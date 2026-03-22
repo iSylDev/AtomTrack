@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Antigravity: AtomTrack
 
-## Getting Started
+> _"Every action you take is a vote for the type of person you wish to become."_
 
-First, run the development server:
+Antigravity is a habit-tracking system based on the principles of Atomic Habits. It operates on the belief that habits are the compound interest of self-improvement. We don't just track tasks; we track the tiny, atomic shifts in behavior that eventually define our identity. If you repeat an action enough times, you aren't just "doing" a task—you are becoming the person who does it.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Most trackers focus on outcomes (what you want to achieve). Antigravity focuses on identity (who you wish to become).
+The 1% Rule: Small, 1% improvements every day lead to massive shifts over time.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Proof of Identity: Every "Atom" earned is a literal vote for your new identity.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The Cost of Inaction: Habits require consistency. If a task isn't recorded by midnight, the vote is lost (0 Atoms), reinforcing the discipline required to maintain your trajectory.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Backend/Auth:** Supabase (PostgreSQL + Go-True)
+- **Routing:** React Router v7
+- **State Management:** Zustand
+- **Data Fetching:** Tanstack Query (v5)
+- **Form Handling:** React Hook Form + Zod
+- **Styling:** Tailwind CSS + Shadcn UI
 
-To learn more about Next.js, take a look at the following resources:
+## Data Table:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- user_table:
+  - user_id (uuid)
+  - email (string)
+  - password_hash
+  - google_id (string)
+  - username (string)
+  - profile_picture (string)
+  - note_password (string)
+  - created_at (timestamp)
+- tasks_table
+  - id (uuid)
+  - user_id (FK ⇒ user_id)
+  - title (string)
+  - category (string)
+  - tag_color (string)
+  - max_points (int)
+  - created_at (timestamp)
+- daily_completion_table
+  - id (uuid)
+  - task_id (FK ⇒ tasks.id)
+  - user_id (FK ⇒ user.id)
+  - date (date)
+  - earned_points (int)
+  - earned_atoms (int)
+  - note_id
+- task_note_table:
+  - id (uuid)
+  - task_id (FK ⇒ tasks.id)
+  - date
+  - note_text
+  - is_protected
