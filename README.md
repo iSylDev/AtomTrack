@@ -55,3 +55,15 @@ The Cost of Inaction: Habits require consistency. If a task isn't recorded by mi
   - date
   - note_text
   - is_protected
+
+
+## Routes
+- /sign-up
+- /sign-in
+- /dashboard
+  - /dashboard/create-task
+  - /dashboard/overview
+  - /dashboard/reports
+  - /dashboard/settings
+  - /dashboard/store
+  - /dashboard/profile
