@@ -8,7 +8,7 @@ export async function verifyOtpAction({
   email: string;
   token: string;
 }) {
-  const supabase = await createClient();
+  const supabase = await createClient()
 
 
   try {

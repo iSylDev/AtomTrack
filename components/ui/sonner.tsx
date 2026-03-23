@@ -30,15 +30,25 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }}
       style={
         {
-          "--normal-bg": "var(--popover)",
-          "--normal-text": "var(--popover-foreground)",
+          "--normal-bg": "hsl(var(--primary))",
+          "--normal-text": "var(--card-foreground)",
           "--normal-border": "var(--border)",
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }
       toastOptions={{
         classNames: {
-          toast: "cn-toast",
+          toast: "group toast group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+
+          // This targets SUCCESS specific toasts
+          success: "group-[.toaster]:!bg-primary/50 group-[.toaster]:!text-foreground group-[.toaster]:!border-primary",
+
+          // This targets ERROR specific toasts
+          error: "group-[.toaster]:!bg-destructive group-[.toaster]:!text-foreground group-[.toaster]:!border-destructive",
+
+          description: "group-[.toast]:text-muted-foreground",
+          actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+          cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
         },
       }}
       {...props}

@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import localFont from "next/font/local";
+import { Toaster } from "@/components/ui/sonner";
 
 const jakarta = localFont({
   src: '../public/fonts/PlusJakartaSans-VariableFont_wght.ttf',
@@ -39,6 +40,7 @@ export default function RootLayout({
             {children}
           </div>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
