@@ -1,4 +1,5 @@
-import { Card, CardHeader } from "@/components/ui/card";
+import VerifyOtpForm from "@/components/auth/components/VerifyOtpForm";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 
 
@@ -18,6 +19,10 @@ export default function VerifyOtpPage() {
             </div>
           </div>
         </CardHeader>
+
+        <CardContent>
+          <VerifyOtpForm />
+        </CardContent>
       </Card>
     </div>
   );
