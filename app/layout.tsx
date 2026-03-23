@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import localFont from "next/font/local";
 
-const jakarta = Plus_Jakarta_Sans({
+const jakarta = localFont({
+  src: '../public/fonts/PlusJakartaSans-VariableFont_wght.ttf',
   variable: "--font-jakarta",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 
