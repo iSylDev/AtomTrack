@@ -32,7 +32,7 @@ export default function AuthForm() {
 
   function submitFunc(data: LoginSchema | SignupSchema) {
     console.log('Submitted', data);
-    
+
   }
 
 
@@ -69,7 +69,9 @@ export default function AuthForm() {
           <Button className="w-full mt-5 py-5 rounded-md md:mt-6" >{!isLogin ? 'Get Started' : 'Continue'}</Button>
         </form>
 
-        <p className="text-center mt-7 text-sm ">{isLogin ? 'New to AtomTrack?' : 'Already have an account?'}<Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{isLogin ? 'Sign in' : 'Sign up'}</Link></p>
+        <p className="text-center mt-7 text-sm ">{isLogin ? 'New to AtomTrack?' : 'Already have an account?'}
+          <Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{isLogin ? 'Sign in' : 'Sign up'}</Link>
+        </p>
 
         <div>
           <div className="flex justify-center items-center mt-4 gap-3">
