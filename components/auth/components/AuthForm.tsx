@@ -22,13 +22,18 @@ export default function AuthForm() {
 
   const currentSchema = isLogin ? loginSchema : signupSchema
 
-  const { register, handleSubmit } = useForm<LoginSchema | SignupSchema>({
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema | SignupSchema>({
     resolver: zodResolver(currentSchema),
     defaultValues: {
       username: '',
       email: '',
     },
   })
+
+  function submitFunc(data: LoginSchema | SignupSchema) {
+    console.log('Submitted');
+    
+  }
 
 
   return (
@@ -38,7 +43,7 @@ export default function AuthForm() {
         <CardDescription className='text-sm'>{isLogin ? 'Sign in to continue to your account.' : 'Join the ecosystem of high-performance tracking.'}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit(submitFunc)}>
           <div className="grid gap-5">
             {
               !isLogin && (
@@ -48,7 +53,7 @@ export default function AuthForm() {
                     <User className="absolute left-3.5 top-1/2 -translate-y-1/2 stroke-card-foreground/50" size={17} />
                     <Input id="username" type="text" placeholder="TrackerLily" className="pl-10 py-5 placeholder:text-card-foreground/30 rounded-sm placeholder:text-sm" {...register('username')} />
                   </div>
-                  {/* <p className="text-destructive text-sm">Username is required</p> */}
+                  {errors && 'username' in errors && errors.username && <p className="text-destructive text-sm -mt-2">{errors.username.message}</p>}
                 </div>
               )
             }
@@ -58,13 +63,13 @@ export default function AuthForm() {
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 stroke-card-foreground/50" size={17} />
                 <Input id="email" type="email" placeholder="Lily@tracker.com" className="pl-10 py-5 placeholder:text-card-foreground/30 rounded-sm placeholder:text-sm" {...register('email')} />
               </div>
-              {/* <p className="text-destructive text-sm">Email is required</p> */}
+              {errors.email && <p className="text-destructive text-sm -mt-2">{errors.email.message}</p>}
             </div>
           </div>
           <Button className="w-full mt-5 py-6 rounded-full md:mt-6" >{!isLogin ? 'Get Started' : 'Continue'}</Button>
         </form>
 
-        <p className="text-center mt-7 text-sm ">Already have an account? <Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{isLogin ? 'Sign in' : 'Sign up'}</Link></p>
+        <p className="text-center mt-7 text-sm ">{isLogin ? 'New to AtomTrack?' : 'Already have an account?'}<Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{isLogin ? 'Sign in' : 'Sign up'}</Link></p>
 
         <div>
           <div className="flex justify-center items-center mt-4 gap-3">
@@ -75,11 +80,11 @@ export default function AuthForm() {
 
           <div className="flex flex-col gap-2 mt-2">
             <Button className="w-full py-5" variant='outline'>
-              <Image src='/images/auth-icons/google-icon.png' alt="Google logo" width={25} height={25} />
+              <Image src='/images/auth-icons/google-icon.png' alt="Google logo" width={18} height={18} />
               {isLogin ? 'Continue with Google' : 'Sign in with Google'}
             </Button>
             <Button className="w-full py-5" variant={'outline'}>
-              <Image src='/images/auth-icons/github-icon.png' alt="Google logo" width={35} height={35} />
+              <Image src='/images/auth-icons/github-icon.png' alt="Google logo" width={28} height={28} />
               {isLogin ? 'Continue with Github' : 'Sign in with Github'}
             </Button>
           </div>
