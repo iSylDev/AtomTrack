@@ -8,8 +8,8 @@ export default function AuthHeader() {
 
 
   return (
-    <header className="flex justify-between items-center bg-background">
-      <div className="flex items-center -ml-8">
+    <header className="flex justify-between items-center bg-background z-50 pr-7">
+      <div className="flex items-center -ml-2">
         <Image src={'/images/logo.png'} alt="" height={120} width={120} />
         <h3 className="text-xl font-bold -ml-10">AtomTracker</h3>
       </div>

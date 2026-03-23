@@ -35,7 +35,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           
-          <div className="px-6">
+          <div className="">
             {children}
           </div>
         </ThemeProvider>
