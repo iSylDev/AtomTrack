@@ -1,9 +1,9 @@
 import AuthForm from "../components/AuthForm";
 import Logo from "@/components/shared/logo";
 
-export default function SigninPage() {
+export default function AuthPage() {
     return (
-        <div className="flex flex-col justify-center items-center gap-2">
+        <div className="w-full flex flex-col justify-center items-center gap-2 pb-106">
             <Logo />
             <AuthForm />
         </div>
