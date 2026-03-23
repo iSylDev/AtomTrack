@@ -12,7 +12,7 @@ export async function authAction({
   mode,
   data,
 }: {
-  mode: "sign-up" | null;
+  mode: string | null;
   data: LoginSchema | SignupSchema;
 }) {
   const currentSchema = mode === "sign-up" ? signupSchema : loginSchema;

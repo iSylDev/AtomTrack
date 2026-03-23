@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Mail, User } from "lucide-react";
+import { Loader, Loader2, Mail, User } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useForm } from 'react-hook-form'
@@ -12,13 +12,21 @@ import { loginSchema, signupSchema, type LoginSchema, type SignupSchema } from "
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import { authAction } from "@/actions/auth-actions/authAction";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useState } from "react";
 
 
 
 export default function AuthForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const mode = searchParams.get("mode") || 'sign-up'
   const isLogin = mode === 'sign-in'
+  console.log(mode);
 
   const currentSchema = isLogin ? loginSchema : signupSchema
 
@@ -30,9 +38,24 @@ export default function AuthForm() {
     },
   })
 
-  function submitFunc(data: LoginSchema | SignupSchema) {
-    console.log('Submitted', data);
+  async function submitFunc(data: LoginSchema | SignupSchema) {
+    setIsLoading(true);
 
+    try {
+      const result = await authAction({ mode, data })
+
+      if (result.success) {
+        toast.success(result.message)
+        router.push(`/auth/verify-otp?email=${encodeURIComponent(data.email)}`)
+      } else {
+        toast.error(result.message || 'Something went wrong. Please try again')
+        setIsLoading(false)
+      }
+    }
+    catch (error: any) {
+      toast.error('An unexpected error occured')
+      setIsLoading(false)
+    }
   }
 
 
@@ -66,11 +89,17 @@ export default function AuthForm() {
               {errors.email && <p className="text-destructive text-sm -mt-2">{errors.email.message}</p>}
             </div>
           </div>
-          <Button className="w-full mt-5 py-5 rounded-md md:mt-6" >{!isLogin ? 'Get Started' : 'Continue'}</Button>
+          <Button className="w-full mt-5 py-5 rounded-md md:mt-6" >
+            {
+              !isLoading && (<p>{!isLogin ? 'Get Started' : 'Continue'}</p>)
+            }{
+              isLoading && (<Loader2 className="animate-spin" />)
+            }
+          </Button>
         </form>
 
         <p className="text-center mt-7 text-sm ">{isLogin ? 'New to AtomTrack?' : 'Already have an account?'}
-          <Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{isLogin ? 'Sign in' : 'Sign up'}</Link>
+          <Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{!isLogin ? 'Sign in' : 'Sign up'}</Link>
         </p>
 
         <div>
