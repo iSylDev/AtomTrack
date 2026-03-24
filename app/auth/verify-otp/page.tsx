@@ -1,3 +1,5 @@
+'use client'
+
 import VerifyOtpForm from "@/components/auth/components/VerifyOtpForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -6,9 +8,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 
 
 export default function VerifyOtpPage() {
+  const searchParams = useSearchParams();
+
+
+
+
   return (
     <div className="">
       <Card className="flex flex-col items-center w-full max-w-md mx-auto my-auto px-3">

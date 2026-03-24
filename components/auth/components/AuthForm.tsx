@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Loader, Loader2, Mail, User } from "lucide-react";
+import { Loader2, Mail, User } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useForm } from 'react-hook-form'
@@ -61,6 +61,7 @@ export default function AuthForm() {
 
   return (
     <Card className="w-full max-w-md relative px-2 pt-5 pb-7 lg:mt-7">
+      <Image src={'/images/auth/auth-gradients/top-gradient.png'} alt="Gradient" height={700} width={700} className="absolute -z-10" />
       <CardHeader className="mb-5">
         <CardTitle className='text-2xl font-bold text-foreground'>{isLogin ? 'Welcome Back' : 'Create your Account'}</CardTitle>
         <CardDescription className='text-sm'>{isLogin ? 'Sign in to continue to your account.' : 'Join the ecosystem of high-performance tracking.'}</CardDescription>
