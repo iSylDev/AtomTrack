@@ -3,6 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
+import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/sidebar/AppSidebar";
 
 const jakarta = localFont({
   src: '../public/fonts/PlusJakartaSans-VariableFont_wght.ttf',
@@ -34,10 +36,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          
-          <div className="">
-            {children}
-          </div>
+
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="">
+              {children}
+            </main>
+          </SidebarProvider>
         </ThemeProvider>
         <Toaster />
       </body>
