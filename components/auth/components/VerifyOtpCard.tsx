@@ -26,6 +26,7 @@ export default function VerifyOtpCard() {
             <h3 className="text-2xl text-foreground font-semibold">Verify your identity</h3>
             <p className="w-[75%] mx-auto">We've sent a 6-digit email to smallz@gmail.com. Please enter it below</p>
           </div>
+
         </div>
       </CardHeader>
 
@@ -34,7 +35,7 @@ export default function VerifyOtpCard() {
         <div className="flex flex-col mt-4">
           <p className="text-center text-xs">Didn't receive the code? <Button className="text-chart-1 pl-1" variant={'link'}>Resend</Button> </p>
           <Link href={'/auth?mode'} className={cn(buttonVariants({ variant: 'ghost' }), 'w-fit mx-auto text-xs')}>
-            <ArrowLeft />
+            <ArrowLeft size={15}/>
             <p>Back to Login</p>
           </Link>
         </div>

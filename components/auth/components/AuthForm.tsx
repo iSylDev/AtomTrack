@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Loader2, Mail, User } from "lucide-react";
 import Link from "next/link";
@@ -60,68 +60,69 @@ export default function AuthForm() {
 
 
   return (
-    <Card className="w-full max-w-md relative px-2 pt-5 pb-7 lg:mt-7">
-      <Image src={'/images/auth/auth-gradients/top-gradient.png'} alt="Gradient" height={700} width={700} className="absolute -z-10" />
-      <CardHeader className="mb-5">
-        <CardTitle className='text-2xl font-bold text-foreground'>{isLogin ? 'Welcome Back' : 'Create your Account'}</CardTitle>
-        <CardDescription className='text-sm'>{isLogin ? 'Sign in to continue to your account.' : 'Join the ecosystem of high-performance tracking.'}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(submitFunc)}>
-          <div className="grid gap-5">
-            {
-              !isLogin && (
-                <div className="grid gap-3">
-                  {/* <Label htmlFor="username">Username</Label> */}
-                  <div className="relative">
-                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 stroke-card-foreground/50" size={17} />
-                    <Input id="username" type="text" placeholder="Username" className="pl-10 py-5 placeholder:text-card-foreground/30 rounded-sm placeholder:text-sm" {...register('username')} />
+    <div className="w-full">
+      <Card className="w-full max-w-md mx-auto px-2 pb-7 lg:mt-7">
+        <CardHeader className="mb-5">
+          <CardTitle className='text-2xl font-bold text-foreground'>{isLogin ? 'Welcome Back' : 'Create your Account'}</CardTitle>
+          <CardDescription className='text-sm'>{isLogin ? 'Sign in to continue to your account.' : 'Join the ecosystem of high-performance tracking.'}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit(submitFunc)}>
+            <div className="grid gap-5">
+              {
+                !isLogin && (
+                  <div className="grid gap-3">
+                    {/* <Label htmlFor="username">Username</Label> */}
+                    <div className="relative">
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 stroke-card-foreground/50" size={17} />
+                      <Input id="username" type="text" placeholder="Username" className="pl-10 py-5 placeholder:text-card-foreground/30 rounded-sm placeholder:text-sm" {...register('username')} />
+                    </div>
+                    {errors && 'username' in errors && errors.username && <p className="text-destructive text-xs italic -mt-2">{errors.username.message}!</p>}
                   </div>
-                  {errors && 'username' in errors && errors.username && <p className="text-destructive text-xs italic -mt-2">{errors.username.message}!</p>}
+                )
+              }
+              <div className="grid gap-3">
+                {/* <Label htmlFor="email">Email</Label> */}
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 stroke-card-foreground/50" size={17} />
+                  <Input id="email" type="email" placeholder="Email" className="pl-10 py-5 placeholder:text-card-foreground/30 rounded-sm placeholder:text-sm" {...register('email')} />
                 </div>
-              )
-            }
-            <div className="grid gap-3">
-              {/* <Label htmlFor="email">Email</Label> */}
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 stroke-card-foreground/50" size={17} />
-                <Input id="email" type="email" placeholder="Email" className="pl-10 py-5 placeholder:text-card-foreground/30 rounded-sm placeholder:text-sm" {...register('email')} />
+                {errors.email && <p className="text-destructive text-xs italic -mt-2">{errors.email.message}!</p>}
               </div>
-              {errors.email && <p className="text-destructive text-xs italic -mt-2">{errors.email.message}!</p>}
+            </div>
+            <Button className="w-full mt-4 py-5 rounded-md md:mt-5" >
+              {
+                !isLoading && (<p>{!isLogin ? 'Get Started' : 'Continue'}</p>)
+              }{
+                isLoading && (<Loader2 className="animate-spin" />)
+              }
+            </Button>
+          </form>
+
+          <p className="text-center mt-7 text-sm ">{isLogin ? 'New to AtomTrack?' : 'Already have an account?'}
+            <Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{!isLogin ? 'Sign in' : 'Sign up'}</Link>
+          </p>
+
+          <div>
+            <div className="flex justify-center items-center mt-4 gap-3">
+              <Separator className="w-full" />
+              <p className="text-center ">Or</p>
+              <Separator />
+            </div>
+
+            <div className="flex flex-col gap-2 mt-2">
+              <Button className="w-full py-5 text-sm" variant='outline'>
+                <Image src='/images/auth-icons/google-icon.png' alt="Google logo" width={17} height={15} />
+                {isLogin ? 'Continue with Google' : 'Sign in with Google'}
+              </Button>
+              <Button className="w-full py-5 text-sm" variant={'outline'}>
+                <Image src='/images/auth-icons/github-icon.png' alt="Google logo" width={25} height={25} />
+                {isLogin ? 'Continue with Github' : 'Sign in with Github'}
+              </Button>
             </div>
           </div>
-          <Button className="w-full mt-4 py-5 rounded-md md:mt-5" >
-            {
-              !isLoading && (<p>{!isLogin ? 'Get Started' : 'Continue'}</p>)
-            }{
-              isLoading && (<Loader2 className="animate-spin" />)
-            }
-          </Button>
-        </form>
-
-        <p className="text-center mt-7 text-sm ">{isLogin ? 'New to AtomTrack?' : 'Already have an account?'}
-          <Link href={isLogin ? `/auth?mode` : `/auth?mode=sign-in`} className="text-primary font-semibold hover:underline transition-all duration-300 ease-in-out pl-1">{!isLogin ? 'Sign in' : 'Sign up'}</Link>
-        </p>
-
-        <div>
-          <div className="flex justify-center items-center mt-4 gap-3">
-            <Separator className="w-full" />
-            <p className="text-center ">Or</p>
-            <Separator />
-          </div>
-
-          <div className="flex flex-col gap-2 mt-2">
-            <Button className="w-full py-5 text-sm" variant='outline'>
-              <Image src='/images/auth-icons/google-icon.png' alt="Google logo" width={17} height={15} />
-              {isLogin ? 'Continue with Google' : 'Sign in with Google'}
-            </Button>
-            <Button className="w-full py-5 text-sm" variant={'outline'}>
-              <Image src='/images/auth-icons/github-icon.png' alt="Google logo" width={25} height={25} />
-              {isLogin ? 'Continue with Github' : 'Sign in with Github'}
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -72,7 +72,7 @@ export default function VerifyOtpForm() {
 
       <Button className="w-full mt-3 py-5 rounded-md md:mt-3 flex items-center justify-center " >
         <p className="uppercase font-bold text-xs">verify & continue</p>
-        <ArrowRight />
+        <ArrowRight size={15}/>
       </Button>
     </form>
   );
