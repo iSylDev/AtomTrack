@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Logo() {
     return (
-        <div className=" flex flex-col justify-center items-center gap-2">
-            <div><Image src="/images/logo.png" alt="Logo" width={200} height={200} /></div>
-            <h3 className="text-2xl font-bold -mt-8 text-chart-4">Atom Tracker</h3>
+        <div className="flex items-center gap-2 text-primary font-semibold">
+            <img src={'/images/logo.png'} alt="Logo" className=" w-7" />
+            <h3 className="text-xl">AtomTrack</h3>
         </div>
     );
 }

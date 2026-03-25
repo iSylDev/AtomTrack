@@ -1,4 +1,4 @@
-import { UserType } from "@/types/User";
+import { UserType } from "@/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: UserType | null = null;
@@ -13,3 +13,6 @@ export const userSlice = createSlice({
     logOut: () => null,
   },
 });
+
+export default userSlice.reducer;
+export const { logIn, logOut } = userSlice.actions;
