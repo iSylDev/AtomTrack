@@ -1,5 +1,11 @@
 import { NavLinkProp } from "@/types/nav-links";
-import { LayoutPanelLeft, CalendarArrowDown, Store, Settings } from "lucide-react";
+import {
+  LayoutPanelLeft,
+  CalendarArrowDown,
+  Store,
+  Settings,
+  FileChartColumnIncreasing,
+} from "lucide-react";
 
 export const navLinkData: NavLinkProp[] = [
   {
@@ -15,6 +21,7 @@ export const navLinkData: NavLinkProp[] = [
   {
     title: "Reports",
     to: "/",
+    icon: FileChartColumnIncreasing,
     subLinks: [
       {
         title: "Weekly",
@@ -29,11 +36,11 @@ export const navLinkData: NavLinkProp[] = [
   {
     title: "Goal Shop",
     to: "/",
-    icon: Store
+    icon: Store,
   },
   {
     title: "Settings",
     to: "/",
-    icon: Settings
+    icon: Settings,
   },
 ];
