@@ -11,12 +11,14 @@ import Image from "next/image"
 import Logo from "../shared/logo"
 import NavLinkComponent from "./components/NavLinkComp"
 import { navLinkData } from "./navLinkData"
+import ProfileCard from "./ProfileCard"
 
 export function AppSidebar() {
   return (
     <Sidebar>
-      <div className="px-5 pt-4">
-        <SidebarHeader>
+      {/* <div className="px-5 pt-4"> */}
+      <div className="mt-4 px-4">
+        <SidebarHeader >
           <Logo />
         </SidebarHeader>
         <SidebarContent>
@@ -36,8 +38,11 @@ export function AppSidebar() {
           </div>
           <SidebarGroup />
         </SidebarContent>
-        <SidebarFooter />
       </div>
+      <SidebarFooter className="mt-auto px-4">
+        <ProfileCard />
+      </SidebarFooter>
+      {/* </div> */}
     </Sidebar>
   )
 }
