@@ -5,5 +5,5 @@ export type NavLinkProp = {
   title: string;
   to: string;
   icon?: LucideIcon;
-  subLinks?: { title: string; to: string; icons?: LucideIcon }[];
+  subLinks?: { title: string; to: string }[];
 };

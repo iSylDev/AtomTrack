@@ -21,7 +21,7 @@ export function AppSidebar() {
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup className="px-3 mt-3" />
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             {
               navLinkData.map(item => (
                 <NavLinkComponent
@@ -29,6 +29,7 @@ export function AppSidebar() {
                   title={item.title}
                   linkTo={item.to}
                   icon={item.icon}
+                  subLinks={item.subLinks}
                 />
               ))
             }
