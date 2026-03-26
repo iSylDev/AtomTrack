@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/sidebar"
 import Image from "next/image"
 import Logo from "../shared/logo"
-import NavLinkComponent from "./components/NavLinkComp"
-import { navLinkData } from "./navLinkData"
-import ProfileCard from "./ProfileCard"
+import NavLinkComponent from "./nav-links/components/NavLinkComp"
+import { navLinkData } from "./nav-links/navLinkData"
+import ProfileCard from "./profile/ProfileCard"
 
 export function AppSidebar() {
   return (
