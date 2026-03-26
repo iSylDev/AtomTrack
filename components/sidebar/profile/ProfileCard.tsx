@@ -24,8 +24,8 @@ export default function ProfileCard() {
         </PopoverTrigger>
       </Card>
 
-      <PopoverContent >
-        <div className="flex flex-col items-center px-2 ">
+      <PopoverContent className="">
+        <div className="flex flex-col items-center px-1 pb-1">
           <div className="text-center flex flex-col items-center">
             <UserAvatar className="w-14 h-14 border-2 border-primary mb-2" />
             <h3 className="text-foreground text-[16px]">Alex Rivera</h3>
@@ -44,7 +44,7 @@ export default function ProfileCard() {
                 </Link>
               ))
             }
-            <Separator className="mb-3" />
+            <Separator className="mb-3 mt-1" />
             <Button variant={'destructive'} size={'lg'} className="w-full flex justify-start py-3">
               <LogOut />
               <p>Logout</p>
