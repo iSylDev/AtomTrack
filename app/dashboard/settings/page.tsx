@@ -1,9 +1,13 @@
+import PageHeader from "@/components/shared/PageHeader";
 
 
 export default function SettingsPage() {
   return (
     <div>
-      <h3>Settings</h3>
+      <PageHeader 
+        header="Settings"
+        subHeader="Manage your workspace configuration and personal preference"
+      />
     </div>
   )
 }

@@ -15,7 +15,7 @@ export default function MobileHeader() {
   const {setOpenMobile, openMobile} = useSidebar()
 
   return (
-    <header className="w-full flex pr-4 pl-6 border-b border-primary/20 justify-between py-5 bg-chart-6">
+    <header className="w-full flex border-b border-primary/20 justify-between py-5 bg-chart-6">
       <Logo />
       <div className="flex items-center gap-4">
         <Avatar>
