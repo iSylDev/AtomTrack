@@ -24,7 +24,7 @@ export default function NavLinkComponent({ linkTo, title, icon, subLinks }: prop
         {
           subLinks && (
             subLinks.map(link => (
-              <Link href={linkTo} key={link.title} className="mx-2  mb-1 text-sm  flex gap-2 items-center text-card-foreground hover:text-chart-2 transition-all ease-in-out duration-300 hover:bg-chart-2/10 py-2 px-3 rounded-lg">
+              <Link href={link.to} key={link.title} className="mx-2  mb-1 text-sm  flex gap-2 items-center text-card-foreground hover:text-chart-2 transition-all ease-in-out duration-300 hover:bg-chart-2/10 py-2 px-3 rounded-lg">
                 <p>{link.title}</p>
               </Link>
             ))

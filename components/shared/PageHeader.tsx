@@ -1,6 +1,7 @@
 
 
-export default function SettingsPage() {
+export default function PageHeader() {
+
   return (
     <div>
       <h3>Settings</h3>

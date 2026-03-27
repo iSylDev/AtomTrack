@@ -5,12 +5,12 @@ import {CircleUserRound, Bolt } from 'lucide-react'
 export const profileCardData: NavLinkProp[] = [
   {
     title: "View Profile",
-    to: "/",
+    to: "/dashboard/settings",
     icon: CircleUserRound 
   },
   {
     title: 'Settings',
-    to: '/',
+    to: '/dashboard/settings',
     icon: Bolt
   }
 ];

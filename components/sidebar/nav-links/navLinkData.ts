@@ -10,37 +10,32 @@ import {
 export const navLinkData: NavLinkProp[] = [
   {
     title: "Overview",
-    to: "/",
+    to: "/dashboard/overview",
     icon: LayoutPanelLeft,
   },
   {
     title: "Today's Tasks",
-    to: "/",
+    to: "/dashboard/task-today",
     icon: CalendarArrowDown,
   },
   {
     title: "Reports",
-    to: "/",
+    to: "/dashboard/reports",
     icon: FileChartColumnIncreasing,
     subLinks: [
       {
         title: "Weekly",
-        to: "/",
+        to: "/dashboard/reports/weekly",
       },
       {
         title: "Monthly",
-        to: "/",
+        to: "/dashboard/reports/monthly",
       },
     ],
   },
   {
     title: "Goal Shop",
-    to: "/",
+    to: "/dashboard/goal-shop",
     icon: Store,
-  },
-  {
-    title: "Settings",
-    to: "/",
-    icon: Settings,
   },
 ];
