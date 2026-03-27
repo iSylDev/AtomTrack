@@ -5,7 +5,7 @@ export default function UserAvatar({ className }: { className?: string }) {
 
   return (
     <Avatar className={className}>
-      <AvatarImage src="https://github.com/shadcn.png" className="" />
+      <AvatarImage src="https://github.com/shadcn.png"  />
       <AvatarBadge />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>

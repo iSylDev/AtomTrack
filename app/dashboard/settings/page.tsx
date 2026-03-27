@@ -1,3 +1,4 @@
+import IdentityCard from "@/components/settings/IdentityCard";
 import PageHeader from "@/components/shared/PageHeader";
 
 
@@ -8,6 +9,8 @@ export default function SettingsPage() {
         header="Settings"
         subHeader="Manage your workspace configuration and personal preference"
       />
+
+      <IdentityCard />
     </div>
   )
 }
