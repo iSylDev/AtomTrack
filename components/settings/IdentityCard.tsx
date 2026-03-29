@@ -13,10 +13,14 @@ export default function IdentityCard() {
 
 
   return (
-    <Card>
-      <CardHeader>
+    <Card >
+      <div className="flex flex-col items-center">
         <PfpEditor />
-      </CardHeader>
+        <div className="flex flex-col text-center mt-3">
+          <h3 className="text-[18px] text-foreground">Alex Thompson</h3>
+          <p>Beta User</p>
+        </div>
+      </div>
     </Card>
   )
 }
