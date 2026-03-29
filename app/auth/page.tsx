@@ -1,6 +1,6 @@
 
 
-import AuthForm from "@/components/auth/components/AuthForm";
+import AuthForm from "@/components/forms/AuthForm";
 import AuthHeader from "@/components/auth/components/AuthHeader";
 import Logo from "@/components/shared/logo";
 import Image from "next/image";
