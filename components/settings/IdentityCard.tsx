@@ -1,19 +1,15 @@
 'use client'
 
-
+import { cn } from "@/lib/utils";
 import UserInfoForm from "../forms/UserInforForm";
 import { Card } from "../ui/card";
 import PfpEditor from "./PfpEditor";
 
-
-
-
-
-export default function IdentityCard() {
+export default function IdentityCard({position}: {position?: string}) {
 
   return (
-    <Card >
-      <div className="flex flex-col md:flex-row md:gap-12 items-center px-6">
+    <Card className="md:col-span-2">
+      <div className={cn('flex flex-col md:flex-row md:gap-12 items-center px-6  md:row-end-2', position)}  >
         <div>
           <PfpEditor />
           <div className="flex flex-col text-center mt-3 md:hidden md:mt-0">

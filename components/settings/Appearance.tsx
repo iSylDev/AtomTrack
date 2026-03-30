@@ -6,9 +6,10 @@ import { useTheme } from "next-themes";
 import { Card, CardContent } from "../ui/card";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 
-export default function MobileAppearance() {
+export default function Appearance({ position }: { position?: string }) {
   const { theme, setTheme } = useTheme()
 
   const [hasMounted, setHasMounted] = useState(false)
@@ -19,16 +20,16 @@ export default function MobileAppearance() {
   }, [])
 
   if (!hasMounted) {
-    return <div className="w-full md:w-[55%] animate-pulse">
+    return <div className="w-full animate-pulse">
       <div className="h-full w-full bg-muted/20 rounded-xl" />
     </div>
   }
 
   return (
 
-    <div className="w-full md:w-[35%]">
+    <div className="w-full ">
       {
-        isMobile && <div className="flex gap-2 items-center mb-4">
+        isMobile && <div className={cn('flex gap-2 items-center mb-4', position)}>
           <Palette className="stroke-primary" />
           <h3 className="font-bold">Appearance</h3>
         </div>

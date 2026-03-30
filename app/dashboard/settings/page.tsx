@@ -1,5 +1,5 @@
 import IdentityCard from "@/components/settings/IdentityCard";
-import MobileAppearance from "@/components/settings/Appearance";
+import Appearance from "@/components/settings/Appearance";
 import Notifications from "@/components/settings/Notifications";
 import PageHeader from "@/components/shared/PageHeader";
 import Account from "@/components/settings/Account";
@@ -7,20 +7,16 @@ import Account from "@/components/settings/Account";
 
 export default function SettingsPage() {
   return (
-    <div>
+    <div className="px-6 ">
       <PageHeader
         header="Settings"
         subHeader="Manage your workspace configuration and personal preference"
       />
-      <div className="flex flex-col gap-9 pb-90">
-        <div className="flex flex-col md:flex-row gap-7">
-          <IdentityCard />
-          <MobileAppearance />
-        </div>
-        <div className="flex flex-col md:flex-row gap-9">
-          <Notifications />
-          <Account />
-        </div>
+      <div className="grid grid-cols-1 gap-9 pb-90 md:grid-cols-3">
+        <IdentityCard />
+        <Appearance />
+        <Notifications />
+        <Account />
       </div>
     </div>
   )
