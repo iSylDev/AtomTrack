@@ -2,7 +2,7 @@
 
 
 import UserInfoForm from "../forms/UserInforForm";
-import { Card, CardHeader } from "../ui/card";
+import { Card } from "../ui/card";
 import PfpEditor from "./PfpEditor";
 
 
@@ -10,8 +10,6 @@ import PfpEditor from "./PfpEditor";
 
 
 export default function IdentityCard() {
-
-
 
   return (
     <Card >
