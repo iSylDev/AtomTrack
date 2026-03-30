@@ -12,11 +12,11 @@ export default function SettingsPage() {
         subHeader="Manage your workspace configuration and personal preference"
       />
       <div className="flex flex-col gap-9 pb-90">
-        <IdentityCard />
-        <div className="flex flex-col gap-10 md:flex-row">
+        <div className="flex  gap-7">
+          <IdentityCard />
           <MobileAppearance />
-          <Notifications />
         </div>
+        <Notifications />
       </div>
     </div>
   )

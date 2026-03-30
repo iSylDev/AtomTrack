@@ -10,7 +10,7 @@ export default function MobileAppearance() {
 
   return (
 
-    <div className="w-full">
+    <div className="w-full md:w-[35%]">
       <div className="flex gap-2 items-center mb-4">
         <Palette className="stroke-primary" />
         <h3 className="font-bold">Appearance</h3>
