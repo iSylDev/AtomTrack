@@ -40,15 +40,18 @@ export default function Notifications() {
       {
         !isMobile && (
           <CardHeader>
-            <div className="flex gap-2 items-center mb-4">
+            <div className="flex justify-between items-center px-3">
+              <div className="text-left gap-2 items-start mb-4 flex flex-col">
+                <h3 className="font-bold text-lg text-foreground">Notifications</h3>
+                <p>Manage your alerts</p>
+              </div>
               <Bell className="stroke-chart-2" />
-              <h3 className="font-bold">Notifications</h3>
             </div>
           </CardHeader>
         )
       }
-      <CardContent className="flex flex-col gap-5 p-0">
-        <FieldGroup className="w-full px-4 md:px-5 ">
+      <CardContent className="flex flex-col gap-5 px-2 pb-3">
+        <FieldGroup className="w-full px- md:px-5 ">
           <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
               <div className="flex flex-col gap-1">

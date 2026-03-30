@@ -1,5 +1,5 @@
 import IdentityCard from "@/components/settings/IdentityCard";
-import MobileAppearance from "@/components/settings/MobileAppearance";
+import MobileAppearance from "@/components/settings/Appearance";
 import Notifications from "@/components/settings/Notifications";
 import PageHeader from "@/components/shared/PageHeader";
 
