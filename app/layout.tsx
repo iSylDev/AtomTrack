@@ -3,8 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
-import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/sidebar/AppSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+
 
 const jakarta = localFont({
   src: '../public/fonts/PlusJakartaSans-VariableFont_wght.ttf',
@@ -29,7 +29,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${jakarta.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -37,12 +37,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
 
-          <SidebarProvider>
-            <AppSidebar />
+          
             <main className="flex-1 relative px-5">
               {children}
             </main>
-          </SidebarProvider>
         </ThemeProvider>
         <Toaster />
       </body>
