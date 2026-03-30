@@ -7,7 +7,6 @@ import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 
 export default function Notifications() {
@@ -24,15 +23,15 @@ export default function Notifications() {
     </div>
   }
 
-  if (isMobile) return (
-    <div className="flex gap-2 items-center mb-4">
-      <Bell className="stroke-chart-2" />
-      <h3 className="font-bold">Notifications</h3>
-    </div>
-  )
+  return <div className="w-full md:col-span-6">
+    {isMobile && (
+      <div className="flex gap-2 items-center mb-4">
+        <Bell className="stroke-chart-2" />
+        <h3 className="font-bold">Notifications</h3>
+      </div>
+    )}
 
-  return (
-    <Card className="md:col-span-6">
+    <Card className="">
       {!isMobile && (
         <CardHeader>
           <div className="flex justify-between items-center px-3 mb-4">
@@ -45,7 +44,7 @@ export default function Notifications() {
         </CardHeader>
       )
       }
-      <CardContent className="flex flex-col gap-5 px-2 pb-3">
+      <CardContent className="flex flex-col gap-5 px-2 md:pb-3">
         <FieldGroup className="w-full px-4 md:px-5 ">
           <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
@@ -83,7 +82,12 @@ export default function Notifications() {
         </FieldGroup>
       </CardContent>
     </Card>
-  )
+  </div>
+
+
+
+
+
 
 
 }

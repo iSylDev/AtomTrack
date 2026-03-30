@@ -25,19 +25,20 @@ export default function Appearance({ position }: { position?: string }) {
     </div>
   }
 
+  return <div className="w-full md:col-span-4">
+    {
+      isMobile && (
+        <div className={cn('flex gap-2 items-center mb-4', position)}>
+          <Palette className="stroke-primary" />
+          <h3 className="font-bold">Appearance</h3>
+        </div>
+      )
+    }
 
-  if (isMobile) return (
-    <div className={cn('flex gap-2 items-center mb-4', position)}>
-      <Palette className="stroke-primary" />
-      <h3 className="font-bold">Appearance</h3>
-    </div>
-  )
-
-  return (
-    <Card className="md:col-span-4">
+    <Card className="md:h-full">
       {
         !isMobile && <div className="flex gap-2 items-center justify-between mb-4 p-1 px-6">
-          <div className="flex  flex-col gap-1">
+          <div className="flex flex-col gap-1">
             <h3 className="font-bold text-foreground text-lg">Appearance</h3>
             <p>Virtual system theme</p>
           </div>
@@ -71,7 +72,12 @@ export default function Appearance({ position }: { position?: string }) {
         </Tabs>
       </CardContent>
     </Card>
-  )
+
+  </div>
+
+
+
+
 
 
 

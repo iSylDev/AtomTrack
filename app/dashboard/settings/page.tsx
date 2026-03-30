@@ -7,12 +7,12 @@ import Account from "@/components/settings/Account";
 
 export default function SettingsPage() {
   return (
-    <div className="px-6 pt-">
+    <div className="md:px-6">
       <PageHeader
         header="Settings"
         subHeader="Manage your workspace configuration and personal preference"
       />
-      <div className="grid grid-cols-1 gap-6 pb-12 md:grid-cols-12">
+      <div className="grid grid-cols-1 gap-10 pb-12 md:grid-cols-12 md:gap-6">
         <IdentityCard />
         <Appearance />
         <Notifications />

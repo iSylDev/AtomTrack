@@ -20,8 +20,7 @@ export default function IdentityCard({position}: {position?: string}) {
 
         <div className="w-full">
           <div className="hidden md:flex flex-col mb-5">
-            <h3 className="text-[27px] text-foreground -mb-1">Alex Thompson</h3>
-            <p className="text-base">Beta User</p>
+            <h3 className="text-[23px] text-foreground -mb-1">Alex Thompson</h3>
           </div>
           <UserInfoForm />
         </div>

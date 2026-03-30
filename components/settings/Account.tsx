@@ -23,24 +23,20 @@ export default function Account() {
   }, [])
 
   if (!hasMounted) {
-    return <div className="w-fullanimate-pulse">
+    return <div className="w-full animate-pulse">
       <div className="h-48 w-full bg-muted/20 rounded-xl" />
     </div>
   }
 
-
-
-  if (isMobile) return (
-    isMobile && (
+  return <div className="w-full md:col-span-6">
+    {isMobile && (
       <div className="flex gap-2 items-center mb-4">
         <Lock className="stroke-chart-2" />
         <h3 className="font-bold">Security & Plan</h3>
       </div>
-    )
-  )
+    )}
 
-  return (
-    <Card className="bg-transparent md:bg-card ring-0 md:ring-1 -mt-4 md:mt-0 px-1 md:px-6 md:col-span-6" >
+    <Card className="bg-transparent md:bg-card ring-0 md:ring-1 -mt-4 md:mt-0 px-1 md:px-6 md:h-full" >
       {
         !isMobile && (
           <CardHeader className="p-0">
@@ -75,7 +71,8 @@ export default function Account() {
         </div>
       </CardContent>
     </Card>
-  )
+
+  </div>
 }
 
 
