@@ -17,12 +17,13 @@ import { Button } from "@/components/ui/button"
 export default function UserInfoForm() {
   
 
-  return <form action="" className="w-full mt-6 flex flex-col gap-5">
-    <Label className="flex flex-col gap-2 items-start w-full">
+  return <form action="" className="w-full mt-6 flex flex-col gap-5 md:mt-0 md:gap-3">
+    <Label className="flex flex-col gap-2 items-start w-full ">
       <p>Email Address</p>
       <Input disabled id="email" type="email" placeholder="lily@gmail.com" className="pl-4 py-5 placeholder:text-card-foreground rounded-sm placeholder:text-sm" />
     </Label>
     <DropdownMenuLabel className="w-full p-0">
+      <p className="text-base mb-1">Timezone</p>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button disabled variant="outline" className="w-full py-5">Coordinated Universal Time (UTC) +0</Button>
