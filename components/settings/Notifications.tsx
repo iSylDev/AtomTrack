@@ -9,7 +9,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
 
 
-
 export default function Notifications() {
   const [hasMounted, setHasMounted] = useState(false)
   const isMobile = useIsMobile();
@@ -51,18 +50,6 @@ export default function Notifications() {
         )
       }
       <CardContent className="flex flex-col gap-5 px-2 pb-3">
-        <FieldGroup className="w-full px- md:px-5 ">
-          <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
-            <FieldLabel htmlFor="switch-size-default text-foreground ">
-              <div className="flex flex-col gap-1">
-                <p>Task Deadlines</p>
-                <p className="text-card-foreground hidden md:block">Notify 1 hour before due</p>
-              </div>
-            </FieldLabel>
-            <Switch id="switch-size-default" size="default" />
-          </Field>
-        </FieldGroup>
-        {isMobile && <Separator />}
         <FieldGroup className="w-full px-4 md:px-5 ">
           <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
@@ -79,8 +66,20 @@ export default function Notifications() {
           <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
               <div className="flex flex-col gap-1">
-                <p>Task Deadlines</p>
-                <p className="text-card-foreground hidden md:block">Notify 1 hour before due</p>
+                <p>Weekly Reports</p>
+                <p className="text-card-foreground hidden md:block">Summary of task completion</p>
+              </div>
+            </FieldLabel>
+            <Switch id="switch-size-default" size="default" />
+          </Field>
+        </FieldGroup>
+        {isMobile && <Separator />}
+        <FieldGroup className="w-full px-4 md:px-5 ">
+          <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
+            <FieldLabel htmlFor="switch-size-default text-foreground ">
+              <div className="flex flex-col gap-1">
+                <p>Marketing updates</p>
+                <p className="text-card-foreground hidden md:block">Product news and filters</p>
               </div>
             </FieldLabel>
             <Switch id="switch-size-default" size="default" />

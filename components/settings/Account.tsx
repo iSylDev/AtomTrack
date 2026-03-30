@@ -39,11 +39,11 @@ export default function Account() {
       )
     }
 
-    <Card className="bg-transparent border-transparent" >
+    <Card className="bg-transparent md:bg-card ring-0 md:ring-1 -mt-4 md:mt-0 px-1 md:px-6" >
       {
         !isMobile && (
-          <CardHeader>
-            <div className="flex justify-between items-center px-3">
+          <CardHeader className="p-0">
+            <div className="flex justify-between items-center">
               <div className="text-left gap-2 items-start mb-4 flex flex-col">
                 <h3 className="font-bold text-lg text-foreground">Account and Security</h3>
                 <p>Sensitive account actions</p>
