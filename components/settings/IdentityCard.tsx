@@ -22,7 +22,13 @@ export default function IdentityCard() {
           </div>
         </div>
 
-        <UserInfoForm />
+        <div className="w-full">
+          <div className="flex flex-col mb-5">
+            <h3 className="text-[27px] text-foreground -mb-1">Alex Thompson</h3>
+            <p className="text-base">Beta User</p>
+          </div>
+          <UserInfoForm />
+        </div>
       </div>
     </Card>
   )
