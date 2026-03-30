@@ -35,7 +35,7 @@ export default function MobileAppearance() {
       }
       {
         !isMobile && <Card>
-          <div className="flex gap-2 items-center justify-between mb-4 p-4 px-6">
+          <div className="flex gap-2 items-center justify-between mb-4 p-1 px-6">
             <div className="flex  flex-col gap-1">
               <h3 className="font-bold text-foreground text-lg">Appearance</h3>
             <p>Virtual system theme</p>
