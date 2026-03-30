@@ -9,10 +9,9 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 
 
-
-
 export default function VerifyOtpCard() {
   const searchParams = useSearchParams();
+  const email = searchParams.get('email') || 'your email'
 
   return (
     <Card className="flex flex-col items-center w-full max-w-md mx-auto my-auto px-3">
@@ -24,7 +23,7 @@ export default function VerifyOtpCard() {
 
           <div className="text-center">
             <h3 className="text-2xl text-foreground font-semibold">Verify your identity</h3>
-            <p className="w-[75%] mx-auto">We've sent a 6-digit email to smallz@gmail.com. Please enter it below</p>
+            <p className="w-[75%] mx-auto">We've sent a 6-digit email to <span className="text-primary">{email}</span>. Please enter it below</p>
           </div>
 
         </div>
