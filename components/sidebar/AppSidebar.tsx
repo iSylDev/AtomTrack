@@ -7,7 +7,6 @@ import {
   SidebarGroup,
   SidebarHeader,
 } from "@/components/ui/sidebar"
-import Image from "next/image"
 import Logo from "../shared/logo"
 import NavLinkComponent from "./nav-links/components/NavLinkComp"
 import { navLinkData } from "./nav-links/navLinkData"

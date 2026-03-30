@@ -7,7 +7,7 @@ import Account from "@/components/settings/Account";
 
 export default function SettingsPage() {
   return (
-    <div className="md:px-6">
+    <div className="md:px-6 2xl:px-12">
       <PageHeader
         header="Settings"
         subHeader="Manage your workspace configuration and personal preference"

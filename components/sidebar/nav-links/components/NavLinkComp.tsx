@@ -1,17 +1,20 @@
+'use client'
 
-import { LucideIcon, Store } from "lucide-react";
+import * as Icons from 'lucide-react'
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type props = {
   linkTo: string,
   title: string,
-  icon?: LucideIcon
+  icon?: keyof typeof Icons;
   subLinks?: { title: string; to: string; }[]
 }
 
 
 export default function NavLinkComponent({ linkTo, title, icon, subLinks }: props) {
-  const Icon = icon;
+  const pathname = usePathname()
+  const Icon = icon ? (Icons[icon] as Icons.LucideIcon) : null;
 
   return (
     <div className="text-[14px]">

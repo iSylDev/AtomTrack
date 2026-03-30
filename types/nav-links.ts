@@ -1,8 +1,8 @@
-import { LucideIcon } from "lucide-react";
+import * as Icons from 'lucide-react'
 
 export type NavLinkProp = {
   title: string;
   to: string;
-  icon: LucideIcon;
+  icon: keyof typeof Icons;
   subLinks?: { title: string; to: string }[];
 };
