@@ -32,7 +32,7 @@ export default function Notifications() {
   )
 
   return (
-    <Card className="md:col-span-2">
+    <Card className="md:col-span-6">
       {!isMobile && (
         <CardHeader>
           <div className="flex justify-between items-center px-3 mb-4">

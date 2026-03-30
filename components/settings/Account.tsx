@@ -40,7 +40,7 @@ export default function Account() {
   )
 
   return (
-    <Card className="bg-transparent md:bg-card ring-0 md:ring-1 -mt-4 md:mt-0 px-1 md:px-6 md:grid-span-2" >
+    <Card className="bg-transparent md:bg-card ring-0 md:ring-1 -mt-4 md:mt-0 px-1 md:px-6 md:col-span-6" >
       {
         !isMobile && (
           <CardHeader className="p-0">

@@ -5,7 +5,7 @@ export default function PageHeader({ header, subHeader }: { header: string, subH
   return (
     <div className="mt-5 mb-9">
       <h3 className="text-3xl font-bold">{header}</h3>
-      <p className="text-card-foreground mt-3">{subHeader}</p>
+      <p className="text-card-foreground mt-2">{subHeader}</p>
     </div>
   )
 }

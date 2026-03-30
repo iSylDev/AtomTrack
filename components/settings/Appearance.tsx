@@ -34,7 +34,7 @@ export default function Appearance({ position }: { position?: string }) {
   )
 
   return (
-    <Card className=" ">
+    <Card className="md:col-span-4">
       {
         !isMobile && <div className="flex gap-2 items-center justify-between mb-4 p-1 px-6">
           <div className="flex  flex-col gap-1">

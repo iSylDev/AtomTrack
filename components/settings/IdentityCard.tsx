@@ -8,7 +8,7 @@ import PfpEditor from "./PfpEditor";
 export default function IdentityCard({position}: {position?: string}) {
 
   return (
-    <Card className="md:col-span-2">
+    <Card className="md:col-span-8">
       <div className={cn('flex flex-col md:flex-row md:gap-12 items-center px-6  md:row-end-2', position)}  >
         <div>
           <PfpEditor />
