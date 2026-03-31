@@ -53,9 +53,6 @@ export default function VerifyOtpForm() {
     } finally {
       setIsLoading(false)
     }
-
-
-
   }
 
   return (
