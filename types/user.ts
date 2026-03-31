@@ -6,6 +6,7 @@ export interface UserType {
   theme: 'light' | 'dark';
   task_deadline: boolean;
   weekly_reports: boolean; 
+  marketing_updates: boolean;
 }
 
 

@@ -9,14 +9,14 @@ export default function DashboardLayout({
 }>) {
 
   return (
-    <div className="min-h-full flex flex-col">
-      <SidebarProvider>
+    <SidebarProvider>
+      {/* <div className="min-h-full flex flex-col"> */}
         <AppSidebar />
+      <div className="flex-1 relative px-2">
         <MobileHeader />
-        <div className="flex-1 relative px-5">
-          {children}
-        </div>
-      </SidebarProvider>
-    </div>
+        {children}
+      </div>
+      {/* </div> */}
+    </SidebarProvider>
   )
 }
