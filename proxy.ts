@@ -4,14 +4,14 @@ import { type NextRequest, NextResponse } from "next/server";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!;
 
-export async function proxy(request: NextRequest){
+export async function proxy(request: NextRequest) {
   console.log("PROXY TRIGGERED on:", request.nextUrl.pathname);
-  return await updateSession(request)
+  return await updateSession(request);
 }
 
 export const updateSession = async (request: NextRequest) => {
   // Create an unmodified response
-  
+
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,
@@ -37,17 +37,21 @@ export const updateSession = async (request: NextRequest) => {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const { data, error } = await supabase.auth.getUser();
+  const user = data?.user;
   const url = request.nextUrl.clone();
 
   console.log("Proxy checking path:", url.pathname, "User found:", !!user);
 
   // Check if a logged in user tries access the auth pages, redirect them to dashboard
-  if (user && url.pathname.startsWith("/auth")) {
-    url.pathname = "/dashboard";
+  if (user && (url.pathname.startsWith("/auth") || url.pathname === "/")) {
+    url.pathname = "/dashboard/overview";
+    return NextResponse.redirect(url);
+  }
+
+  // Redirect logged-in users hitting the base /dashboard to /dashboard/overview
+  if (user && url.pathname === "/dashboard") {
+    url.pathname = "/dashboard/overview";
     return NextResponse.redirect(url);
   }
 
@@ -61,5 +65,5 @@ export const updateSession = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/auth/:path*'],
+  matcher: [ '/', "/dashboard/:path*", "/auth/:path*"],
 };
