@@ -11,16 +11,11 @@ import { VerfiyOtpSchema, verifiyOtpSchema } from "@/schemas/VerifyOtpSchema";
 import { verifyOtpAction } from "@/actions/auth-actions/verifyOtpAction";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { createClientInBroswer } from "@/utils/supabase/client";
-import { useDispatch } from "react-redux";
-import useFetchUser from "@/hooks/useFetchUser";
+import createUser from "@/actions/auth-actions/createUserAction";
 
 
 export default function VerifyOtpForm() {
-  const { fetchUser } = useFetchUser();
   const [isLoading, setIsLoading] = useState(false);
-  const supabase = createClientInBroswer();
-  const dispatch = useDispatch()
 
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || ''
@@ -41,31 +36,29 @@ export default function VerifyOtpForm() {
     }
 
     setIsLoading(true);
+    // Call the action to verify the user's email
     try {
       const result = await verifyOtpAction({
         email,
         token: data.token
       })
 
+      // Upsert User profile
       if (result?.success) {
-        console.log(result)
-        fetchUser();
-        // const { data: { user }, error } = await supabase.auth.getUser();
+        console.log(result);
+        // Grab user data from the create user action
+        const userData = await createUser();
 
-        // if (user) {
-        //   console.log(user);
-
-        //   // dispatch(logIn(user))
-        //   toast.success('Account verified successfully!')
-        //   router.push(`/dashboard`)
-        // }
-
-
+        // If upsert is successful, push the user to the dashbaord
+        if (userData?.success) {
+          toast.success('Account verified successfully!')
+          router.push(`/dashboard`)
+        }
       } else {
         toast.error(result?.message || 'Invalid Code')
       }
     } catch (error) {
-      toast.error('An error occured')
+      toast.error('An error occured');
     } finally {
       setIsLoading(false)
     }
@@ -83,8 +76,10 @@ export default function VerifyOtpForm() {
         {...register('token')}
         className="text-center text-lg tracking-[0.75em] py-5 w-full text-bold lg:py-6" type="text" inputMode="numeric" pattern="\d{8}" maxLength={8} placeholder="********" />
 
-      <Button className="w-full mt-3 py-5 rounded-md md:mt-3 flex items-center justify-center " >
-        <p className="uppercase font-bold text-xs">verify & continue</p>
+      <Button
+        disabled={isLoading}
+        className="w-full mt-3 py-5 rounded-md md:mt-3 flex items-center justify-center" >
+        <p className="uppercase font-bold text-xs"></p>
         <ArrowRight size={15} />
       </Button>
     </form>
