@@ -16,8 +16,6 @@ import { useDispatch } from "react-redux";
 import useFetchUser from "@/hooks/useFetchUser";
 
 
-
-
 export default function VerifyOtpForm() {
   const { fetchUser } = useFetchUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +30,7 @@ export default function VerifyOtpForm() {
   const { register, handleSubmit, formState: { errors } } = useForm<VerfiyOtpSchema>({
     resolver: zodResolver(verifiyOtpSchema),
     defaultValues: {
-      token: ''
+      token: '',
     }
   })
 

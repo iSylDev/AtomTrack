@@ -1,22 +1,11 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import {
-  SignupSchema,
-  LoginSchema,
-  signupSchema,
-  loginSchema,
-} from "@/schemas/AuthSchema";
+import { LoginSchema } from "@/schemas/AuthSchema";
 
-export async function authAction({
-  mode,
-  data,
-}: {
-  mode: string | null;
-  data: LoginSchema | SignupSchema;
-}) {
-  const currentSchema = mode === "sign-up" ? signupSchema : loginSchema;
 
+
+export async function authAction(data: LoginSchema) {
   const supabase = await createClient();
 
   try {
@@ -26,7 +15,6 @@ export async function authAction({
         data: {
           username: "username" in data ? data.username : undefined,
         },
-        shouldCreateUser: mode === "sign-up",
       },
     });
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { Loader2, Mail, User } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useForm } from 'react-hook-form'
-import { loginSchema, signupSchema, type LoginSchema, type SignupSchema } from "@/schemas/AuthSchema";
+import { loginSchema, type LoginSchema } from "@/schemas/AuthSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -30,23 +30,24 @@ export default function AuthForm() {
     },
   })
 
-  async function submitFunc(data: LoginSchema | SignupSchema) {
+  async function submitFunc(data: LoginSchema) {
     setIsLoading(true);
 
     try {
-      const result = await authAction({ mode, data })
+      //  Send otp to the user;
+      const result = await authAction(data);
 
       if (result.success) {
-        toast.success(result.message)
-        router.push(`/auth/verify-otp?email=${encodeURIComponent(data.email)}`)
+        toast.success(result.message);
+        router.push(`/auth/verify-otp?email=${encodeURIComponent(data.email)}`) // Send them to the verification page
       } else {
-        toast.error(result.message || 'Something went wrong. Please try again')
-        setIsLoading(false)
+        toast.error(result.message || 'Something went wrong. Please try again');
+        setIsLoading(false);
       }
     }
     catch (error: any) {
-      toast.error('An unexpected error occured')
-      setIsLoading(false)
+      toast.error('An unexpected error occured');
+      setIsLoading(false);
     }
   }
 
@@ -78,7 +79,6 @@ export default function AuthForm() {
               }
             </Button>
           </form>
-
 
           <div>
             <div className="flex justify-center items-center mt-4 gap-3">
