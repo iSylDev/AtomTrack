@@ -2,7 +2,6 @@
 
 import AuthHeader from "@/components/auth/components/AuthHeader";
 import VerifyOtpCard from "@/components/auth/components/VerifyOtpCard";
-import Image from "next/image";
 
 
 

@@ -13,7 +13,7 @@ export async function verifyOtpAction({
 
   try {
     const {data, error: verificationError} = await supabase.auth.verifyOtp({
-      email, token, type: 'email'
+      email, token, type: 'email',
     })
 
     if (verificationError) throw verificationError

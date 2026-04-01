@@ -10,12 +10,12 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLogout } from "@/hooks/auth/useLogout";
 
 
 export default function ProfileCard() {
-  const isMobile = useIsMobile()
-  console.log(isMobile);
-
+  const isMobile = useIsMobile();
+  const { logout } = useLogout();
 
   if (!isMobile) {
     return (
@@ -86,7 +86,9 @@ export default function ProfileCard() {
           ))
         }
         <Separator className="mb-3 mt-1" />
-        <Button variant={'destructive'} size={'lg'} className="w-full flex justify-start py-3">
+        <Button 
+        onClick={logout}
+        variant={'destructive'} size={'lg'} className="w-full flex justify-start py-3">
           <LogOut className="mr-1 h-4 w-4" />
           <p>Logout</p>
         </Button>

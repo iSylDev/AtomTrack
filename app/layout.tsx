@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
+import Providers from "@/components/shared/Provider";
 
 
 const jakarta = localFont({
@@ -36,12 +37,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
 
-          
+
+          <Providers>
             <main className="flex-1 relative px-5">
               {children}
             </main>
+            <Toaster />
+          </Providers>
         </ThemeProvider>
-        <Toaster />
       </body>
     </html>
   );

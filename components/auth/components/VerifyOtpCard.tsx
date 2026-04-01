@@ -1,4 +1,4 @@
-import VerifyOtpForm from "@/components/auth/components/VerifyOtpForm";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
@@ -7,6 +7,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import VerifyOtpForm from "@/components/forms/VerifyOtpForm";
 
 
 export default function VerifyOtpCard() {

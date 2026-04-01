@@ -11,11 +11,18 @@ import { VerfiyOtpSchema, verifiyOtpSchema } from "@/schemas/VerifyOtpSchema";
 import { verifyOtpAction } from "@/actions/auth-actions/verifyOtpAction";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import { createClientInBroswer } from "@/utils/supabase/client";
+import { useDispatch } from "react-redux";
+import useFetchUser from "@/hooks/useFetchUser";
+
 
 
 
 export default function VerifyOtpForm() {
+  const { fetchUser } = useFetchUser();
   const [isLoading, setIsLoading] = useState(false);
+  const supabase = createClientInBroswer();
+  const dispatch = useDispatch()
 
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || ''
@@ -43,8 +50,19 @@ export default function VerifyOtpForm() {
       })
 
       if (result?.success) {
-        toast.success('Account verified successfully!')
-        router.push(`/dashboard`)
+        console.log(result)
+        fetchUser();
+        // const { data: { user }, error } = await supabase.auth.getUser();
+
+        // if (user) {
+        //   console.log(user);
+
+        //   // dispatch(logIn(user))
+        //   toast.success('Account verified successfully!')
+        //   router.push(`/dashboard`)
+        // }
+
+
       } else {
         toast.error(result?.message || 'Invalid Code')
       }
@@ -69,7 +87,7 @@ export default function VerifyOtpForm() {
 
       <Button className="w-full mt-3 py-5 rounded-md md:mt-3 flex items-center justify-center " >
         <p className="uppercase font-bold text-xs">verify & continue</p>
-        <ArrowRight size={15}/>
+        <ArrowRight size={15} />
       </Button>
     </form>
   );

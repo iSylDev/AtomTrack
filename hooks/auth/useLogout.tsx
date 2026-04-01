@@ -24,6 +24,8 @@ export const useLogout = () => {
   }
 
   const logout = async () => {
+    console.log('logging out');
+    
     startTransition(async () => {
       try {
         const { error: LogoutError } = await supabase.auth.signOut();
