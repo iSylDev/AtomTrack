@@ -4,9 +4,9 @@ export interface UserType {
   username: string;
   profile_picture: string;
   theme: 'light' | 'dark';
-  task_deadline: boolean;
-  weekly_reports: boolean; 
-  marketing_updates: boolean;
+  task_deadline_notif: boolean;
+  weekly_reports_notif: boolean; 
+  marketing_updates_notif: boolean;
 }
 
 

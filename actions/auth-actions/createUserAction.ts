@@ -13,6 +13,9 @@ export async function createUser() {
     error: getUserError,
   } = await supabase.auth.getUser();
 
+  console.log(user);
+  
+
   if (!user || getUserError) {
     return { success: false, message: "Error fetching user details." };
   }
@@ -20,18 +23,19 @@ export async function createUser() {
   //  Upsert the profile
   const { error: upsertError } = await supabase.from("users").upsert(
     {
-      user_id: user.id,
       email: user.email,
       username:
         user.user_metadata?.username || user.email?.split("@")[0] || "New User",
       profile_picture: "",
       theme: "dark",
-      task_deadline: true,
-      weekly_reports: true,
-      marketing_updates: true,
+      task_deadline_notif: true,
+      weekly_reports_notif: true,
+      marketing_updates_notif: true,
     },
     { onConflict: "user_id" },
   );
+  console.log('Upsert Success');
+  
 
   if (upsertError) {
     console.error("Upsert Error:", upsertError);
