@@ -3,8 +3,6 @@
 import { createClient } from "@/utils/supabase/server";
 
 export async function createUser() {
-  console.log("Hello");
-
   const supabase = await createClient();
 
   // Get the authenticated user from the session
@@ -13,14 +11,23 @@ export async function createUser() {
     error: getUserError,
   } = await supabase.auth.getUser();
 
-  console.log(user);
-  
-
   if (!user || getUserError) {
     return { success: false, message: "Error fetching user details." };
   }
 
-  //  Upsert the profile
+  // Check if profile exists
+  const { data: exisitingProfile } = await supabase
+    .from("users")
+    .select("user_id")
+    .eq("user_id", user.id)
+    .single();
+
+    // return here if profile already exists
+  if (exisitingProfile) {
+    return { success: true, message: "Profile already exists" };
+  }
+
+  //  Upsert the profile if its a new user
   const { error: upsertError } = await supabase.from("users").upsert(
     {
       user_id: user.id,
