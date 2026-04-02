@@ -2,7 +2,9 @@
 
 import { createClient } from "@/utils/supabase/server";
 
-const createUser = async () => {
+export async function createUser() {
+  console.log("Hello");
+
   const supabase = await createClient();
 
   // Get the authenticated user from the session
@@ -39,6 +41,4 @@ const createUser = async () => {
     };
   }
   return { success: true, message: "Profile Synced Successfully" };
-};
-
-export default createUser;
+}

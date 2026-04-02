@@ -11,7 +11,6 @@ import { VerfiyOtpSchema, verifiyOtpSchema } from "@/schemas/VerifyOtpSchema";
 import { verifyOtpAction } from "@/actions/auth-actions/verifyOtpAction";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import createUser from "@/actions/auth-actions/createUserAction";
 
 
 export default function VerifyOtpForm() {
@@ -43,21 +42,16 @@ export default function VerifyOtpForm() {
         token: data.token
       })
 
-      // Upsert User profile
       if (result?.success) {
-        console.log(result);
-        // Grab user data from the create user action
-        const userData = await createUser();
-
-        // If upsert is successful, push the user to the dashbaord
-        if (userData?.success) {
-          toast.success('Account verified successfully!')
-          router.push(`/dashboard`)
-        }
-      } else {
+        // Push user to dashboard
+        toast.success('Account verified successfully!')
+        router.push(`/dashboard`)
+      }
+      else {
         toast.error(result?.message || 'Invalid Code')
       }
     } catch (error) {
+      console.error(error)
       toast.error('An error occured');
     } finally {
       setIsLoading(false)
@@ -77,9 +71,10 @@ export default function VerifyOtpForm() {
         className="text-center text-lg tracking-[0.75em] py-5 w-full text-bold lg:py-6" type="text" inputMode="numeric" pattern="\d{8}" maxLength={8} placeholder="********" />
 
       <Button
+        type="submit"
         disabled={isLoading}
         className="w-full mt-3 py-5 rounded-md md:mt-3 flex items-center justify-center" >
-        <p className="uppercase font-bold text-xs"></p>
+        <p className="uppercase font-bold text-xs">{isLoading ? 'Verifying...' : 'Verify Code'}</p>
         <ArrowRight size={15} />
       </Button>
     </form>

@@ -37,11 +37,15 @@ export const updateSession = async (request: NextRequest) => {
     },
   });
 
-  const { data, error } = await supabase.auth.getUser();
-  const user = data?.user;
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
   const url = request.nextUrl.clone();
 
-  console.log("Proxy checking path:", url.pathname, "User found:", !!user);
+  if (request.headers.has("next-action")) {
+    return supabaseResponse;
+  }
 
   // Check if a logged in user tries access the auth pages, redirect them to dashboard
   if (user && (url.pathname.startsWith("/auth") || url.pathname === "/")) {
@@ -65,5 +69,5 @@ export const updateSession = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: [ '/', "/dashboard/:path*", "/auth/:path*"],
+  matcher: ["/", "/dashboard/:path*", "/auth/:path*"],
 };
