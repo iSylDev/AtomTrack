@@ -4,6 +4,7 @@ import { logIn } from "@/store/slices/userSlice";
 import { createClientInBroswer } from "@/utils/supabase/client";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { success } from "zod";
 
 const useFetchUser = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,21 +25,23 @@ const useFetchUser = () => {
       if (authError || !authUser) setError("No authenticated user found!");
 
       //  Get the user profile from the users table
-      const { data: userTableData, error: userTableError } = await supabase
+      const { data: userData, error: userTableError } = await supabase
         .from("users")
         .select("*")
         .eq("user_id", authUser?.id)
         .single();
 
-      if (!userTableData || userTableError) throw userTableError;
+      if (!userData || userTableError) setError("Error fetching user profile");
 
-      console.log(userTableData);
+      console.log(userData);
       //  Update the user in the redux store
-      dispatch(logIn(userTableData));
+      dispatch(logIn(userData));
       setIsLoading(false);
+      return { success: true };
     } catch (err: any) {
       setIsLoading(false);
       setError("Error fetching user profile");
+      return {success: false};
     }
   };
 

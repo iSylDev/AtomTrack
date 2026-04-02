@@ -45,7 +45,7 @@ export default function VerifyOtpForm() {
       if (result?.success) {
         // Push user to dashboard
         toast.success('Account verified successfully!')
-        router.push(`/dashboard`)
+        router.push(`/dashboard?new=true`)
       }
       else {
         toast.error(result?.message || 'Invalid Code')
