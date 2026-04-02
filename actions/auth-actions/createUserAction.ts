@@ -23,6 +23,7 @@ export async function createUser() {
   //  Upsert the profile
   const { error: upsertError } = await supabase.from("users").upsert(
     {
+      user_id: user.id,
       email: user.email,
       username:
         user.user_metadata?.username || user.email?.split("@")[0] || "New User",
@@ -34,8 +35,6 @@ export async function createUser() {
     },
     { onConflict: "user_id" },
   );
-  console.log('Upsert Success');
-  
 
   if (upsertError) {
     console.error("Upsert Error:", upsertError);

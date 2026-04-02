@@ -1,37 +1,48 @@
+"use client";
+
 import { logIn } from "@/store/slices/userSlice";
 import { createClientInBroswer } from "@/utils/supabase/client";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const useFetchUser = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const supabase = createClientInBroswer();
 
   const fetchUser = async () => {
     try {
+      setIsLoading(true);
+      setError("");
+      //  Get the current logged in user
       const {
         data: { user: authUser },
         error: authError,
       } = await supabase.auth.getUser();
 
-      if (authError || !authUser)
-        throw new Error("No authenticated user found!");
+      if (authError || !authUser) setError("No authenticated user found!");
 
+      //  Get the user profile from the users table
       const { data: userTableData, error: userTableError } = await supabase
         .from("users")
         .select("*")
-        .eq("user_id", authUser.id)
+        .eq("user_id", authUser?.id)
         .single();
 
       if (!userTableData || userTableError) throw userTableError;
 
       console.log(userTableData);
-      return userTableData;
+      //  Update the user in the redux store
+      dispatch(logIn(userTableData));
+      setIsLoading(false);
     } catch (err: any) {
-      return null;
+      setIsLoading(false);
+      setError("Error fetching user profile");
     }
   };
 
-  return { fetchUser };
+  return { fetchUser, isLoading, error };
 };
 
 export default useFetchUser;
