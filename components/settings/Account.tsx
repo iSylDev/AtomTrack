@@ -28,7 +28,7 @@ export default function Account() {
     </div>
   }
 
-  return <div className="w-full md:col-span-6">
+  return <div className="w-full lg:col-span-6">
     {isMobile && (
       <div className="flex gap-2 items-center mb-4">
         <Lock className="stroke-chart-2" />
@@ -36,7 +36,7 @@ export default function Account() {
       </div>
     )}
 
-    <Card className="bg-transparent md:bg-card ring-0 md:ring-1 -mt-4 md:mt-0 px-1 md:px-6 md:h-full" >
+    <Card className="bg-transparent lg:bg-card ring-0 lg:ring-1 -mt-4 lg:mt-0 px-1 lg:px-6 lg:h-full" >
       {
         !isMobile && (
           <CardHeader className="p-0">
@@ -50,21 +50,21 @@ export default function Account() {
           </CardHeader>
         )
       }
-      <CardContent className="flex flex-col gap-2 px-0 pb-3 md:gap-3">
+      <CardContent className="flex flex-col gap-2 px-0 pb-3 lg:gap-3">
         <div>
-          <Button className="w-full md:border md:border-border py-7 flex justify-between items-center px-5" variant={'outline'}>
+          <Button className="w-full lg:border lg:border-border py-7 flex justify-between items-center px-5" variant={'outline'}>
             <p>Change Password</p>
             <ChevronRight />
           </Button>
         </div>
         <div>
-          <Button className="w-full md:border md:border-border py-7  flex justify-between items-center px-5" variant={'outline'}>
+          <Button className="w-full lg:border lg:border-border py-7  flex justify-between items-center px-5" variant={'outline'}>
             <p className="text-destructive">Logout</p>
             <ChevronRight className="stroke-destructive" />
           </Button>
         </div>
         <div>
-          <Button className="w-full md:border md:border-border py-7 flex justify-between items-center px-5" variant={'destructive'}>
+          <Button className="w-full lg:border lg:border-border py-7 flex justify-between items-center px-5" variant={'destructive'}>
             <p>Delete Account</p>
             <Trash2 />
           </Button>

@@ -23,7 +23,7 @@ export default function Notifications() {
     </div>
   }
 
-  return <div className="w-full md:col-span-6">
+  return <div className="w-full lg:col-span-6">
     {isMobile && (
       <div className="flex gap-2 items-center mb-4">
         <Bell className="stroke-chart-2" />
@@ -44,37 +44,37 @@ export default function Notifications() {
         </CardHeader>
       )
       }
-      <CardContent className="flex flex-col gap-5 px-2 md:pb-3">
-        <FieldGroup className="w-full px-4 md:px-5 ">
-          <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
+      <CardContent className="flex flex-col gap-5 px-2 lg:pb-3">
+        <FieldGroup className="w-full px-4 lg:px-5 ">
+          <Field orientation="horizontal" className="lg:p-4 lg:bg-[#232a33] lg:rounded-lg lg:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
               <div className="flex flex-col gap-1">
                 <p>Task Deadlines</p>
-                <p className="text-card-foreground hidden md:block">Notify 1 hour before due</p>
+                <p className="text-card-foreground hidden lg:block">Notify 1 hour before due</p>
               </div>
             </FieldLabel>
             <Switch id="switch-size-default" size="default" />
           </Field>
         </FieldGroup>
         {isMobile && <Separator />}
-        <FieldGroup className="w-full px-4 md:px-5 ">
-          <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
+        <FieldGroup className="w-full px-4 lg:px-5 ">
+          <Field orientation="horizontal" className="lg:p-4 lg:bg-[#232a33] lg:rounded-lg lg:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
               <div className="flex flex-col gap-1">
                 <p>Weekly Reports</p>
-                <p className="text-card-foreground hidden md:block">Summary of task completion</p>
+                <p className="text-card-foreground hidden lg:block">Summary of task completion</p>
               </div>
             </FieldLabel>
             <Switch id="switch-size-default" size="default" />
           </Field>
         </FieldGroup>
         {isMobile && <Separator />}
-        <FieldGroup className="w-full px-4 md:px-5 ">
-          <Field orientation="horizontal" className="md:p-4 md:bg-[#232a33] md:rounded-lg md:border">
+        <FieldGroup className="w-full px-4 lg:px-5 ">
+          <Field orientation="horizontal" className="lg:p-4 lg:bg-[#232a33] lg:rounded-lg lg:border">
             <FieldLabel htmlFor="switch-size-default text-foreground ">
               <div className="flex flex-col gap-1">
                 <p>Marketing updates</p>
-                <p className="text-card-foreground hidden md:block">Product news and filters</p>
+                <p className="text-card-foreground hidden lg:block">Product news and filters</p>
               </div>
             </FieldLabel>
             <Switch id="switch-size-default" size="default" />

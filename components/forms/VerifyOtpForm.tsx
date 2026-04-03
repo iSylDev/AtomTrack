@@ -73,7 +73,7 @@ export default function VerifyOtpForm() {
       <Button
         type="submit"
         disabled={isLoading}
-        className="w-full mt-3 py-5 rounded-md md:mt-3 flex items-center justify-center" >
+        className="w-full mt-3 py-5 rounded-md lg:mt-3 flex items-center justify-center" >
         <p className="uppercase font-bold text-xs">{isLoading ? 'Verifying...' : 'Verify Code'}</p>
         <ArrowRight size={15} />
       </Button>

@@ -31,7 +31,7 @@ export default function ProfileCard() {
               <h3 className="text-foreground text-sm">{formatToTitle(user?.username) || 'Guest User'}</h3>
               <p className="text-xs">Beta User</p>
             </div>
-            </div>
+          </div>
           <PopoverTrigger asChild>
             <EllipsisVertical size={17} className="hover:bg-sidebar-ring/20 transition-all duration-300 hover:cursor-pointer h-6 w-6 p-1 rounded-sm" />
           </PopoverTrigger>
@@ -71,9 +71,9 @@ export default function ProfileCard() {
 
   return (
     <div className="flex flex-col items-center px-3 mb-3 lg:px-1 pb-1 pt-2">
-      <div className="w-full text-center flex gap-3 items-center justify-start md:flex-col md:items-center ">
+      <div className="w-full text-center flex gap-3 items-center justify-start lg:flex-col lg:items-center ">
         <UserAvatar className="w-14 h-14 border-2 border-primary mb-2" />
-        <div className="text-left md:text-center">
+        <div className="text-left lg:text-center">
           <h3 className="text-foreground text-[16px] mb-1 lg:mb-0">{formatToTitle(user?.username) || 'Guest User'}</h3>
           <p className="uppercase tracking-wider text-xs text-card-foreground">Beta User</p>
         </div>

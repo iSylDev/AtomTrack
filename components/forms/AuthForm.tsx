@@ -71,7 +71,7 @@ export default function AuthForm() {
                 {errors.email && <p className="text-destructive text-xs italic -mt-2">{errors.email.message}!</p>}
               </div>
             </div>
-            <Button className="w-full mt-4 py-5 rounded-md md:mt-5" >
+            <Button className="w-full mt-4 py-5 rounded-md lg:mt-5" >
               {
                 !isLoading && (<p>Continue</p>)
               }{
