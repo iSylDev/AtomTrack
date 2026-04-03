@@ -11,21 +11,27 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLogout } from "@/hooks/auth/useLogout";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import formatToTitle from "@/helpers/formatToTitle";
 
 
 export default function ProfileCard() {
   const isMobile = useIsMobile();
   const { logout } = useLogout();
+  const user = useSelector((state: RootState) => state.userSlice.user)
 
   if (!isMobile) {
     return (
       <Popover>
-        <Card className="bg-sidebar-ring/10 px-3 flex-row items-center gap-4 " >
-          <UserAvatar />
-          <div>
-            <h3 className="text-foreground text-sm">Krypto Lily</h3>
-            <p className="text-xs">Beta User</p>
-          </div>
+        <Card className="bg-sidebar-ring/10 px-3 flex-row items-center gap-4 justify-between " >
+          <div className="flex gap-3 items-center">
+            <UserAvatar />
+            <div>
+              <h3 className="text-foreground text-sm">{formatToTitle(user?.username) || 'Guest User'}</h3>
+              <p className="text-xs">Beta User</p>
+            </div>
+            </div>
           <PopoverTrigger asChild>
             <EllipsisVertical size={17} className="hover:bg-sidebar-ring/20 transition-all duration-300 hover:cursor-pointer h-6 w-6 p-1 rounded-sm" />
           </PopoverTrigger>
@@ -35,7 +41,7 @@ export default function ProfileCard() {
           <div className="flex flex-col items-center px-1 pb-1 pt-2">
             <div className="text-center flex flex-col items-center">
               <UserAvatar className="w-14 h-14 border-2 border-primary mb-2" />
-              <h3 className="text-foreground text-[16px]">Alex Rivera</h3>
+              <h3 className="text-foreground text-[16px]">{formatToTitle(user?.username) || 'Guest User'}</h3>
               <p className="uppercase tracking-wider text-xs">Beta User</p>
             </div>
 
@@ -86,9 +92,9 @@ export default function ProfileCard() {
           ))
         }
         <Separator className="mb-3 mt-1" />
-        <Button 
-        onClick={logout}
-        variant={'destructive'} size={'lg'} className="w-full flex justify-start py-3">
+        <Button
+          onClick={logout}
+          variant={'destructive'} size={'lg'} className="w-full flex justify-start py-3">
           <LogOut className="mr-1 h-4 w-4" />
           <p>Logout</p>
         </Button>
