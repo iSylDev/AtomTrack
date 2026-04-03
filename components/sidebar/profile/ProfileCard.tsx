@@ -26,7 +26,7 @@ export default function ProfileCard() {
       <Popover>
         <Card className="bg-sidebar-ring/10 px-3 flex-row items-center gap-4 justify-between " >
           <div className="flex gap-3 items-center">
-            <UserAvatar />
+            <UserAvatar size="lg" />
             <div>
               <h3 className="text-foreground text-sm">{formatToTitle(user?.username) || 'Guest User'}</h3>
               <p className="text-xs">Beta User</p>
@@ -40,7 +40,7 @@ export default function ProfileCard() {
         <PopoverContent className="">
           <div className="flex flex-col items-center px-1 pb-1 pt-2">
             <div className="text-center flex flex-col items-center">
-              <UserAvatar className="w-14 h-14 border-2 border-primary mb-2" />
+              <UserAvatar className="w-16 h-16 border-2 border-primary mb-2" />
               <h3 className="text-foreground text-[16px]">{formatToTitle(user?.username) || 'Guest User'}</h3>
               <p className="uppercase tracking-wider text-xs">Beta User</p>
             </div>
@@ -74,7 +74,7 @@ export default function ProfileCard() {
       <div className="w-full text-center flex gap-3 items-center justify-start md:flex-col md:items-center ">
         <UserAvatar className="w-14 h-14 border-2 border-primary mb-2" />
         <div className="text-left md:text-center">
-          <h3 className="text-foreground text-[16px] mb-1 lg:mb-0">Alex Rivera</h3>
+          <h3 className="text-foreground text-[16px] mb-1 lg:mb-0">{formatToTitle(user?.username) || 'Guest User'}</h3>
           <p className="uppercase tracking-wider text-xs text-card-foreground">Beta User</p>
         </div>
       </div>

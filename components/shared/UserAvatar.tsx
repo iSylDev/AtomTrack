@@ -3,13 +3,13 @@ import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "../ui/avatar"
 import type { RootState } from "@/store/store"
 
 
-export default function UserAvatar({ className }: { className?: string }) {
+export default function UserAvatar({ className, size }: { className?: string, size?: 'sm' | 'lg'  }) {
   const profilePicture = useSelector((state: RootState) => state.userSlice.user?.profile_picture)
 
   return (
-    <Avatar className={className}size="lg">
+    <Avatar className={className} size={size}>
       <AvatarImage src={profilePicture}  />
-      <AvatarBadge />
+      {/* <AvatarBadge /> */}
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
   )
