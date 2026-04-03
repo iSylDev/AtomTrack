@@ -6,12 +6,13 @@ import { Label } from "../ui/label";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 export default function PfpEditor() {
   const [imageUrl, setImageUrl] = useState('/images/pfp.png')
   const user = useSelector((state: RootState) => state.userSlice.user)
+  const dispatch = useDispatch();
 
   function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]

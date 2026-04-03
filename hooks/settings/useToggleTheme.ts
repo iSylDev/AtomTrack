@@ -1,7 +1,7 @@
 "use client";
 
 import { toggleThemeAction } from "@/actions/settings/toggleThemeAction";
-import { setTheme } from "@/store/slices/userSlice";
+import { updateUserSlice } from "@/store/slices/userSlice";
 import { RootState } from "@/store/store";
 import { useTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,17 +15,21 @@ export default function useToggleTheme() {
   );
 
   const handleToggle = (newTheme: "light" | "dark") => {
-    dispatch(setTheme(newTheme));
+    // Optimistically update the user theme
+    dispatch(updateUserSlice({ theme: newTheme }));
 
     startTransition(async () => {
+      // Try updating the user theme settings in supabases
       const result = await toggleThemeAction(newTheme);
 
       if (!result.success) {
-        dispatch(setTheme(currentTheme || "dark"));
+        // Rever changes if user theme update in supabase fails
+        dispatch(updateUserSlice({ theme: currentTheme || "dark" }));
         toast.error("Failed to save theme preference");
+        return;
       }
 
-      toast.success('Theme updated successfully!')
+      toast.success("Theme updated successfully!");
     });
   };
   return {

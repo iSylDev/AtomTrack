@@ -24,8 +24,13 @@ export const userSlice = createSlice({
         state.user.theme = action.payload;
       }
     },
+    updateUserSlice: (state, action: PayloadAction<Partial<UserType>>) => {
+      if (state.user) {
+        state.user = { ...state.user, ...action.payload };
+      }
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { logIn, logOut, setTheme } = userSlice.actions;
+export const { logIn, logOut, updateUserSlice } = userSlice.actions;
