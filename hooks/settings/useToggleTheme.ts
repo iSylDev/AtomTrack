@@ -24,6 +24,8 @@ export default function useToggleTheme() {
         dispatch(setTheme(currentTheme || "dark"));
         toast.error("Failed to save theme preference");
       }
+
+      toast.success('Theme updated successfully!')
     });
   };
   return {

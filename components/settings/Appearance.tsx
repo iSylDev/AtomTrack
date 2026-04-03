@@ -7,10 +7,11 @@ import { Card, CardContent } from "../ui/card";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import useToggleTheme from "@/hooks/settings/useToggleTheme";
 
 
 export default function Appearance({ position }: { position?: string }) {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, isPending } = useToggleTheme();
 
   const [hasMounted, setHasMounted] = useState(false)
   const isMobile = useIsMobile();
@@ -49,7 +50,7 @@ export default function Appearance({ position }: { position?: string }) {
       <CardContent className="lg:px-6">
         <Tabs
           defaultValue={theme}
-          onValueChange={(value) => setTheme(value)}
+          onValueChange={(value) => setTheme(value as "light" | 'dark')}
           className="w-full "
         >
           <TabsList className="w-full flex bg-muted/50 py-7 lg:py-5 px-3 lg:px-1 items-center justify-center">

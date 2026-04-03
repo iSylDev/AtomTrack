@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/components/shared/Provider";
+import { ThemeSync } from "@/components/theme/ThemeSync";
 
 
 const jakarta = localFont({
@@ -37,9 +38,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
 
-
           <Providers>
             <main className="flex-1 relative px-5">
+              <ThemeSync />
               {children}
             </main>
             <Toaster />
