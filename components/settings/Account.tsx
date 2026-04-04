@@ -2,13 +2,18 @@
 
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { ChevronRight, Lock, Trash2 } from "lucide-react";
-import { Field, FieldLabel, FieldGroup } from "../ui/field";
-import { Switch } from "../ui/switch";
-import { Separator } from "../ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import ChangeEmailForm from "../forms/ChangeEmailForm";
 
 
 
@@ -52,10 +57,21 @@ export default function Account() {
       }
       <CardContent className="flex flex-col gap-2 px-0 pb-3 lg:gap-3">
         <div>
-          <Button className="w-full lg:border lg:border-border py-7 flex justify-between items-center px-5" variant={'outline'}>
-            <p>Change Password</p>
-            <ChevronRight />
-          </Button>
+
+          <Dialog>
+            <DialogTrigger className="w-full">
+              <Button className="w-full lg:border lg:border-border py-7 flex justify-between items-center px-5" variant={'outline'}>
+                <p>Change Email</p>
+                <ChevronRight />
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Change Email Address</DialogTitle>
+                  <ChangeEmailForm />
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         </div>
         <div>
           <Button className="w-full lg:border lg:border-border py-7  flex justify-between items-center px-5" variant={'outline'}>
