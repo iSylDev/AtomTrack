@@ -2,11 +2,8 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Loader2, Mail, User } from "lucide-react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { Loader2, Mail } from "lucide-react";
 import { useForm } from 'react-hook-form'
 import { loginSchema, type LoginSchema } from "@/schemas/AuthSchema";
 import { zodResolver } from "@hookform/resolvers/zod";

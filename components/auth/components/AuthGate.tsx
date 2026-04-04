@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { createUser } from "@/actions/auth-actions/createUserAction";
 import LoadingScreen from "@/components/shared/LoadingScreen";
 import ErrorScreen from "@/components/shared/ErrorScreen";
-import useFetchUser from "@/hooks/useFetchUser";
+import useFetchUser from "@/hooks/useUser";
 import { useSearchParams } from "next/navigation";
 
 export default function AuthGate({ children }: { children: ReactNode }) {
@@ -16,7 +16,7 @@ export default function AuthGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      
+
       try {
         // Determine if the user is coming from the auth page 
         const isFromAuthPage = searchParams.get('new') === 'true'

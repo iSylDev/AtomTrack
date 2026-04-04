@@ -1,5 +1,5 @@
 'use client'
-import useFetchUser from "@/hooks/useFetchUser"
+import useFetchUser from "@/hooks/useUser"
 
 
 
