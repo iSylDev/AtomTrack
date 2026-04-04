@@ -12,10 +12,17 @@ export const useSettingsSaver = () => {
   const currentUserState = useSelector(
     (state: RootState) => state.userSlice.user,
   );
+  // Live ref
+  const liveStateRef = useRef(currentUserState);
 
   // The snapshot refs
   const lastSavedStateRef = useRef<UserType | null>(null);
   const pendingFileRef = useRef<File | null>(null);
+
+  // Keep the live red in sync with redux changes
+  useEffect(() => {
+    liveStateRef.current = currentUserState;
+  }, [currentUserState]);
 
   // Take a snapshot of the current user settings on page load if a user exists in the store
   useEffect(() => {
@@ -26,13 +33,13 @@ export const useSettingsSaver = () => {
 
   const saveToDatabase = async () => {
     // Check if there's a logged in user
-    if (!currentUserState) {
+    if (!liveStateRef.current) {
       toast.error("No user data found. Please sign in again");
       return;
     }
 
     const toastId = toast.loading("Saving changes");
-    let finalUserData = { ...currentUserState };
+    let finalUserData = { ...liveStateRef.current };
 
     if (pendingFileRef.current) {
       const formData = new FormData();
@@ -76,6 +83,7 @@ export const useSettingsSaver = () => {
     if (file) pendingFileRef.current = file;
 
     toast("You have unsaved changed", {
+      id: "unsaves-settings-toast",
       cancel: { label: "Cancel", onClick: () => handleCancel() },
       action: { label: "Save now", onClick: () => saveToDatabase() },
       duration: Infinity,

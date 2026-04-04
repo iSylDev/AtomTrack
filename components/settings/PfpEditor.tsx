@@ -44,7 +44,7 @@ export default function PfpEditor() {
       <div
         className="relative w-28 h-28 object-cover rounded-full overflow-hidden shadow-lg border-3 border-card-foreground/50 " >
         <Image
-          src={user?.profile_picture || 'images/pfp.png'}
+          src={user?.profile_picture || 'https://kcgmivfbuirkvjkikvzq.supabase.co/storage/v1/object/public/pfps/1773616466907.png'}
           className="object-cover object-center"
           fill
           priority

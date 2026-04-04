@@ -7,14 +7,28 @@ import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useSettingsSaver } from "@/hooks/settings/useSettingsSaver";
+import { updateUserSlice } from "@/store/slices/userSlice";
+import { UserType } from "@/types/user";
 
 
 export default function Notifications() {
-  const [hasMounted, setHasMounted] = useState(false)
+  const [hasMounted, setHasMounted] = useState(false);
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.userSlice.user)
+  const { triggerConfirmToast } = useSettingsSaver();
+
+  const handleToggle = (field: keyof UserType, value: boolean) => {
+    dispatch(updateUserSlice({ [field]: value }));
+    triggerConfirmToast();
+  }
+
 
   useEffect(() => {
-    setHasMounted(true)
+    setHasMounted(true) // Only run this component after it has been mountedon the browser
   }, [])
 
   if (!hasMounted) {
@@ -53,7 +67,10 @@ export default function Notifications() {
                 <p className="text-card-foreground hidden lg:block">Notify 1 hour before due</p>
               </div>
             </FieldLabel>
-            <Switch id="switch-size-default" size="default" />
+            <Switch
+              id="switch-size-default"
+              size="default" checked={!!user?.task_deadline_notif}
+              onCheckedChange={(checked) => handleToggle('task_deadline_notif', checked)} />
           </Field>
         </FieldGroup>
         {isMobile && <Separator />}
@@ -65,7 +82,12 @@ export default function Notifications() {
                 <p className="text-card-foreground hidden lg:block">Summary of task completion</p>
               </div>
             </FieldLabel>
-            <Switch id="switch-size-default" size="default" />
+            <Switch
+              id="switch-size-default"
+              size="default"
+              checked={!!user?.weekly_reports_notif}
+              onCheckedChange={(checked) => handleToggle('weekly_reports_notif', checked)}
+            />
           </Field>
         </FieldGroup>
         {isMobile && <Separator />}
@@ -77,7 +99,12 @@ export default function Notifications() {
                 <p className="text-card-foreground hidden lg:block">Product news and filters</p>
               </div>
             </FieldLabel>
-            <Switch id="switch-size-default" size="default" />
+            <Switch
+              id="switch-size-default"
+              size="default"
+              checked={!!user?.marketing_updates_notif}
+              onCheckedChange={(checked) => handleToggle('marketing_updates_notif', checked)}
+            />
           </Field>
         </FieldGroup>
       </CardContent>
