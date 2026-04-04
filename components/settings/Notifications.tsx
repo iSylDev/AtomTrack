@@ -7,24 +7,11 @@ import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { useSettingsSaver } from "@/hooks/settings/useSettingsSaver";
-import { updateUserSlice } from "@/store/slices/userSlice";
-import { UserType } from "@/types/user";
-
 
 export default function Notifications() {
   const [hasMounted, setHasMounted] = useState(false);
   const isMobile = useIsMobile();
-  const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.userSlice.user)
-  const { triggerConfirmToast } = useSettingsSaver();
 
-  const handleToggle = (field: keyof UserType, value: boolean) => {
-    dispatch(updateUserSlice({ [field]: value }));
-    triggerConfirmToast();
-  }
 
 
   useEffect(() => {
@@ -69,8 +56,8 @@ export default function Notifications() {
             </FieldLabel>
             <Switch
               id="switch-size-default"
-              size="default" checked={!!user?.task_deadline_notif}
-              onCheckedChange={(checked) => handleToggle('task_deadline_notif', checked)} />
+              size="default"
+            />
           </Field>
         </FieldGroup>
         {isMobile && <Separator />}
@@ -85,8 +72,6 @@ export default function Notifications() {
             <Switch
               id="switch-size-default"
               size="default"
-              checked={!!user?.weekly_reports_notif}
-              onCheckedChange={(checked) => handleToggle('weekly_reports_notif', checked)}
             />
           </Field>
         </FieldGroup>
@@ -102,8 +87,6 @@ export default function Notifications() {
             <Switch
               id="switch-size-default"
               size="default"
-              checked={!!user?.marketing_updates_notif}
-              onCheckedChange={(checked) => handleToggle('marketing_updates_notif', checked)}
             />
           </Field>
         </FieldGroup>

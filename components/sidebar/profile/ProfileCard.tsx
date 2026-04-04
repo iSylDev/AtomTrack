@@ -12,14 +12,13 @@ import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLogout } from "@/hooks/auth/useLogout";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import formatToTitle from "@/helpers/formatToTitle";
 
 
 export default function ProfileCard() {
   const isMobile = useIsMobile();
   const { logout } = useLogout();
-  const user = useSelector((state: RootState) => state.userSlice.user)
+
 
   if (!isMobile) {
     return (
@@ -28,7 +27,7 @@ export default function ProfileCard() {
           <div className="flex gap-3 items-center">
             <UserAvatar size="lg" />
             <div>
-              <h3 className="text-foreground text-sm">{formatToTitle(user?.username) || 'Guest User'}</h3>
+              <h3 className="text-foreground text-sm">{'Guest User'}</h3>
               <p className="text-xs">Beta User</p>
             </div>
           </div>
@@ -41,7 +40,7 @@ export default function ProfileCard() {
           <div className="flex flex-col items-center px-1 pb-1 pt-2">
             <div className="text-center flex flex-col items-center">
               <UserAvatar className="w-16 h-16 border-2 border-primary mb-2" />
-              <h3 className="text-foreground text-[16px]">{formatToTitle(user?.username) || 'Guest User'}</h3>
+              <h3 className="text-foreground text-[16px]">{ 'Guest User'}</h3>
               <p className="uppercase tracking-wider text-xs">Beta User</p>
             </div>
 
@@ -74,7 +73,7 @@ export default function ProfileCard() {
       <div className="w-full text-center flex gap-3 items-center justify-start lg:flex-col lg:items-center ">
         <UserAvatar className="w-14 h-14 border-2 border-primary mb-2" />
         <div className="text-left lg:text-center">
-          <h3 className="text-foreground text-[16px] mb-1 lg:mb-0">{formatToTitle(user?.username) || 'Guest User'}</h3>
+          <h3 className="text-foreground text-[16px] mb-1 lg:mb-0">{ 'Guest User'}</h3>
           <p className="uppercase tracking-wider text-xs text-card-foreground">Beta User</p>
         </div>
       </div>

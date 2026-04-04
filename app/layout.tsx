@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeSync } from "@/components/theme/ThemeSync";
+import Providers from "@/components/shared/Provider";
 import QueryProvider from "@/components/shared/Provider";
 
 
@@ -40,7 +40,6 @@ export default function RootLayout({
 
           <QueryProvider>
             <main className="flex-1 relative px-5">
-              <ThemeSync />
               {children}
             </main>
             <Toaster />

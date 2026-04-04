@@ -1,15 +1,14 @@
 "use client";
 
-import { logIn } from "@/store/slices/userSlice";
+
 import { createClientInBroswer } from "@/utils/supabase/client";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { success } from "zod";
+
 
 const useFetchUser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const dispatch = useDispatch();
+
   const supabase = createClientInBroswer();
 
   const fetchUser = async () => {
@@ -35,7 +34,6 @@ const useFetchUser = () => {
 
       console.log(userData);
       //  Update the user in the redux store
-      dispatch(logIn(userData));
       setIsLoading(false);
       return { success: true };
     } catch (err: any) {

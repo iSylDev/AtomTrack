@@ -1,21 +1,15 @@
 'use client'
 
-import { RootState } from "@/store/store";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUserSlice } from "@/store/slices/userSlice";
-import { useSettingsSaver } from "@/hooks/settings/useSettingsSaver";
 import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
 
 
 export default function PfpEditor() {
-  const user = useSelector((state: RootState) => state.userSlice.user)
-  const dispatch = useDispatch();
-  const { triggerConfirmToast } = useSettingsSaver();
+
 
   async function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
     // Grab the first picture the user selected
@@ -24,9 +18,8 @@ export default function PfpEditor() {
     if (file) {
       // Display a preview image for the user to see
       const previewUrl = URL.createObjectURL(file);
-      dispatch(updateUserSlice({ profile_picture: previewUrl }));
 
-      triggerConfirmToast(file);
+
 
       // Upload the image to supabase
       const formData = new FormData();
@@ -44,7 +37,7 @@ export default function PfpEditor() {
       <div
         className="relative w-28 h-28 object-cover rounded-full overflow-hidden shadow-lg border-3 border-card-foreground/50 " >
         <Image
-          src={user?.profile_picture || 'https://kcgmivfbuirkvjkikvzq.supabase.co/storage/v1/object/public/pfps/1773616466907.png'}
+          src={ 'https://kcgmivfbuirkvjkikvzq.supabase.co/storage/v1/object/public/pfps/1773616466907.png'}
           className="object-cover object-center"
           fill
           priority

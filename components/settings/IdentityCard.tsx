@@ -4,12 +4,9 @@ import { cn } from "@/lib/utils";
 import UserInfoForm from "../forms/UserInforForm";
 import { Card } from "../ui/card";
 import PfpEditor from "./PfpEditor";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import formatToTitle from "@/helpers/formatToTitle";
 
 export default function IdentityCard({ position }: { position?: string }) {
-  const user = useSelector((state: RootState) => state.userSlice.user)
 
   return (
     <Card className="lg:col-span-8">
@@ -17,14 +14,14 @@ export default function IdentityCard({ position }: { position?: string }) {
         <div>
           <PfpEditor />
           <div className="flex flex-col text-center mt-3 lg:hidden lg:mt-0">
-            <h3 className="text-[18px] text-foreground">{formatToTitle(user?.username) || 'Guest User'}</h3>
+            <h3 className="text-[18px] text-foreground">{'Guest User'}</h3>
             <p>Beta User</p>
           </div>
         </div>
 
         <div className="w-full">
           <div className="hidden md:flex flex-col mb-5">
-            <h3 className="text-[23px] text-foreground -mb-1">{formatToTitle(user?.username) || 'Guest User'}</h3>
+            <h3 className="text-[23px] text-foreground -mb-1">{'Guest User'}</h3>
           </div>
           <UserInfoForm />
         </div>

@@ -10,7 +10,7 @@ export default function DashboardLayout({
 }>) {
 
   return (
-    <AuthGate>
+    // <AuthGate>
       <SidebarProvider>
         <AppSidebar />
         <div className="flex-1 relative px-2">
@@ -18,7 +18,7 @@ export default function DashboardLayout({
           {children}
         </div>
       </SidebarProvider>
-    </AuthGate>
+    // </AuthGate>
 
   )
 }

@@ -6,8 +6,6 @@ import { createUser } from "@/actions/auth-actions/createUserAction";
 import LoadingScreen from "@/components/shared/LoadingScreen";
 import ErrorScreen from "@/components/shared/ErrorScreen";
 import useFetchUser from "@/hooks/useFetchUser";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 import { useSearchParams } from "next/navigation";
 
 export default function AuthGate({ children }: { children: ReactNode }) {
@@ -15,17 +13,10 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   const { fetchUser, error: fetchUserError } = useFetchUser();
   const searchParams = useSearchParams()
 
-  //  Get the user from the redux store
-  const userProfile = useSelector((state: RootState) => state.userSlice.user);
 
   useEffect(() => {
     const initializeAuth = async () => {
-      // If user exists in our store, skip the entire process;
-      if (userProfile) {
-        setStatus('success');
-        return;
-      }
-
+      
       try {
         // Determine if the user is coming from the auth page 
         const isFromAuthPage = searchParams.get('new') === 'true'
