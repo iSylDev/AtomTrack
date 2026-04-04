@@ -1,8 +1,9 @@
 import { mutateUserDataAction } from "@/actions/settings/mutateUserDataAction";
+import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
 import { logIn } from "@/store/slices/userSlice";
 import { RootState } from "@/store/store";
 import { UserType } from "@/types/user";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
@@ -11,8 +12,17 @@ export const useSettingsSaver = () => {
   const currentUserState = useSelector(
     (state: RootState) => state.userSlice.user,
   );
-  // Save the last state before changes to the user settings were made
-  const lastSavedStateRef = useRef<UserType | null>(currentUserState);
+
+  // The snapshot refs
+  const lastSavedStateRef = useRef<UserType | null>(null);
+  const pendingFileRef = useRef<File | null>(null);
+
+  // Take a snapshot of the current user settings on page load if a user exists in the store
+  useEffect(() => {
+    if (currentUserState && !lastSavedStateRef.current) {
+      lastSavedStateRef.current = currentUserState;
+    }
+  }, [currentUserState]);
 
   const saveToDatabase = async () => {
     // Check if there's a logged in user
@@ -21,13 +31,31 @@ export const useSettingsSaver = () => {
       return;
     }
 
-    // Try to update the user's data on Supabase
     const toastId = toast.loading("Saving changes");
-    const result = await mutateUserDataAction(currentUserState);
+    let finalUserData = { ...currentUserState };
+
+    if (pendingFileRef.current) {
+      const formData = new FormData();
+      formData.append("file", pendingFileRef.current);
+      const uploadResult = await uploadAvatarAction(formData);
+
+      if (uploadResult.success && uploadResult.url) {
+        finalUserData.profile_picture = uploadResult.url;
+      } else {
+        toast.error(uploadResult.message || "Image Upload Failed", {
+          id: toastId,
+        });
+        return;
+      }
+    }
+
+    // Try to update the user's data on Supabase
+    const result = await mutateUserDataAction(finalUserData);
 
     if (result.success) {
       toast.success("Settings synced to cloud", { id: toastId });
-      lastSavedStateRef.current = currentUserState;
+      lastSavedStateRef.current = finalUserData;
+      pendingFileRef.current = null;
     } else {
       toast.error(`Update failed: ${result.message}`, { id: toastId });
       // Rollback to the last state if the supabase update fails
@@ -38,21 +66,18 @@ export const useSettingsSaver = () => {
   const handleCancel = () => {
     if (lastSavedStateRef.current) {
       dispatch(logIn(lastSavedStateRef.current));
+      pendingFileRef.current = null; // Forget the file
       toast.dismiss();
     }
   };
 
   // Ask the userr if they wanna save their changes.
-  const triggerConfirmToast = () => {
+  const triggerConfirmToast = (file?: File) => {
+    if (file) pendingFileRef.current = file;
+
     toast("You have unsaved changed", {
-      cancel: {
-        label: "Cancel",
-        onClick: () => handleCancel(),
-      },
-      action: {
-        label: "Save now",
-        onClick: () => saveToDatabase(),
-      },
+      cancel: { label: "Cancel", onClick: () => handleCancel() },
+      action: { label: "Save now", onClick: () => saveToDatabase() },
       duration: Infinity,
     });
   };

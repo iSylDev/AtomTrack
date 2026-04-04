@@ -7,21 +7,35 @@ import { Pencil } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateUserSlice } from "@/store/slices/userSlice";
+import { useSettingsSaver } from "@/hooks/settings/useSettingsSaver";
+import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
 
 
 export default function PfpEditor() {
-  const [imageUrl, setImageUrl] = useState('/images/pfp.png')
   const user = useSelector((state: RootState) => state.userSlice.user)
   const dispatch = useDispatch();
+  const { triggerConfirmToast } = useSettingsSaver();
 
-  function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
+  async function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
+    // Grab the first picture the user selected
     const file = e.target.files?.[0]
 
     if (file) {
-      const previewUrl = URL.createObjectURL(file)
-      setImageUrl(previewUrl)
+      // Display a preview image for the user to see
+      const previewUrl = URL.createObjectURL(file);
+      dispatch(updateUserSlice({ profile_picture: previewUrl }));
 
-      return () => URL.revokeObjectURL(previewUrl)
+      triggerConfirmToast(file);
+
+      // Upload the image to supabase
+      const formData = new FormData();
+      formData.append('file', file)
+      const uploadResult = await uploadAvatarAction(formData);
+
+
+
+      URL.revokeObjectURL(previewUrl)
     }
   }
 
@@ -30,7 +44,7 @@ export default function PfpEditor() {
       <div
         className="relative w-28 h-28 object-cover rounded-full overflow-hidden shadow-lg border-3 border-card-foreground/50 " >
         <Image
-          src={user?.profile_picture || imageUrl}
+          src={user?.profile_picture || 'images/pfp.png'}
           className="object-cover object-center"
           fill
           priority

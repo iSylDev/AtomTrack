@@ -1,5 +1,6 @@
 "use client";
 
+import { mutateUserDataAction } from "@/actions/settings/mutateUserDataAction";
 import { toggleThemeAction } from "@/actions/settings/toggleThemeAction";
 import { updateUserSlice } from "@/store/slices/userSlice";
 import { RootState } from "@/store/store";
@@ -10,21 +11,23 @@ import { toast } from "sonner";
 export default function useToggleTheme() {
   const dispatch = useDispatch();
   const [isPending, startTransition] = useTransition();
-  const currentTheme = useSelector(
-    (state: RootState) => state.userSlice.user?.theme,
-  );
+  const user = useSelector((state: RootState) => state.userSlice.user);
 
   const handleToggle = (newTheme: "light" | "dark") => {
+    if (!user) {
+      toast.error('Unauthorized')
+      return
+    };
     // Optimistically update the user theme
     dispatch(updateUserSlice({ theme: newTheme }));
 
     startTransition(async () => {
       // Try updating the user theme settings in supabases
-      const result = await toggleThemeAction(newTheme);
+      const result = await mutateUserDataAction(user);
 
       if (!result.success) {
         // Rever changes if user theme update in supabase fails
-        dispatch(updateUserSlice({ theme: currentTheme || "dark" }));
+        dispatch(updateUserSlice({ theme: user?.theme || "dark" }));
         toast.error("Failed to save theme preference");
         return;
       }
@@ -33,7 +36,7 @@ export default function useToggleTheme() {
     });
   };
   return {
-    theme: currentTheme,
+    theme: user?.theme,
     setTheme: handleToggle,
     isPending,
   };
