@@ -10,6 +10,7 @@ import { toast } from "sonner";
 export default function useSettingsSaver() {
   const queryClient = useQueryClient();
 
+  // Save settings function
   const { mutate: saveSettings, isPending } = useMutation({
     mutationFn: async ({
       userData,
@@ -21,6 +22,7 @@ export default function useSettingsSaver() {
       const toastId = toast.loading("Saving Changes...");
       let finalUserData = { ...userData };
 
+      // If the user changes their pfp, upload it to supabase and grab the link,
       if (file) {
         const formData = new FormData();
         formData.append("file", file);
@@ -31,6 +33,7 @@ export default function useSettingsSaver() {
         finalUserData.profile_picture = uploadResult.url;
       }
 
+      // Save all changes to the user table on supabase
       const result = await mutateUserDataAction(finalUserData);
 
       assert(result.success, result.message);

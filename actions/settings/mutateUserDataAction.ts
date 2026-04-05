@@ -16,7 +16,7 @@ export const mutateUserDataAction = async (payload: Record<string, any>) => {
     return { success: false, message: "Unauthorized. Please log in" };
   }
 
-  // Mutate data:
+  // Update the user's data on supabase:
   const { data, error: mutateError } = await supabse
     .from("users")
     .update(payload)
