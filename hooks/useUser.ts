@@ -1,5 +1,6 @@
 "use client";
 
+import { UserType } from "@/types/user";
 import assert from "@/utils/assertions";
 import { createClientInBroswer } from "@/utils/supabase/client";
 import { useQuery } from "@tanstack/react-query";
@@ -27,7 +28,7 @@ const useUser = () => {
 
       assert(!userTableError && userData, "Profile not found");
 
-      return userData;
+      return userData as UserType;
     },
     retry: 2,
     enabled: typeof window !== "undefined",

@@ -6,10 +6,11 @@ import { Pencil } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
+import { useUser } from "@/hooks/useUser";
 
 
 export default function PfpEditor() {
-
+  const { user } = useUser();
 
   async function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
     // Grab the first picture the user selected
@@ -19,14 +20,10 @@ export default function PfpEditor() {
       // Display a preview image for the user to see
       const previewUrl = URL.createObjectURL(file);
 
-
-
       // Upload the image to supabase
       const formData = new FormData();
       formData.append('file', file)
       const uploadResult = await uploadAvatarAction(formData);
-
-
 
       URL.revokeObjectURL(previewUrl)
     }
@@ -37,7 +34,7 @@ export default function PfpEditor() {
       <div
         className="relative w-28 h-28 object-cover rounded-full overflow-hidden shadow-lg border-3 border-card-foreground/50 " >
         <Image
-          src={ 'https://kcgmivfbuirkvjkikvzq.supabase.co/storage/v1/object/public/pfps/1773616466907.png'}
+          src={user?.profile_picture || 'https://kcgmivfbuirkvjkikvzq.supabase.co/storage/v1/object/public/pfps/1773616466907.png'}
           className="object-cover object-center"
           fill
           priority
