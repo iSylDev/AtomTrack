@@ -18,6 +18,8 @@ export default function useSettingsSaver() {
   // Save settings function
   const { mutate: saveSettings, isPending } = useMutation({
     onMutate: async ({ userData, file }) => {
+      toast.dismiss("unsaved-changes-toast");
+      const toastId = toast.success("Settings synced to cloud");
       // Cancel any outgoing refetches so the don't overwrite this action
       await queryClient.cancelQueries({ queryKey: ["user"] });
 
@@ -43,7 +45,6 @@ export default function useSettingsSaver() {
       userData: UserType;
       file?: File | null;
     }) => {
-      const toastId = toast.loading("Saving Changes...");
 
       // Get the data that exists before change
       const originalData = queryClient.getQueryData<UserType>([
@@ -67,8 +68,7 @@ export default function useSettingsSaver() {
 
       // If no changes were made, dismiss the toast and skip
       if (Object.keys(payload).length === 0) {
-        toast.dismiss(toastId);
-        return { finalData: originalData, toastId, skipped: true };
+        return { finalData: originalData, skipped: true };
       }
 
       // Save all changes to the user table on supabase
@@ -77,17 +77,13 @@ export default function useSettingsSaver() {
 
       return {
         finalData: { ...originalData, ...payload },
-        toastId,
         skipped: false,
       };
     },
 
-    onSuccess: ({ finalData, toastId, skipped }) => {
+    onSuccess: ({ finalData, skipped }) => {
       // Update the cache with the real server data if update was successfull
       queryClient.setQueryData(["user"], finalData);
-      if (!skipped) {
-        toast.success("Settings synced to cloud", { id: toastId });
-      }
     },
     onError: (error: any, __, context) => {
       if (context?.previousUserData) {
@@ -115,6 +111,7 @@ export default function useSettingsSaver() {
       cancel: {
         label: "Cancel",
         onClick: () => {
+          // Invalidate fake previewUrl optimistic update
           queryClient.invalidateQueries({ queryKey: ["user"] });
           toast.dismiss("unsaved-changes-toast");
         },

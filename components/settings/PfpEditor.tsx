@@ -8,17 +8,28 @@ import { ChangeEvent, useState } from "react";
 import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
 import { useUser } from "@/hooks/useUser";
 import useSettingsSaver from "@/hooks/settings/useSettingsSaver";
+import { useQueryClient } from "@tanstack/react-query";
+import { UserType } from "@/types/user";
 
 
 export default function PfpEditor() {
   const { user } = useUser();
   const { triggerConfirmToast } = useSettingsSaver();
+  const queryClient = useQueryClient();
 
   async function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
 
     // Pass the file to the settings saver if we have a user and they upload a file
     if (file && user) {
+      // Create a temp url for the image
+      const previewUrl = URL.createObjectURL(file);
+      // Manually update the cache so that the image is shown
+      queryClient.setQueryData<UserType>(['user'], {
+        ...user,
+        profile_picture: previewUrl
+      })
+
       triggerConfirmToast(user, file)
     }
   }
