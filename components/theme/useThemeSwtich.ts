@@ -9,10 +9,15 @@ type MutationProp = {
 
 const useThemeSwitch = () => {
   const queryClient = useQueryClient();
+  const THEME_ID = 'theme-update-toast'
 
   return useMutation<any, Error, string, MutationProp>({
     onMutate: async (newTheme: string) => {
-      toast.success('Theme updated Successfully')
+      toast.success('Theme updated Successfully', {
+        id: THEME_ID,
+        duration: 2000,
+        
+      })
       // Stop all outogoing queries
       await queryClient.cancelQueries({ queryKey: ["user"] });
       // Take a snapshot of the user data before the change

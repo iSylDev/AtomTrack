@@ -7,14 +7,11 @@ import { Switch } from "../ui/switch";
 import { Separator } from "../ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 export default function Notifications() {
-  const [hasMounted, setHasMounted] = useState(false);
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    setHasMounted(true) // Only run this component after it has been mounted on the browser
-  }, [])
+  const { hasMounted } = useHasMounted();
 
   if (!hasMounted) {
     return <div className="w-full animate-pulse">
@@ -91,11 +88,5 @@ export default function Notifications() {
       </CardContent>
     </Card>
   </div>
-
-
-
-
-
-
 
 }
