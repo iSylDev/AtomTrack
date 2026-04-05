@@ -7,10 +7,15 @@ import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import useToggleTheme from "@/hooks/settings/useToggleTheme";
+import { useThemeSwitch } from "../theme/useThemeSwtich";
+import { useUser } from "@/hooks/useUser";
 
 
-export default function Appearance({ position }: { position?: string }) {
-  const { theme, setTheme, isPending } = useToggleTheme();
+export default function Appearance() {
+  const { user } = useUser();
+  const theme = user?.theme
+  const { mutate: setTheme } = useThemeSwitch()
+
 
   const [hasMounted, setHasMounted] = useState(false)
   const isMobile = useIsMobile();
@@ -28,7 +33,7 @@ export default function Appearance({ position }: { position?: string }) {
   return <div className="w-full lg:col-span-4">
     {
       isMobile && (
-        <div className={cn('flex gap-2 items-center mb-4', position)}>
+        <div className={cn('flex gap-2 items-center mb-4')}>
           <Palette className="stroke-primary" />
           <h3 className="font-bold">Appearance</h3>
         </div>

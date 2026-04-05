@@ -6,11 +6,9 @@ import { useEffect } from "react";
 
 const ThemeSync = () => {
   const { setTheme } = useTheme();
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
 
   useEffect(() => {
-    if (isLoading) return;
-
     // Default to dark theme 
     if (!user?.theme) {
       setTheme("dark");
@@ -18,7 +16,7 @@ const ThemeSync = () => {
     }
 
     setTheme(user?.theme);
-  }, [user?.theme, setTheme, isLoading]);
+  }, [user?.theme, setTheme]);
 
   return null;
 };
