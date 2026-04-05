@@ -5,55 +5,40 @@ import { useEffect } from "react";
 import { createUser } from "@/actions/auth-actions/createUserAction";
 import LoadingScreen from "@/components/shared/LoadingScreen";
 import ErrorScreen from "@/components/shared/ErrorScreen";
-import useFetchUser from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 import { useSearchParams } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 
 export default function AuthGate({ children }: { children: ReactNode }) {
-  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
-  const { fetchUser, error: fetchUserError } = useFetchUser();
   const searchParams = useSearchParams()
+  const { user, error: fetchUserError, isLoading: isFetchingUser } = useUser();
 
+  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    const initializeAuth = async () => {
+    // Check if user jjust signed in
+    const isFromAuthPage = searchParams.get('new') === 'true';
 
-      try {
-        // Determine if the user is coming from the auth page 
-        const isFromAuthPage = searchParams.get('new') === 'true'
-        setStatus('loading');
+    const { mutate: sync, isPending: isSyncing, error: createUserError } = useMutation({
+      mutationFn: createUser
+    });
 
-        // Create upsert if user is coming from the auth page
-        if (isFromAuthPage) {
-          const syncResult = await createUser();
-
-          if (!syncResult.success) {
-            console.error('Sync Error', syncResult.message);
-            setStatus('error');
-            return;
-          }
-        }
-
-        const userInfo = await fetchUser();
-
-        // If we fail to fetch user, show error
-        if (userInfo.success === false) {
-          console.error('Failed to fetch user');
-          setStatus('error')
-          return;
-        }
-
-        setStatus('success')
-
-      } catch (err: any) {
-        console.error('Auth error failed', err);
-        setStatus('error')
+    // run the createUser fn if user just signed in
+    useEffect(() =>{
+      setIsMounted(true)
+      if (isFromAuthPage){
+        sync();
       }
-    }
-    initializeAuth();
-  }, []);
+    }, [isFromAuthPage, sync]);
 
-  if (status === 'loading') return <LoadingScreen />
-  if (status === 'error') return <ErrorScreen />
+    if (!isMounted) return <LoadingScreen />
 
-  return <>{children}</>
+
+    const showLoading = isSyncing || isFetchingUser;
+    const showError = createUserError || fetchUserError || (!isFetchingUser && !isSyncing && !user)
+
+
+    if (showLoading) return <LoadingScreen />
+    if (showError) return <ErrorScreen />
+
+    return <>{children}</>
 }

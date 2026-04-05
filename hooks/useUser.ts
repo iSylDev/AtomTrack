@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 const useUser = () => {
   const supabase = createClientInBroswer();
 
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, error, refetch,  } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       // Get the currently logged in user

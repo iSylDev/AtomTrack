@@ -6,7 +6,7 @@ import { useLogout } from "@/hooks/auth/useLogout";
 import { Loader2 } from "lucide-react";
 
 export default function ErrorScreen() {
-  const { logout, isPending, isError } = useLogout();
+  const { logout, isPending } = useLogout();
 
   return (
     <div className="flex flex-col gap-2 items-center justify-center h-screen">

@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/components/shared/Provider";
 import QueryProvider from "@/components/shared/Provider";
+import AuthGate from "@/components/auth/components/AuthGate";
 
 
 const jakarta = localFont({
@@ -39,10 +40,12 @@ export default function RootLayout({
         >
 
           <QueryProvider>
-            <main className="flex-1 relative px-5">
-              {children}
-            </main>
-            <Toaster />
+            <AuthGate>
+              <main className="flex-1 relative px-5">
+                {children}
+              </main>
+              <Toaster />
+            </AuthGate>
           </QueryProvider>
         </ThemeProvider>
       </body>
