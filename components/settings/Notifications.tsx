@@ -12,10 +12,8 @@ export default function Notifications() {
   const [hasMounted, setHasMounted] = useState(false);
   const isMobile = useIsMobile();
 
-
-
   useEffect(() => {
-    setHasMounted(true) // Only run this component after it has been mountedon the browser
+    setHasMounted(true) // Only run this component after it has been mounted on the browser
   }, [])
 
   if (!hasMounted) {

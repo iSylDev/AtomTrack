@@ -2,7 +2,6 @@
 
 import { Palette, Sun, Moon } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import { useTheme } from "next-themes";
 import { Card, CardContent } from "../ui/card";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
