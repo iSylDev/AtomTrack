@@ -6,6 +6,7 @@ import { UserType } from "@/types/user";
 import assert from "@/utils/assertions";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import getDirtyFields from "./getDirtyFields";
 
 export default function useSettingsSaver() {
   const queryClient = useQueryClient();
@@ -20,9 +21,19 @@ export default function useSettingsSaver() {
       file?: File | null;
     }) => {
       const toastId = toast.loading("Saving Changes...");
-      let finalUserData = { ...userData };
 
-      // If the user changes their pfp, upload it to supabase and grab the link,
+      // Get the data that exists before change
+      const originalData = queryClient.getQueryData<UserType>([
+        "user",
+      ]) as UserType;
+
+      // Get the fields that were changed
+      const payload = getDirtyFields({
+        original: originalData || {},
+        current: userData,
+      });
+
+      // If the user changes their pfp, upload it to supabase and grab the images's public link,
       if (file) {
         const formData = new FormData();
         formData.append("file", file);
@@ -30,20 +41,28 @@ export default function useSettingsSaver() {
 
         assert(uploadResult.success && uploadResult.url, "Image upload failed");
 
-        finalUserData.profile_picture = uploadResult.url;
+        payload.profile_picture = uploadResult.url;
+      }
+
+      // If no changes were made, dismiss the toast and skip
+      if (Object.keys(payload).length === 0) {
+        toast.dismiss(toastId);
+        return { finalData: originalData, toastId, skipped: true };
       }
 
       // Save all changes to the user table on supabase
-      const result = await mutateUserDataAction(finalUserData);
+      const result = await mutateUserDataAction(payload);
 
       assert(result.success, result.message);
-
-      return { finalUserData, toastId };
+      return { finalData: originalData, toastId, skipped: false };
     },
 
-    onSuccess: ({ finalUserData, toastId }) => {
-      queryClient.setQueryData(["user"], finalUserData);
-      toast.success("Settings synced to cloud");
+    onSuccess: ({ finalData, toastId, skipped }) => {
+      // Update the ui if update was successfull
+      queryClient.setQueryData(["user"], finalData);
+      if (!skipped) {
+        toast.success("Settings synced to cloud", { id: toastId });
+      }
     },
     onError: (error: any, variables, context) => {
       toast.error(error.message || "Failed to update settings");
