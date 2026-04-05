@@ -7,25 +7,19 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
 import { useUser } from "@/hooks/useUser";
+import useSettingsSaver from "@/hooks/settings/useSettingsSaver";
 
 
 export default function PfpEditor() {
   const { user } = useUser();
+  const { triggerConfirmToast } = useSettingsSaver();
 
   async function handleChangePfp(e: ChangeEvent<HTMLInputElement>) {
-    // Grab the first picture the user selected
     const file = e.target.files?.[0]
 
-    if (file) {
-      // Display a preview image for the user to see
-      const previewUrl = URL.createObjectURL(file);
-
-      // Upload the image to supabase
-      const formData = new FormData();
-      formData.append('file', file)
-      const uploadResult = await uploadAvatarAction(formData);
-
-      URL.revokeObjectURL(previewUrl)
+    // Pass the file to the settings saver if we have a user and they upload a file
+    if (file && user) {
+      triggerConfirmToast(user, file)
     }
   }
 
@@ -42,8 +36,9 @@ export default function PfpEditor() {
         <Input
           onChange={handleChangePfp}
           type="file"
-          hidden
-          accept="image*" />
+          accept="image*"
+          className="hidden"
+        />
       </div>
       <div className="absolute bottom-0 right-1 bg-primary rounded-full w-7 flex items-center justify-center h-7">
         <Pencil className="w-4 stroke-card" />
