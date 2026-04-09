@@ -80,6 +80,7 @@ export default function useSettingsSaver() {
         },
 
         onSuccess: ({finalData, skipped}) => {
+            toast.dismiss('loading')
             // Update the cache with the real server data if update was successfully
             if (finalData) queryClient.setQueryData(["user"], finalData);
             if (!skipped) {
@@ -91,6 +92,7 @@ export default function useSettingsSaver() {
             }
         },
         onError: (error: Error, _mutationVariables, context) => {
+            toast.dismiss('loading')
             if (context?.previousUserData) {
                 queryClient.setQueryData(["user"], context?.previousUserData);
             }
@@ -129,6 +131,7 @@ export default function useSettingsSaver() {
                 action: {
                     label: "Save now",
                     onClick: () => {
+                        toast.loading('Syncing to cloud', {id: 'loading'});
 
                         const latestUserData = queryClient.getQueryData<UserType>(["user"]);
 
