@@ -91,7 +91,9 @@ export default function Notifications() {
                         />
                     </Field>
                 </FieldGroup>
+
                 {isMobile && <Separator/>}
+
                 <FieldGroup className="w-full px-4 lg:px-5 ">
                     <Field orientation="horizontal" className="lg:p-4 lg:bg-[#232a33] lg:rounded-lg lg:border">
                         <FieldLabel htmlFor="switch-size-updates">

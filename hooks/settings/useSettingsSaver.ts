@@ -11,7 +11,7 @@ import {
 import {toast} from "sonner";
 import getDirtyFields from "./getDirtyFields";
 
-type MutationVariables = { userData: UserType; file?: File | null }
+type MutationVariables = { userData: UserType; snapShotDataBeforeToggle: UserType; file?: File | null }
 type MutationResponse = { finalData: UserType; skipped: boolean }
 
 
@@ -30,8 +30,6 @@ export default function useSettingsSaver() {
                 updated.profile_picture = URL.createObjectURL(file);
             }
             // Optimistically update the ui
-            toast.dismiss("unsaved-changes-toast");
-            toast.success("Settings saved successfully");
             return updated;
         });
     };
@@ -52,15 +50,9 @@ export default function useSettingsSaver() {
 
             return {previousUserData};
         },
-        mutationFn: async ({userData, file,}) => {
-            // Get the data that exists before change
-            const originalData = queryClient.getQueryData<UserType>([
-                "user",
-            ]) as UserType;
-
-            // Get the fields that were changed
+        mutationFn: async ({userData, snapShotDataBeforeToggle, file,}) => {
             const payload = getDirtyFields({
-                original: originalData || {},
+                original: snapShotDataBeforeToggle || {},
                 current: userData,
             });
 
@@ -75,14 +67,14 @@ export default function useSettingsSaver() {
 
             // If no changes were made, dismiss the toast and skip
             if (Object.keys(payload).length === 0)
-                return {finalData: originalData, skipped: true};
+                return {finalData: userData, skipped: true};
 
             // Save all changes to the user table on supabase
             const result = await mutateUserDataAction(payload);
             assert(result.success, result.message);
 
             return {
-                finalData: {...originalData, ...payload},
+                finalData: {...snapShotDataBeforeToggle, ...payload},
                 skipped: false,
             };
         },
@@ -91,7 +83,9 @@ export default function useSettingsSaver() {
             // Update the cache with the real server data if update was successfully
             if (finalData) queryClient.setQueryData(["user"], finalData);
             if (!skipped) {
-                toast.success("Settings Synced to cloud");
+                toast.success("Settings Synced to cloud", {
+                    id: 'success'
+                });
             } else {
                 toast.dismiss("unsaved-changes-toast");
             }
@@ -119,18 +113,29 @@ export default function useSettingsSaver() {
         },
     ) => {
         const {file = null, strategy} = options;
+        toast.dismiss('success')
+
+        const snapShotBeforeToggle = queryClient.getQueryData<UserType>(['user'])
 
         if (strategy === "instant") {
-            performSave({userData, file});
+            performSave({userData, snapShotDataBeforeToggle: snapShotBeforeToggle!, file});
         } else {
             updateOptimisticCache(userData, file);
+
 
             toast("You have unsaved changes", {
                 id: "unsaved-changes-toast",
                 duration: Infinity,
                 action: {
                     label: "Save now",
-                    onClick: () => performSave({userData, file}),
+                    onClick: () => {
+
+                        const latestUserData = queryClient.getQueryData<UserType>(["user"]);
+
+                        if (latestUserData) {
+                            performSave({userData: latestUserData, file});
+                        }
+                    },
                 },
                 cancel: {
                     label: "Cancel",
