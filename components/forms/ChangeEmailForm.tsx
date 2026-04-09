@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux"
 import { Input } from "../ui/input"
-import { RootState } from "@/store/store"
 import { Label } from "../ui/label"
 import { Button } from "../ui/button"
+import {useUser} from "@/hooks/useUser";
 
 export default function ChangeEmailForm() {
-  const user = useSelector((state: RootState) => state.userSlice.user)
+  const {user} = useUser()
 
   return <form className="flex flex-col mt-5 gap-3">
     <div>
