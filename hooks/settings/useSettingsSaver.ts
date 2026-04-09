@@ -135,7 +135,7 @@ export default function useSettingsSaver() {
                 cancel: {
                     label: "Cancel",
                     onClick: () => {
-                        // Invalidate fake previewUrl optimistic update
+                        // Invalidate fake previewUrl optimistic updates
                         toast.dismiss("unsaved-changes-toast");
                         return queryClient.invalidateQueries({queryKey: ["user"]});
                     },
