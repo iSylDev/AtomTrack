@@ -10,7 +10,6 @@ import {useHasMounted} from "@/hooks/useHasMounted";
 import {useUser} from "@/hooks/useUser";
 import useSettingsSaver from "@/hooks/settings/useSettingsSaver";
 import {UserType} from "@/types/user";
-import {useQueryClient} from "@tanstack/react-query";
 
 export default function Notifications() {
     const isMobile = useIsMobile();
