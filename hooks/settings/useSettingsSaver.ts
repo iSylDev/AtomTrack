@@ -1,122 +1,147 @@
 "use client";
 
-import { mutateUserDataAction } from "@/actions/settings/mutateUserDataAction";
-import { uploadAvatarAction } from "@/actions/settings/uploadAvatarAction";
-import { UserType } from "@/types/user";
+import {mutateUserDataAction} from "@/actions/settings/mutateUserDataAction";
+import {uploadAvatarAction} from "@/actions/settings/uploadAvatarAction";
+import {UserType} from "@/types/user";
 import assert from "@/utils/assertions";
 import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
+    useMutation,
+    useQueryClient,
 } from "@tanstack/react-query";
-import { toast } from "sonner";
+import {toast} from "sonner";
 import getDirtyFields from "./getDirtyFields";
 
+type MutationVariables = { userData: UserType; file?: File | null }
+type MutationResponse = { finalData: UserType; skipped: boolean }
+
+
 export default function useSettingsSaver() {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  // Save settings function
-  const { mutate: saveSettings, isPending } = useMutation({
-    onMutate: async ({ userData, file }) => {
-      toast.dismiss("unsaved-changes-toast");
-      const toastId = toast.success("Settings synced to cloud");
-      // Cancel any outgoing refetches so the don't overwrite this action
-      await queryClient.cancelQueries({ queryKey: ["user"] });
+    // Internal helper to cache optimistically
+    const updateOptimisticCache = (userData: UserType, file?: File | null): void => {
+        // Check the current value of 'user' right now
+        queryClient.setQueryData(["user"], (prevUser: UserType | undefined) => {
+            if (!prevUser) return prevUser;
+            // create a new object that contains the edited fields
+            const updated = {...prevUser, ...userData};
+            // Create a temporary link for the image
+            if (file) {
+                updated.profile_picture = URL.createObjectURL(file);
+            }
+            // Optimistically update the ui
+            toast.dismiss("unsaved-changes-toast");
+            toast.success("Settings saved successfully");
+            return updated;
+        });
+    };
 
-      // Take a snapshot of the user setting before update
-      const previousUserData = queryClient.getQueryData<UserType>(["user"]);
+    // Save settings function
+    const {mutate: performSave, isPending} = useMutation<MutationResponse, Error, MutationVariables, {
+        previousUserData?: UserType
+    }>({
+        onMutate: async ({userData, file}) => {
+            // Cancel any outgoing refetches so they don't overwrite this action
+            await queryClient.cancelQueries({queryKey: ["user"]});
 
-      // Optimistically update the ui
-      if (previousUserData) {
-        const optimisticData = { ...previousUserData, ...userData };
+            // Take a snapshot of the user setting before update
+            const previousUserData = queryClient.getQueryData<UserType>(["user"]);
 
-        // If the user uploaded a file, create a tempoary link for that file
-        if (file) {
-          optimisticData.profile_picture = URL.createObjectURL(file);
-        }
-        queryClient.setQueryData(["user"], optimisticData); // Optimistic update
-      }
-      return { previousUserData };
-    },
-    mutationFn: async ({
-      userData,
-      file,
-    }: {
-      userData: UserType;
-      file?: File | null;
-    }) => {
+            //  Update the ui optimistically
+            updateOptimisticCache(userData, file);
 
-      // Get the data that exists before change
-      const originalData = queryClient.getQueryData<UserType>([
-        "user",
-      ]) as UserType;
-
-      // Get the fields that were changed
-      const payload = getDirtyFields({
-        original: originalData || {},
-        current: userData,
-      });
-
-      // If the user changes their pfp, upload it to supabase and grab the images's public link,
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const uploadResult = await uploadAvatarAction(formData);
-        assert(uploadResult.success && uploadResult.url, "Image upload failed");
-        payload.profile_picture = uploadResult.url;
-      }
-
-      // If no changes were made, dismiss the toast and skip
-      if (Object.keys(payload).length === 0) {
-        return { finalData: originalData, skipped: true };
-      }
-
-      // Save all changes to the user table on supabase
-      const result = await mutateUserDataAction(payload);
-      assert(result.success, result.message);
-
-      return {
-        finalData: { ...originalData, ...payload },
-        skipped: false,
-      };
-    },
-
-    onSuccess: ({ finalData, skipped }) => {
-      // Update the cache with the real server data if update was successfull
-      queryClient.setQueryData(["user"], finalData);
-    },
-    onError: (error: any, __, context) => {
-      if (context?.previousUserData) {
-        queryClient.setQueryData(["user"], context?.previousUserData);
-      }
-      toast.error(error.message || "Failed to update settings");
-    },
-    onSettled: (data) => {
-      // Revoke the tempary image link we created
-      if (data?.finalData?.profile_picture.startsWith("blob:")) {
-        URL.revokeObjectURL(data?.finalData?.profile_picture);
-      }
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-    },
-  });
-
-  const triggerConfirmToast = (userData: UserType, file?: File | null) => {
-    toast("You have unsaved changes", {
-      id: "unsaved-changes-toast",
-      duration: Infinity,
-      action: {
-        label: "Save now",
-        onClick: () => saveSettings({ userData, file }),
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => {
-          // Invalidate fake previewUrl optimistic update
-          queryClient.invalidateQueries({ queryKey: ["user"] });
-          toast.dismiss("unsaved-changes-toast");
+            return {previousUserData};
         },
-      },
+        mutationFn: async ({userData, file,}) => {
+            // Get the data that exists before change
+            const originalData = queryClient.getQueryData<UserType>([
+                "user",
+            ]) as UserType;
+
+            // Get the fields that were changed
+            const payload = getDirtyFields({
+                original: originalData || {},
+                current: userData,
+            });
+
+            // If the user changes their pfp, upload it to supabase and grab the images public link,
+            if (file) {
+                const formData = new FormData();
+                formData.append("file", file);
+                const uploadResult = await uploadAvatarAction(formData);
+                assert(uploadResult.success && uploadResult.url, "Image upload failed");
+                payload.profile_picture = uploadResult.url;
+            }
+
+            // If no changes were made, dismiss the toast and skip
+            if (Object.keys(payload).length === 0)
+                return {finalData: originalData, skipped: true};
+
+            // Save all changes to the user table on supabase
+            const result = await mutateUserDataAction(payload);
+            assert(result.success, result.message);
+
+            return {
+                finalData: {...originalData, ...payload},
+                skipped: false,
+            };
+        },
+
+        onSuccess: ({finalData, skipped}) => {
+            // Update the cache with the real server data if update was successfully
+            if (finalData) queryClient.setQueryData(["user"], finalData);
+            if (!skipped) {
+                toast.success("Settings Synced to cloud");
+            } else {
+                toast.dismiss("unsaved-changes-toast");
+            }
+        },
+        onError: (error: Error, _mutationVariables, context) => {
+            if (context?.previousUserData) {
+                queryClient.setQueryData(["user"], context?.previousUserData);
+            }
+            toast.error(error.message || "Failed to update settings");
+        },
+        onSettled: (data) => {
+            // Revoke the temporary image link we created and revert to the previous user image
+            if (data?.finalData?.profile_picture.startsWith("blob:")) {
+                URL.revokeObjectURL(data?.finalData?.profile_picture);
+            }
+            return queryClient.invalidateQueries({queryKey: ["user"]});
+        },
     });
-  };
-  return { triggerConfirmToast, isSaving: isPending };
+
+    const saveSettings = (
+        userData: UserType,
+        options: {
+            file?: File | null;
+            strategy: "instant" | "confirm";
+        },
+    ) => {
+        const {file = null, strategy} = options;
+
+        if (strategy === "instant") {
+            performSave({userData, file});
+        } else {
+            updateOptimisticCache(userData, file);
+
+            toast("You have unsaved changes", {
+                id: "unsaved-changes-toast",
+                duration: Infinity,
+                action: {
+                    label: "Save now",
+                    onClick: () => performSave({userData, file}),
+                },
+                cancel: {
+                    label: "Cancel",
+                    onClick: () => {
+                        // Invalidate fake previewUrl optimistic update
+                        toast.dismiss("unsaved-changes-toast");
+                        return queryClient.invalidateQueries({queryKey: ["user"]});
+                    },
+                },
+            });
+        }
+    };
+    return {isSaving: isPending, saveSettings};
 }

@@ -9,20 +9,17 @@ import { cn } from "@/lib/utils";
 import useToggleTheme from "@/hooks/settings/useToggleTheme";
 import { useThemeSwitch } from "../theme/useThemeSwtich";
 import { useUser } from "@/hooks/useUser";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 
 export default function Appearance() {
+  const isMobile = useIsMobile();
+  const { hasMounted } = useHasMounted();
+
   const { user } = useUser();
   const theme = user?.theme
   const { mutate: setTheme } = useThemeSwitch()
 
-
-  const [hasMounted, setHasMounted] = useState(false)
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
 
   if (!hasMounted) {
     return <div className="w-full animate-pulse">

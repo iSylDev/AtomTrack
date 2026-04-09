@@ -3,29 +3,23 @@
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { ChevronRight, Lock, Trash2 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import ChangeEmailForm from "../forms/ChangeEmailForm";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 
 
 
 export default function Account() {
-
-  const [hasMounted, setHasMounted] = useState(false)
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
+  const { hasMounted } = useHasMounted()
 
   if (!hasMounted) {
     return <div className="w-full animate-pulse">
@@ -68,7 +62,7 @@ export default function Account() {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Change Email Address</DialogTitle>
-                  <ChangeEmailForm />
+                <ChangeEmailForm />
               </DialogHeader>
             </DialogContent>
           </Dialog>

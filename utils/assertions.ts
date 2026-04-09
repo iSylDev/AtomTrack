@@ -1,6 +1,3 @@
-export default function assert(
-  condition: any,
-  message: string,
-): asserts condition {
-  if (!condition) throw new Error(message);
+export default function assert<T>(condition: T, message: string,): asserts condition {
+    if (!condition) throw new Error(message);
 }
