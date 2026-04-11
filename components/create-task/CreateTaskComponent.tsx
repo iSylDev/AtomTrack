@@ -3,6 +3,7 @@ import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import TextInputComp from "@/components/create-task/TextInputComp";
+import CategorySelector from "@/components/create-task/CategorySelector";
 
 
 function CreateTaskComponent() {
@@ -29,7 +30,10 @@ function CreateTaskComponent() {
 
             <CardContent>
                 <form>
-                    <TextInputComp />
+                    {/*Task Name*/}
+                    <TextInputComp label={'Task name'} />
+                    {/*Category Selector*/}
+                    <CategorySelector />
                 </form>
             </CardContent>
         </Card>
