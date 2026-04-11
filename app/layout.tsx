@@ -40,12 +40,10 @@ export default function RootLayout({
         >
 
           <QueryProvider>
-            <AuthGate>
               <main className="flex-1 relative px-5">
                 {children}
               </main>
               <Toaster />
-            </AuthGate>
           </QueryProvider>
         </ThemeProvider>
       </body>
