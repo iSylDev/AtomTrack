@@ -2,25 +2,30 @@ import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import TextInputComp from "@/components/create-task/TextInputComp";
 import CategorySelector from "@/components/create-task/CategorySelector";
 import CreateTaskHeader from "@/components/create-task/CreateTaskHeader";
+import CustomCategory from "@/components/create-task/CustomCategory";
 
 
 function CreateTaskComponent() {
 
 
     return (
-        <Card>
+        <Card className={'w-full max-w-[90vw]'}>
             <CardHeader>
-                <CreateTaskHeader />
+                <CreateTaskHeader/>
             </CardHeader>
 
             <CardContent>
                 <form className={'col gap-7'}>
-                    <TextInputComp label={'Task name'} placeholder={'e.g Morning Workout'} />
+                    <TextInputComp label={'Task name'} placeholder={'e.g Morning Workout'}/>
                     <div>
                         <h3 className={'uppercase mb-2 text-xs text-chart-1 font-semibold'}>Category</h3>
-                        <CategorySelector />
+                        <CategorySelector/>
                     </div>
-                    <TextInputComp label={'custom-category'} placeholder={'e.g Learning'} />
+
+                    <>
+                        <CustomCategory/>
+                    </>
+
                 </form>
             </CardContent>
         </Card>

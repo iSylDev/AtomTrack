@@ -1,7 +1,7 @@
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {FieldContent, Field, FieldLabel, FieldDescription} from "@/components/ui/field";
 import {icons} from 'lucide-react'
-import {category} from "@/components/create-task/data/data";
+import {category} from "@/components/create-task/data/categoryData";
 import {cn} from "@/lib/utils";
 
 
@@ -13,8 +13,11 @@ const CategorySelector = () => {
                         const LucideIcon = icons[c.icon]
                         return (
 
-                            <Field orientation="horizontal" key={c.name} className={'rounded-xl border border-border bg-chart-5 flex-between'}>
-                                <RadioGroupItem value={c.name} id={c.name} className={'hidden'}/>
+                            <Field orientation="horizontal" key={c.name}
+                                   className={'rounded-xl border border-border bg-chart-5 flex-between'}>
+                                <RadioGroupItem value={c.name} id={c.name}
+                                                className={cn('hidden',
+                                                    'has-data-[state=checked]:outline-chart-1 has-data-[state=checked]:outline-3 has-data-[state=checked]:border-')}/>
                                 <FieldContent className={'gap-1 flex-col flex-between w-22 h-17'}>
                                     <FieldLabel htmlFor={c.name}>
                                         <LucideIcon className={cn(c.iconColor, '')}/>
