@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-interface taskInterface {
+export interface taskInterface {
     name: string;
     category: string;
     occurrence: string;
@@ -16,9 +16,9 @@ interface taskInterface {
 
 const taskStore = create<taskInterface>((set) => ({
     name: '',
-    category: '',
-    occurrence: '',
-    category_color: '',
+    category: 'Fitness',
+    occurrence: 'Daily',
+    category_color: '#3FFF8B',
     category_icon: '',
     impact: '',
     setTaskValue: (key, value) => set((state) => ({
