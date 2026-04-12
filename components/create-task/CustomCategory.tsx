@@ -5,6 +5,7 @@ import {Input} from "@/components/ui/input";
 import {useState} from "react";
 import {icons} from 'lucide-react'
 import TaskDrawer from "@/components/create-task/TaskDrawer";
+import TextInputComp from "@/components/create-task/TextInputComp";
 
 
 function CustomCategory() {
@@ -20,10 +21,11 @@ function CustomCategory() {
     return (
         <FieldGroup className={'bg-chart-5 py-4  px-3'}>
             <Field>
-                <FieldLabel className={'col gap-2 items-start'}>
-                    <p className={'uppercase text-chart-1'}>Custom Name</p>
-                    <Input className={'h-10'}/>
-                </FieldLabel>
+                <TextInputComp
+                    category={'category'}
+                    className={'bg-input/70'}
+                    label={'Custom Name'}
+                    placeholder={'e.g Morning Workout'}/>
             </Field>
 
             <div className={'row gap-5'}>

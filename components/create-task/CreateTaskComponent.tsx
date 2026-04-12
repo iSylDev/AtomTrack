@@ -16,7 +16,7 @@ function CreateTaskComponent() {
 
             <CardContent>
                 <form className={'col gap-7'}>
-                    <TextInputComp label={'Task name'} placeholder={'e.g Morning Workout'}/>
+                    <TextInputComp category={'name'} label={'Task name'} placeholder={'e.g Morning Workout'}/>
                     <div>
                         <h3 className={'uppercase mb-2 text-xs text-chart-1 font-semibold'}>Category</h3>
                         <CategorySelector/>
