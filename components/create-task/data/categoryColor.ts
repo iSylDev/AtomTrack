@@ -2,18 +2,30 @@ type Props = {
     color: string;
 }
 
-
 const colorList: Props[] = [
-    {color: 'bg-purple-500'},
-    {color: 'bg-violet-500'},
-    {color: 'bg-indigo-600'},
-    {color: 'bg-green-600'},
-    {color: 'bg-green-500'},
-    {color: 'bg-green-300'},
-    {color: 'bg-blue-500'},
-    {color: 'bg-blue-300'},
-    {color: 'bg-red-500'},
-    {color: 'bg-orange-500'},
-    {color: 'bg-yellow-200'}
-]
-export default colorList
+    // Line 1: The "Power" Row (Reds & Oranges)
+    { color: '#EF4444' }, // True Red
+    { color: '#F97316' }, // Sunset Orange
+    { color: '#FB923C' }, // Peach Orange
+    { color: '#F87171' }, // Soft Coral
+
+    // Line 2: The "Nature" Row (Yellows & Greens)
+    { color: '#FACC15' }, // Cyber Yellow
+    { color: '#3FFF8B' }, // Your Signature Neon Green
+    { color: '#22C55E' }, // Forest Green
+    { color: '#14B8A6' }, // Teal
+
+    // Line 3: The "Deep" Row (Blues & Cyans)
+    { color: '#06B6D4' }, // Bright Cyan
+    { color: '#3B82F6' }, // Royal Blue
+    { color: '#1D4ED8' }, // Deep Navy
+    { color: '#6366F1' }, // Indigo
+
+    // Line 4: The "Premium" Row (Purples & Pinks)
+    { color: '#A855F7' }, // Vivid Purple
+    { color: '#D946EF' }, // Fuchsia
+    { color: '#EC4899' }, // Hot Pink
+    { color: '#94A3B8' }  // Neutral Slate
+];
+
+export default colorList;

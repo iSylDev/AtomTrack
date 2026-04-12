@@ -1,5 +1,6 @@
 import {Drawer, DrawerClose, DrawerContent, DrawerTitle} from "@/components/ui/drawer";
 import {X} from 'lucide-react'
+import CategoryColorPicker from "@/components/create-task/CategoryColorPicker";
 
 
 type Props = {
@@ -11,14 +12,17 @@ type Props = {
 const TaskDrawer = ({openFn, onCloseFn}: Props) => {
     return (
         <Drawer open={openFn} onOpenChange={onCloseFn} onClose={onCloseFn}>
-            <DrawerContent className={'px-5'}>
-                    <DrawerTitle className={'flex justify-between'}>
-                        <p className={'text-xl'}>Select Color</p>
-                        <DrawerClose>
-                            <X/>
-                        </DrawerClose>
-                    </DrawerTitle>
-                <h3>Hello World</h3>
+            <DrawerContent className={'col px-5'}>
+                <DrawerTitle className={'flex justify-between'}>
+                    <p className={'text-xl'}>Select Color</p>
+                    <DrawerClose>
+                        <X/>
+                    </DrawerClose>
+                </DrawerTitle>
+
+                <div className={'mt-8 mb-6 w-full'}>
+                    <CategoryColorPicker/>
+                </div>
             </DrawerContent>
         </Drawer>
     );
