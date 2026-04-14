@@ -8,6 +8,7 @@ export interface taskInterface {
     category_color: string;
     temp_category_color: string;
     category_icon: keyof typeof icons;
+    temp_category_icon: keyof typeof icons;
     setTaskValue: <K extends keyof Omit<taskInterface, 'setTaskValue'>>(
         key: K,
         value: taskInterface[K]
@@ -23,6 +24,7 @@ const taskStore = create<taskInterface>((set) => ({
     category_color: '#3FFF8B',
     temp_category_color: '#3FFF8B',
     category_icon: 'Star',
+    temp_category_icon: 'Star',
     impact: '',
     setTaskValue: (key, value) => set((state) => ({
         ...state,
