@@ -1,11 +1,13 @@
 import {create} from 'zustand'
+import {icons} from 'lucide-react'
 
 export interface taskInterface {
     name: string;
     category: string;
     occurrence: string;
     category_color: string;
-    category_icon: string;
+    temp_category_color: string;
+    category_icon: keyof typeof icons;
     setTaskValue: <K extends keyof Omit<taskInterface, 'setTaskValue'>>(
         key: K,
         value: taskInterface[K]
@@ -19,7 +21,8 @@ const taskStore = create<taskInterface>((set) => ({
     category: 'Fitness',
     occurrence: 'Daily',
     category_color: '#3FFF8B',
-    category_icon: '',
+    temp_category_color: '#3FFF8B',
+    category_icon: 'Star',
     impact: '',
     setTaskValue: (key, value) => set((state) => ({
         ...state,
