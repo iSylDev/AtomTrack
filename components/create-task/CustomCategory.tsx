@@ -3,23 +3,22 @@
 import {Field, FieldGroup} from "@/components/ui/field";
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
-import {icons} from 'lucide-react'
 import TaskDrawer from "@/components/create-task/TaskDrawer";
 import TextInputComp from "@/components/create-task/TextInputComp";
 import taskStore from "@/store/taskStore";
 import ColorPicker from "@/components/create-task/ColorPicker";
 import CustomIcon from "@/components/create-task/CustomIcon";
+import {CUSTOM_CATEGORY_ICON_CONFIG} from "@/components/create-task/data/iconData";
 
 
 function CustomCategory() {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-    const [drawerMode, setDrawerMode] = useState<'category_icon' | 'category_color'>('icon');
-    const selectedColor = taskStore(state => state.category_color);
-    const selectedIcon = taskStore(state => state.category_icon);
+    const [drawerMode, setDrawerMode] = useState<'category_icon' | 'category_color'>('category_icon');
+    const selectedColor = taskStore(state => state.temp_category_color);
+    const selectedIcon = taskStore(state => state.temp_category_icon);
     const setTaskValue = taskStore(state => state.setTaskValue);
 
-    const LucideIcon = icons[selectedIcon]
-
+    const LucideIcon = CUSTOM_CATEGORY_ICON_CONFIG[selectedIcon];
 
     const handleSaveInfo = () => {
         // Set the category state in zustand based on the current drawer mode
@@ -28,7 +27,7 @@ function CustomCategory() {
     }
 
     return (
-        <FieldGroup className={'bg-chart-5 py-4  px-3'}>
+        <FieldGroup className={'bg-chart-5 py-5  px-4 rounded-lg'}>
             <Field>
                 {/*Custom Category Name Input*/}
                 <TextInputComp

@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import {icons} from 'lucide-react'
+import {CUSTOM_CATEGORY_ICON_CONFIG} from "@/components/create-task/data/iconData";
 
 export interface taskInterface {
     name: string;
@@ -7,8 +7,8 @@ export interface taskInterface {
     occurrence: string;
     category_color: string;
     temp_category_color: string;
-    category_icon: keyof typeof icons;
-    temp_category_icon: keyof typeof icons;
+    category_icon: keyof typeof CUSTOM_CATEGORY_ICON_CONFIG;
+    temp_category_icon: keyof typeof CUSTOM_CATEGORY_ICON_CONFIG;
     setTaskValue: <K extends keyof Omit<taskInterface, 'setTaskValue'>>(
         key: K,
         value: taskInterface[K]

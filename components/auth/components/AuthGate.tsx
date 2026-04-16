@@ -13,7 +13,6 @@ export default function AuthGate({children}: { children: ReactNode }) {
     const isMounted = useHasMounted();
 
     // Check if user just signed in
-
     const { isPending: isSyncing, error: createUserError} = useMutation({
         mutationFn: createUser
     });

@@ -8,6 +8,8 @@ import taskStore from "@/store/taskStore";
 const ColorPicker = () => {
     const temp_category_color = taskStore(state => state.temp_category_color)
     const setTaskValue = taskStore(state => state.setTaskValue)
+    // const store = taskStore(state => state)
+    // console.log(store)
 
     return (
         <>

@@ -1,4 +1,4 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -47,7 +47,7 @@ export const updateSession = async (request: NextRequest) => {
     return supabaseResponse;
   }
 
-  // Check if a logged in user tries access the auth pages, redirect them to dashboard
+  // Check if a logged-in user tries access the auth pages, redirect them to dashboard
   if (user && (url.pathname.startsWith("/auth") || url.pathname === "/")) {
     url.pathname = "/dashboard/overview";
     return NextResponse.redirect(url);

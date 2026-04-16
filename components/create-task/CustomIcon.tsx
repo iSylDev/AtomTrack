@@ -1,7 +1,7 @@
 import {Field, FieldLabel} from "@/components/ui/field";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {cn} from "@/lib/utils";
-import {CUSTOM_CATEGORY_ICON_CONFIG, iconList} from "@/components/create-task/data/iconData";
+import {CUSTOM_CATEGORY_ICON_CONFIG, iconList, IconName} from "@/components/create-task/data/iconData";
 import taskStore from "@/store/taskStore";
 
 const CustomIcon = () => {
@@ -14,7 +14,7 @@ const CustomIcon = () => {
         <div>
             <RadioGroup
                 value={selectedIcon}
-                onValueChange={(icon) => setTaskValue('temp_category_icon', icon)}
+                onValueChange={(icon: IconName) => setTaskValue('temp_category_icon', icon)}
                 className="grid grid-cols-5  justify-center">
                 {
                     iconList.map((i) => {
