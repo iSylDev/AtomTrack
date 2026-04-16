@@ -3,11 +3,10 @@ import TextInputComp from "@/components/create-task/TextInputComp";
 import CategorySelector from "@/components/create-task/CategorySelector";
 import CreateTaskHeader from "@/components/create-task/CreateTaskHeader";
 import CustomCategory from "@/components/create-task/CustomCategory";
+import ReccurenceComponent from './RecurrenceComponent'
 
 
 function CreateTaskComponent() {
-
-
     return (
         <Card className={'w-full max-w-[90vw]'}>
             <CardHeader>
@@ -24,6 +23,10 @@ function CreateTaskComponent() {
 
                     <>
                         <CustomCategory/>
+                    </>
+
+                    <>
+                        <ReccurenceComponent/>
                     </>
 
                 </form>

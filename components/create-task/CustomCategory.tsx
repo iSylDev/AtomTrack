@@ -16,6 +16,8 @@ function CustomCategory() {
     const [drawerMode, setDrawerMode] = useState<'category_icon' | 'category_color'>('category_icon');
     const selectedColor = taskStore(state => state.temp_category_color);
     const selectedIcon = taskStore(state => state.temp_category_icon);
+    const globalCategory = taskStore(state => state.category)
+    const globalColor = taskStore(state => state.category_color)
     const setTaskValue = taskStore(state => state.setTaskValue);
 
     const LucideIcon = CUSTOM_CATEGORY_ICON_CONFIG[selectedIcon];
@@ -27,53 +29,62 @@ function CustomCategory() {
     }
 
     return (
-        <FieldGroup className={'bg-chart-5 py-5  px-4 rounded-lg'}>
-            <Field>
-                {/*Custom Category Name Input*/}
-                <TextInputComp
-                    category={'category'}
-                    className={'bg-input/70'}
-                    label={'Category Name'}
-                    placeholder={'e.g Morning Workout'}/>
-            </Field>
+        <>
+            {
+                // Only display this component if the custom category mode is selected
+                globalCategory === 'Custom' && (
+                    <FieldGroup className={'bg-chart-5 py-5  px-4 rounded-lg'}>
+                        <Field>
+                            {/*Custom Category Name Input*/}
+                            <TextInputComp
+                                category={'category'}
+                                className={'bg-input/70'}
+                                label={'Category Name'}
+                                placeholder={'e.g Morning Workout'}/>
+                        </Field>
 
-            <div className={'row gap-5'}>
-                {/*Custom Category Icon Selector*/}
-                <div className={'col items-start h-fit hover:bg-transparent!'}
-                     onClick={() => {
-                         setDrawerMode('category_icon');
-                         setDrawerIsOpen(!drawerIsOpen);
-                     }}
-                >
-                    <div className={'row items-center gap-2 h-10 px-2 rounded-lg bg-input/70'}>
-                        <LucideIcon/>
-                        <p>Icon</p>
-                        <Input className={'hidden'} disabled value={selectedIcon}/>
-                    </div>
-                </div>
+                        <div className={'row gap-5'}>
+                            {/*Custom Category Icon Selector*/}
+                            <div className={'col items-start h-fit hover:bg-transparent!'}
+                                 onClick={() => {
+                                     setDrawerMode('category_icon');
+                                     setDrawerIsOpen(!drawerIsOpen);
+                                 }}
+                            >
+                                <div className={'row items-center gap-2 h-10 px-2 rounded-lg bg-input/70'}>
+                                    <LucideIcon style={{ stroke: globalColor }} />
+                                    <p>Edit Icon</p>
+                                    <Input className={'hidden'} disabled value={selectedIcon}/>
+                                </div>
+                            </div>
 
-                <div className={'col items-start h-fit hover:bg-transparent!'}
-                     onClick={() => {
-                         setDrawerMode('category_color');
-                         setDrawerIsOpen(!drawerIsOpen);
-                     }}
-                >
-                    <div className={'row items-center gap-2 h-10 px-2 rounded-lg bg-input/70'}>
-                        <div className={`h-6 w-6 rounded-sm`}
-                             style={{backgroundColor: selectedColor}}
-                        >
+                            <div className={'col items-start h-fit hover:bg-transparent!'}
+                                 onClick={() => {
+                                     setDrawerMode('category_color');
+                                     setDrawerIsOpen(!drawerIsOpen);
+                                 }}
+                            >
+                                <div className={'row items-center gap-2 h-10 px-2 rounded-lg bg-input/70'}>
+                                    <div className={`h-6 w-6 rounded-sm`}
+                                         style={{backgroundColor: selectedColor}}
+                                    >
+                                    </div>
+                                    <p>Edit Color</p>
+                                    <Input className={'hidden'} disabled value={selectedColor}/>
+                                </div>
+                            </div>
                         </div>
-                        <p>Color</p>
-                        <Input className={'hidden'} disabled value={selectedColor}/>
-                    </div>
-                </div>
-            </div>
-            <TaskDrawer
-                component={drawerMode === 'category_icon' ? <CustomIcon/> : <ColorPicker/>}
-                openFn={drawerIsOpen}
-                onCloseFn={() => handleSaveInfo()}/>
-        </FieldGroup>
-    );
+                        <TaskDrawer
+                            component={drawerMode === 'category_icon' ? <CustomIcon/> : <ColorPicker/>}
+                            openFn={drawerIsOpen}
+                            onCloseFn={() => handleSaveInfo()}/>
+                    </FieldGroup>
+                )
+            }
+        </>
+    )
+
+
 }
 
 export default CustomCategory;
