@@ -1,11 +1,12 @@
 import {create} from 'zustand'
 import {CUSTOM_CATEGORY_ICON_CONFIG} from "@/components/create-task/data/iconData";
-import {Occurrence} from "@/types/days";
+import {Occurrence, OccurrenceType} from "@/types/days";
 
 export interface taskInterface {
     name: string;
     category: string;
-    occurrence: Occurrence;
+    occurrence: OccurrenceType;
+    occurrence_days: Occurrence;
     category_color: string;
     temp_category_color: string;
     category_icon: keyof typeof CUSTOM_CATEGORY_ICON_CONFIG;
@@ -21,7 +22,8 @@ export interface taskInterface {
 const taskStore = create<taskInterface>((set) => ({
     name: '',
     category: 'Fitness',
-    occurrence: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    occurrence: 'daily',
+    occurrence_days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     category_color: '#3FFF8B',
     temp_category_color: '#3FFF8B',
     category_icon: 'Star',
