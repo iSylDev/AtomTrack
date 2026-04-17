@@ -24,7 +24,7 @@ const TextInputComp = ({label, placeholder, category, className, error}: Props) 
                    name={label}
                    onChange={(e) => setTaskValue(category, e.target.value)}
                    className={cn('h-12 px-4 border-border text-foreground placeholder:text-sm placeholder:text-card-foreground/50',
-                     classNameValue )}
+                       classNameValue)}
                    placeholder={placeholder}/>
             <p className={'text-destructive text-xs italic'}>{error}</p>
         </label>

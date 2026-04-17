@@ -2,7 +2,7 @@
 
 import {Card, CardContent, CardHeader} from "../ui/card";
 import {ChevronRight, Lock, Trash2} from "lucide-react";
-import {useIsMobile} from "@/hooks/use-mobile";
+import {useIsMobile} from "@/hooks/shared/use-mobile";
 import {Button, buttonVariants} from "../ui/button";
 import {
     Dialog,
@@ -12,7 +12,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import ChangeEmailForm from "../forms/ChangeEmailForm";
-import {useHasMounted} from "@/hooks/useHasMounted";
+import {useHasMounted} from "@/hooks/shared/useHasMounted";
 import {cn} from "@/lib/utils";
 
 

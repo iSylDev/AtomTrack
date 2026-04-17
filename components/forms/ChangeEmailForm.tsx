@@ -1,7 +1,7 @@
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { Button } from "../ui/button"
-import {useUser} from "@/hooks/useUser";
+import {useUser} from "@/hooks/settings/useUser";
 
 export default function ChangeEmailForm() {
   const {user} = useUser()

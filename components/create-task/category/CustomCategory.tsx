@@ -14,10 +14,17 @@ import {CUSTOM_CATEGORY_ICON_CONFIG} from "@/components/create-task/data/iconDat
 function CustomCategory() {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [drawerMode, setDrawerMode] = useState<'category_icon' | 'category_color'>('category_icon');
+
+
+    const categoryError = taskStore(state => state.errors.categoryError);
+    const isCustomCategory = taskStore(state => state.isCustomCategory);
+    const globalColor = taskStore(state => state.category_color);
+
+
     const selectedColor = taskStore(state => state.temp_category_color);
     const selectedIcon = taskStore(state => state.temp_category_icon);
-    const isCustomCategory = taskStore(state => state.isCustomCategory)
-    const globalColor = taskStore(state => state.category_color)
+
+
     const setTaskValue = taskStore(state => state.setTaskValue);
 
     const LucideIcon = CUSTOM_CATEGORY_ICON_CONFIG[selectedIcon];
@@ -40,7 +47,9 @@ function CustomCategory() {
                                 category={'category'}
                                 className={'bg-input/70'}
                                 label={'Category Name'}
-                                placeholder={'e.g Morning Workout'}/>
+                                placeholder={'e.g Morning Workout'}
+                                error={categoryError}
+                            />
                         </Field>
 
                         <div className={'row gap-5'}>

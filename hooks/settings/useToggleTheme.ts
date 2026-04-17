@@ -9,7 +9,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useUser } from "../useUser";
+import { useUser } from "./useUser";
 import { UserType } from "@/types/user";
 
 export default function useToggleTheme() {

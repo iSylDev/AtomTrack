@@ -5,7 +5,7 @@ import UserInfoForm from "../forms/UserInforForm";
 import { Card } from "../ui/card";
 import PfpEditor from "./PfpEditor";
 import formatToTitle from "@/helpers/formatToTitle";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/settings/useUser";
 
 export default function IdentityCard({ position }: { position?: string }) {
   const { user } = useUser();

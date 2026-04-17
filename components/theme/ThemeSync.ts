@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/settings/useUser";
 import { useTheme } from "next-themes";
 import { useEffect } from "react";
 

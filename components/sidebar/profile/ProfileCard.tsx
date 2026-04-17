@@ -9,9 +9,9 @@ import { profileCardData } from "./profileCardData";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/shared/use-mobile";
 import { useLogout } from "@/hooks/auth/useLogout";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/settings/useUser";
 import formatToTitle from "@/helpers/formatToTitle";
 
 

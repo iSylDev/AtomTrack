@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-const verifiyOtpSchema = z.object({
+const verifyOtpSchema = z.object({
   token: z.string('Invalid OTP').nonempty('Please enter your OTP')
 });
 
-export type VerfiyOtpSchema = z.infer<typeof verifiyOtpSchema>;
+export type VerifyOtpSchema = z.infer<typeof verifyOtpSchema>;
 
-export { verifiyOtpSchema };
+export { verifyOtpSchema };

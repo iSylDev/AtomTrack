@@ -4,9 +4,9 @@ import {ReactNode} from "react";
 import {createUser} from "@/actions/auth-actions/createUserAction";
 import LoadingScreen from "@/components/shared/LoadingScreen";
 import ErrorScreen from "@/components/shared/ErrorScreen";
-import {useUser} from "@/hooks/useUser";
+import {useUser} from "@/hooks/settings/useUser";
 import {useMutation} from "@tanstack/react-query";
-import {useHasMounted} from "@/hooks/useHasMounted";
+import {useHasMounted} from "@/hooks/shared/useHasMounted";
 
 export default function AuthGate({children}: { children: ReactNode }) {
     const {user, error: fetchUserError, isLoading: isFetchingUser} = useUser();

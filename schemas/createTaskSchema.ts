@@ -23,6 +23,22 @@ export const CreateTaskSchema = z.object({
 }, {
     message: 'Custom Category Name cannot be blank',
     path: ['category'],
+}).refine((data) => {
+    if (data.isCustomCategory) {
+        const trimmedName = data.category.trim();
+
+        // Check if it's long enough
+        const isLongEnough = trimmedName.length >= 3;
+
+        //  Check if it's NOT the word "custom" (case-insensitive)
+        const isNotReservedWord = trimmedName.toLowerCase() !== 'custom';
+
+        return isLongEnough && isNotReservedWord;
+    }
+    return true;
+}, {
+    message: 'Invalid category name',
+    path: ['category'],
 })
 
 export type CreateTaskType = z.infer<typeof CreateTaskSchema>;
