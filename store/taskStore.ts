@@ -15,6 +15,10 @@ export interface taskInterface {
     temp_category_color: string;
     category_icon: keyof typeof CUSTOM_CATEGORY_ICON_CONFIG;
     temp_category_icon: keyof typeof CUSTOM_CATEGORY_ICON_CONFIG;
+    errors: {
+        nameError: string;
+        categoryError: string;
+    }
     setTaskValue: <K extends keyof Omit<taskInterface, 'setTaskValue'>>(
         key: K,
         value: taskInterface[K]
@@ -34,6 +38,10 @@ const taskStore = create<taskInterface>((set) => ({
     temp_category_color: '#3FFF8B',
     category_icon: 'Star',
     temp_category_icon: 'Star',
+    errors: {
+        nameError: '',
+        categoryError: '',
+    },
     setTaskValue: (key, value) => set((state) => ({
         ...state,
         [key]: value

@@ -4,11 +4,11 @@ import {CUSTOM_CATEGORY_ICON_CONFIG} from "@/components/create-task/data/iconDat
 const IconEnum = z.custom<keyof typeof CUSTOM_CATEGORY_ICON_CONFIG>()
 
 
-const CreateTaskSchema = z.object({
+export const CreateTaskSchema = z.object({
     name: z.string().min(3, 'Task Name must be at least 3 characters'),
     priority: z.enum(['low', 'medium', 'high']),
     category: z.string().min(3, 'Category Name must be at least 3 characters'),
-    isCustomCategory: z.boolean,
+    isCustomCategory: z.boolean(),
     occurrence: z.enum(["daily", "weekly", "specific-days"]),
     occurrence_days: z.array(z.string()).min(1, 'Select at least  1 day'),
     category_color: z.string().startsWith('#'),

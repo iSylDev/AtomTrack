@@ -5,6 +5,7 @@ import CreateTaskHeader from "@/components/create-task/shared/CreateTaskHeader";
 import CustomCategory from "@/components/create-task/category/CustomCategory";
 import RecurrenceComponent from '../reccurrence/RecurrenceComponent'
 import PrioritySelector from "@/components/create-task/priority/PrioritySelector";
+import {Button} from "@/components/ui/button";
 
 
 function CreateTaskComponent() {
@@ -15,12 +16,12 @@ function CreateTaskComponent() {
             </CardHeader>
 
             <CardContent>
-                <form className={'col gap-7'}>
+                <div className={'col gap-7'}>
                     <TextInputComp category={'name'} label={'Task name'} placeholder={'e.g Morning Workout'}/>
 
                     <div>
                         <h3 className={'uppercase mb-2 text-xs text-chart-1 font-semibold'}>Set Task Priority</h3>
-                        <PrioritySelector />
+                        <PrioritySelector/>
                     </div>
                     <div>
                         <h3 className={'uppercase mb-2 text-xs text-chart-1 font-semibold'}>Category</h3>
@@ -35,7 +36,11 @@ function CreateTaskComponent() {
                         <RecurrenceComponent/>
                     </>
 
-                </form>
+                    <Button size={'lg'}>
+                        Save Task
+                    </Button>
+
+                </div>
             </CardContent>
         </Card>
     );
