@@ -16,7 +16,7 @@ function CustomCategory() {
     const [drawerMode, setDrawerMode] = useState<'category_icon' | 'category_color'>('category_icon');
     const selectedColor = taskStore(state => state.temp_category_color);
     const selectedIcon = taskStore(state => state.temp_category_icon);
-    const globalCategory = taskStore(state => state.category)
+    const isCustomCategory = taskStore(state => state.isCustomCategory)
     const globalColor = taskStore(state => state.category_color)
     const setTaskValue = taskStore(state => state.setTaskValue);
 
@@ -32,7 +32,7 @@ function CustomCategory() {
         <>
             {
                 // Only display this component if the custom category mode is selected
-                globalCategory === 'Custom' && (
+                isCustomCategory && (
                     <FieldGroup className={'bg-chart-5 py-5  px-4 rounded-lg'}>
                         <Field>
                             {/*Custom Category Name Input*/}

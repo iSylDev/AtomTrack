@@ -8,6 +8,7 @@ export interface taskInterface {
     name: string;
     priority: PriorityType;
     category: string;
+    isCustomCategory: boolean;
     occurrence: OccurrenceType;
     occurrence_days: Occurrence;
     category_color: string;
@@ -26,6 +27,7 @@ const taskStore = create<taskInterface>((set) => ({
     name: '',
     priority: 'low',
     category: 'Fitness',
+    isCustomCategory: false,
     occurrence: 'daily',
     occurrence_days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     category_color: '#3FFF8B',
