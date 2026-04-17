@@ -24,7 +24,7 @@ export interface taskInterface {
 
 const taskStore = create<taskInterface>((set) => ({
     name: '',
-    priority: 'Low',
+    priority: 'low',
     category: 'Fitness',
     occurrence: 'daily',
     occurrence_days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -32,7 +32,6 @@ const taskStore = create<taskInterface>((set) => ({
     temp_category_color: '#3FFF8B',
     category_icon: 'Star',
     temp_category_icon: 'Star',
-    impact: '',
     setTaskValue: (key, value) => set((state) => ({
         ...state,
         [key]: value

@@ -1,6 +1,6 @@
 'use client'
 
-import {Input} from '../ui/input'
+import {Input} from '../../ui/input'
 import taskStore, {taskInterface} from "@/store/taskStore";
 import {cn} from "@/lib/utils";
 

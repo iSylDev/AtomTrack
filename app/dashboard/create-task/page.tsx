@@ -1,4 +1,4 @@
-import CreateTaskComponent from "@/components/create-task/CreateTaskComponent";
+import CreateTaskComponent from "@/components/create-task/shared/CreateTaskComponent";
 
 
 const Page = () => {

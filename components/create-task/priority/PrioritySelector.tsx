@@ -1,9 +1,8 @@
 'use client'
 
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
-import RecurrenceRadioGroup from "@/components/create-task/reccurrence/RecurrenceRadioGroup";
-import {RecurrenceToggleGroup} from "@/components/create-task/reccurrence/RecurrenceToggleGroup";
+import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import taskStore, {PriorityType} from "@/store/taskStore";
+import {cn} from "@/lib/utils";
 
 
 const PrioritySelector = () => {
@@ -25,9 +24,9 @@ const PrioritySelector = () => {
             <TabsList
                 variant="default"
                 className={'w-full bg-chart-5 group-data-horizontal/tabs:h-12 '}>
-                <TabsTrigger value="low">Low</TabsTrigger>
-                <TabsTrigger value="medium">Medium</TabsTrigger>
-                <TabsTrigger value="high">High</TabsTrigger>
+                <TabsTrigger value="low" className={cn(priority === 'low' ? 'bg-primary text-foreground! hover:text-foreground' : '')}>Low</TabsTrigger>
+                <TabsTrigger value="medium" className={cn(priority === 'medium' ? 'bg-chart-6! text-foreground! hover:text-foreground' : '')}>Medium</TabsTrigger>
+                <TabsTrigger value="high" className={cn(priority === 'high' ? 'bg-destructive! text-foreground! hover:text-foreground' : '')}>High</TabsTrigger>
             </TabsList>
         </Tabs>
     );

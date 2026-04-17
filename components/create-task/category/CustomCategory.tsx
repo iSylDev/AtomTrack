@@ -3,11 +3,11 @@
 import {Field, FieldGroup} from "@/components/ui/field";
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
-import TaskDrawer from "@/components/create-task/TaskDrawer";
-import TextInputComp from "@/components/create-task/TextInputComp";
+import TaskDrawer from "@/components/create-task/shared/TaskDrawer";
+import TextInputComp from "@/components/create-task/shared/TextInputComp";
 import taskStore from "@/store/taskStore";
-import ColorPicker from "@/components/create-task/ColorPicker";
-import CustomIcon from "@/components/create-task/CustomIcon";
+import ColorPicker from "@/components/create-task/color/ColorPicker";
+import CustomIcon from "@/components/create-task/icon/CustomIcon";
 import {CUSTOM_CATEGORY_ICON_CONFIG} from "@/components/create-task/data/iconData";
 
 

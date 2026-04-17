@@ -16,7 +16,7 @@ export default function MobileHeader() {
     return (
         <>
             {
-                <header className="w-full flex border-b border-primary/20 justify-between py-5 bg-chart-6">
+                <header className="w-full flex border-b border-primary/20 justify-between py-5 bg-transparent">
                     <Logo/>
                     <div className="flex items-center gap-4">
                         <UserAvatar/>
