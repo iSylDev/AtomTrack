@@ -13,8 +13,7 @@ type Props = {
 
 const TextInputComp = ({label, placeholder, category, className}: Props) => {
     const setTaskValue = taskStore(state => state.setTaskValue);
-    // const store = taskStore(state => state)
-    // console.log(store)
+
     const classNameValue = className ? className : 'bg-chart-5!'
 
     return (

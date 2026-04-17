@@ -52,7 +52,7 @@ function CustomCategory() {
                                  }}
                             >
                                 <div className={'row items-center gap-2 h-10 px-2 rounded-lg bg-input/70'}>
-                                    <LucideIcon style={{ stroke: globalColor }} />
+                                    <LucideIcon style={{stroke: globalColor}}/>
                                     <p>Edit Icon</p>
                                     <Input className={'hidden'} disabled value={selectedIcon}/>
                                 </div>
