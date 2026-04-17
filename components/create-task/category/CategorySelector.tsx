@@ -10,7 +10,6 @@ import taskStore from "@/store/taskStore";
 
 const CategorySelector = () => {
     const selectedCategory = taskStore((state) => state.category);
-    const isCustomCategory = taskStore(state => state.isCustomCategory);
     const store = taskStore(state => state)
     const setTaskValue = taskStore((state) => state.setTaskValue)
     console.log(store)
