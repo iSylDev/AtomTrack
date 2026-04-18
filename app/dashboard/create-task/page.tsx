@@ -2,12 +2,8 @@ import CreateTaskComponent from "@/components/create-task/shared/CreateTaskCompo
 
 
 const Page = () => {
-
-
     return (
-        <div className={'flex-between'}>
             <CreateTaskComponent />
-        </div>
     );
 };
 

@@ -20,7 +20,7 @@ const TextInputComp = ({label, placeholder, category, className, error}: Props) 
 
     return (
         <label className={'flex flex-col justify-center gap-2'}>
-            <p className={'text-chart-1 uppercase text-xs'}>{label}</p>
+            <p className={'font-semibold uppercase text-xs'}>{label}</p>
             <Input id={label}
                    value={typeof value === 'string' ? value : ''}
                    name={label}

@@ -13,10 +13,12 @@ export default function DashboardLayout({
     return (
         <SidebarProvider>
             <AppSidebar/>
-            <div className="flex-1 relative px-2">
+            <div className="w-full min-h-screen px-2 flex flex-col">
                 <MobileHeader/>
                 <ThemeSync/>
+                <div className={'mt-15 pb-30 flex-between'}>
                     {children}
+                </div>
             </div>
         </SidebarProvider>
     )

@@ -19,9 +19,6 @@ function CreateTaskComponent() {
     const nameError = taskStore(state => state.errors.nameError);
 
     function handleCreateTask() {
-        // Grab current state
-        const currentState = taskStore.getState();
-
         // Validate the user input
         const validatedData = validateCreateTaskInput();
 
@@ -32,26 +29,28 @@ function CreateTaskComponent() {
     }
 
     return (
-        <Card className={'w-full lg:max-w-[50vw] mt-8 mb-10'}>
+        <Card className="w-full rounded-3xl max-w-150 lg:px-2 lg:py-5 ">
             <CardHeader>
                 <CreateTaskHeader/>
             </CardHeader>
 
             <CardContent>
-                <div className={'col gap-7'}>
-                    <TextInputComp
-                        category={'name'}
-                        label={'Task name'}
-                        placeholder={'e.g Morning Workout'}
-                        error={nameError}
-                    />
+                <div className={'col gap-7 '}>
+                    <div className={'mt-5'}>
+                        <TextInputComp
+                            category={'name'}
+                            label={'Task name'}
+                            placeholder={'e.g Morning Workout'}
+                            error={nameError}
+                        />
+                    </div>
 
                     <div>
-                        <h3 className={'uppercase mb-2 text-xs text-chart-1 font-semibold'}>Set Task Priority</h3>
+                        <h3 className={'uppercase mb-2 text-xs font-semibold'}>Set Task Priority</h3>
                         <PrioritySelector/>
                     </div>
                     <div>
-                        <h3 className={'uppercase mb-2 text-xs text-chart-1 font-semibold'}>Category</h3>
+                        <h3 className={'uppercase mb-2 text-xs font-semibold'}>Category</h3>
                         <CategorySelector/>
                     </div>
 
@@ -59,15 +58,16 @@ function CreateTaskComponent() {
                         <CustomCategory/>
                     </>
 
-                    <>
+                    <div>
+                        <h3 className={'uppercase mb-2 text-xs font-semibold'}>Recurrence</h3>
                         <RecurrenceComponent/>
-                    </>
+                    </div>
 
                     <Button
                         disabled={isPending}
                         onClick={handleCreateTask}
                         size={'lg'}>
-                        {isPending ? <Loader2 className={'data-[state=open]:animate-in'}/> : <p>Save Task</p>}
+                        {isPending ? <Loader2 className={'animate-spin'}/> : <p>Save Task</p>}
                     </Button>
 
                 </div>

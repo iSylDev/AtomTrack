@@ -15,8 +15,7 @@ const RecurrenceRadioGroup = () => {
     const specificDay = occurrenceDays[0];
 
     return (
-        <div>
-            <p className={'text-center my-2'}>{getWeeklyDescription(specificDay)}</p>
+        <div className={'mt-1'}>
             <RadioGroup
                 value={specificDay}
                 onValueChange={(value) => setTaskValue('occurrence_days', [value as Day])}
@@ -29,8 +28,8 @@ const RecurrenceRadioGroup = () => {
                                 <Field orientation="horizontal" key={day} className={''}>
                                     <RadioGroupItem value={day} id={day} className={cn('hidden')}/>
                                     <FieldLabel htmlFor={day}
-                                                className={cn('w-10 h-10 rounded-full shrink-0 flex-between ',
-                                                    isSelected ? 'bg-primary' : ''
+                                                className={cn('w-10 h-10 rounded-lg  flex-between hover:bg-primary/10',
+                                                    isSelected ? 'bg-primary hover:bg-primary hover:cursor-auto' : ''
                                                 )}
                                     >
                                         <p>{formatDayToSingleLetter(day)}</p>
@@ -41,6 +40,7 @@ const RecurrenceRadioGroup = () => {
                     )
                 }
             </RadioGroup>
+            <p className={'text-center my-2'}>{getWeeklyDescription(specificDay)}</p>
         </div>
     );
 };
