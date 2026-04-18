@@ -23,7 +23,7 @@ interface TaskData {
 }
 
 //  Full store (Data + Actions)
-export interface TaskState extends TaskData {
+export interface TaskInterface extends TaskData {
     setTaskValue: <K extends keyof TaskData>(key: K, value: TaskData[K]) => void;
     resetForm: () => void;
 }
@@ -44,7 +44,7 @@ const defaultValues: TaskData = {
 };
 
 // Initialize the store
-const taskStore = create<TaskState>((set) => ({
+const taskStore = create<TaskInterface>((set) => ({
     ...defaultValues,
     setTaskValue: (key, value) =>
         set((state) => ({
