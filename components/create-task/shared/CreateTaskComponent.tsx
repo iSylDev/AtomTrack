@@ -10,10 +10,26 @@ import PrioritySelector from "@/components/create-task/priority/PrioritySelector
 import {Button} from "@/components/ui/button";
 import validateCreateTaskInput from "@/components/create-task/func/validateCreateTaskInput";
 import taskStore from "@/store/taskStore";
+import {useCreateTask} from "@/hooks/tasks/useCreateTask";
+import {Loader2} from "lucide-react";
 
 
 function CreateTaskComponent() {
-    const nameError = taskStore(state => state.errors.nameError)
+    const {mutate: createTask, isPending} = useCreateTask();
+    const nameError = taskStore(state => state.errors.nameError);
+
+    function handleCreateTask() {
+        // Grab current state
+        const currentState = taskStore.getState();
+
+        // Validate the user input
+        const validatedData = validateCreateTaskInput();
+
+        // Create the task in db if there are no errors
+        if (validatedData) {
+            createTask(validatedData);
+        }
+    }
 
     return (
         <Card className={'w-full lg:max-w-[50vw] mt-8 mb-10'}>
@@ -48,9 +64,10 @@ function CreateTaskComponent() {
                     </>
 
                     <Button
-                        onClick={validateCreateTaskInput}
+                        disabled={isPending}
+                        onClick={handleCreateTask}
                         size={'lg'}>
-                        Save Task
+                        {isPending ? <Loader2 className={'data-[state=open]:animate-in'}/> : <p>Save Task</p>}
                     </Button>
 
                 </div>

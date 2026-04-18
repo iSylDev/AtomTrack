@@ -10,9 +10,7 @@ import taskStore from "@/store/taskStore";
 
 const CategorySelector = () => {
     const selectedCategory = taskStore((state) => state.category);
-    const store = taskStore(state => state)
-    const setTaskValue = taskStore((state) => state.setTaskValue)
-    console.log(store)
+    const setTaskValue = taskStore((state) => state.setTaskValue);
 
     return (
         <RadioGroup

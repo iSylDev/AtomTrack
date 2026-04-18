@@ -5,7 +5,6 @@ import {CreateTaskSchema} from "@/schemas/createTaskSchema";
 const validateCreateTaskInput = () => {
     const state = taskStore.getState();
     const setTaskValue = state.setTaskValue;
-    console.log('Hello')
 
     const result = CreateTaskSchema.safeParse(state);
 
@@ -20,16 +19,14 @@ const validateCreateTaskInput = () => {
             categoryError: categoryIssue?.message || ''
         })
 
-        console.log('Validation Error')
-        return false;
+        return null;
     }
 
     setTaskValue('errors', {
         nameError: '',
         categoryError: '',
     })
-    console.log('Form validated successfully')
-    return true;
+    return result.data;
 }
 
 export default validateCreateTaskInput;
