@@ -9,7 +9,7 @@ import {Palette} from "lucide-react";
 
 function CustomColorPicker() {
     const [isOpen, setOpen] = useState(false);
-    const currColor = taskStore(state => state.temp_category_color)
+    const currColor = taskStore(state => state.category_color)
     const setColor = taskStore(state => state.setTaskValue)
 
     return (
@@ -42,7 +42,7 @@ function CustomColorPicker() {
             <PopoverContent className={'bg-transparent border-transparent outline-transparent w-fit'}>
                 <HexColorPicker
                     color={currColor}
-                    onChange={(newColor) => setColor('temp_category_color', newColor)}/>
+                    onChange={(newColor) => setColor('category_color', newColor)}/>
             </PopoverContent>
 
         </Popover>

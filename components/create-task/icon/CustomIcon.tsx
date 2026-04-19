@@ -6,12 +6,8 @@ import taskStore from "@/store/taskStore";
 import {useIsMobile} from "@/hooks/shared/use-mobile";
 
 const CustomIcon = () => {
-    const isMobile = useIsMobile();
-
-    const targetKey = isMobile ? 'temp_category_icon' : 'category_icon'
-
     const IconColor = taskStore(state => state.category_color)
-    const selectedIcon = taskStore(state => state[targetKey]);
+    const selectedIcon = taskStore(state => state.category_icon);
     const setTaskValue = taskStore(state => state.setTaskValue);
 
     const state = taskStore(state => state);
@@ -22,7 +18,7 @@ const CustomIcon = () => {
         <div>
             <RadioGroup
                 value={selectedIcon}
-                onValueChange={(icon: IconName) => setTaskValue(targetKey, icon)}
+                onValueChange={(icon: IconName) => setTaskValue('category_icon', icon)}
                 className="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))]">
                 {
                     iconList.map((i) => {

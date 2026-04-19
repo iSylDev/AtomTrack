@@ -5,13 +5,10 @@ import {cn} from "@/lib/utils";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import taskStore from "@/store/taskStore";
 import {useIsMobile} from "@/hooks/shared/use-mobile";
+import colorList from "@/components/create-task/data/categoryColor";
 
 const ColorPicker = () => {
-    const isMobile = useIsMobile();
-
-    const targetKey = isMobile ? 'temp_category_color' : 'category_color'
-
-    const temp_category_color = taskStore(state => state.temp_category_color);
+    const selectedColor  = taskStore(state => state.category_color);
 
     const setTaskValue = taskStore(state => state.setTaskValue)
     const store = taskStore(state => state)
@@ -19,14 +16,14 @@ const ColorPicker = () => {
 
     return (
         <>
-            <div className={''}>
+            <div>
                 <RadioGroup
-                    value={temp_category_color}
-                    onValueChange={(color) => setTaskValue(targetKey, color)}
+                    value={selectedColor}
+                    onValueChange={(color) => setTaskValue('category_color', color)}
                     className="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] justify-center">
                     {
-                        categoryColor.map((c) => {
-                                const isSelected = temp_category_color === c.color;
+                        colorList.map((c) => {
+                                const isSelected = selectedColor === c.color;
                                 const indicator = `border-[${c.color}] border`;
 
                                 return (
