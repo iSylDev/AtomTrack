@@ -1,10 +1,8 @@
-import categoryColor from "@/components/create-task/data/categoryColor";
 import CustomColorPicker from "@/components/create-task/color/ColorCreator";
 import {Field, FieldLabel} from "@/components/ui/field";
 import {cn} from "@/lib/utils";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import taskStore from "@/store/taskStore";
-import {useIsMobile} from "@/hooks/shared/use-mobile";
 import colorList from "@/components/create-task/data/categoryColor";
 
 const ColorPicker = () => {
