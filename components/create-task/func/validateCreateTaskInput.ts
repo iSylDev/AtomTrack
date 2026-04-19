@@ -19,7 +19,7 @@ const validateCreateTaskInput = () => {
             categoryError: categoryIssue?.message || ''
         })
 
-        return null;
+        throw new Error(result.error.message);
     }
 
     setTaskValue('errors', {

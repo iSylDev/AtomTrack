@@ -14,7 +14,7 @@ function CustomColorPicker() {
 
     return (
         <Popover>
-            <PopoverTrigger className={'w-full'}>
+            <PopoverTrigger className={'w-full hover:cursor-pointer'}>
                 <div
                     className={'row justify-between items-center w-full mt-5 bg-chart-5 py-4 px-5 rounded-lg'}
                     onClick={() => setOpen(!isOpen)}
@@ -28,7 +28,7 @@ function CustomColorPicker() {
                         </div>
 
                         <div className={'flex flex-col items-start justify-center'}>
-                            <p className={'text-primary'}>CUSTOM COLOR</p>
+                            <p className={'text-primary text-xs'}>CREATE CUSTOM COLOR</p>
                             <h3 className={'uppercase text-xl text-foreground'}>{currColor}</h3>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ function CustomColorPicker() {
                 </div>
             </PopoverTrigger>
 
-            <PopoverContent className={'bg-transparent border-transparent outline-transparent w-fit'}>
+            <PopoverContent className={'bg-transparent border-transparent outline-transparent w-fit hover:cursor-pointer'}>
                 <HexColorPicker
                     color={currColor}
                     onChange={(newColor) => setColor('category_color', newColor)}/>

@@ -12,9 +12,7 @@ export const CreateTaskSchema = z.object({
     occurrence: z.enum(["daily", "weekly", "specific-days"]),
     occurrence_days: z.array(z.string()).min(1, 'Select at least  1 day'),
     category_color: z.string().startsWith('#'),
-    temp_category_color: z.string().startsWith('#'),
     category_icon: IconEnum,
-    temp_category_icon: IconEnum,
 }).refine((data) => {
     if (data.isCustomCategory) {
         return data.category.trim().length > 0;

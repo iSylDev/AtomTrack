@@ -3,7 +3,6 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {cn} from "@/lib/utils";
 import {CUSTOM_CATEGORY_ICON_CONFIG, iconList, IconName} from "@/components/create-task/data/iconData";
 import taskStore from "@/store/taskStore";
-import {useIsMobile} from "@/hooks/shared/use-mobile";
 
 const CustomIcon = () => {
     const IconColor = taskStore(state => state.category_color)

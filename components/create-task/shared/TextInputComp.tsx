@@ -3,6 +3,7 @@
 import {Input} from '../../ui/input'
 import taskStore, {TaskInterface} from "@/store/taskStore";
 import {cn} from "@/lib/utils";
+import {useState} from "react";
 
 type Props = {
     label?: string;
@@ -13,8 +14,9 @@ type Props = {
 }
 
 const TextInputComp = ({label, placeholder, category, className, error}: Props) => {
-    const value = taskStore(state => state[category])
     const setTaskValue = taskStore(state => state.setTaskValue);
+
+    const [textInput, setTextInput] = useState<string>('')
 
     const classNameValue = className ? className : 'bg-chart-5!'
 
@@ -22,9 +24,10 @@ const TextInputComp = ({label, placeholder, category, className, error}: Props) 
         <label className={'flex flex-col justify-center gap-2'}>
             <p className={'font-semibold uppercase text-xs'}>{label}</p>
             <Input id={label}
-                   value={typeof value === 'string' ? value : ''}
+                   onBlur={() => setTaskValue(category, textInput)}
+                   value={textInput}
                    name={label}
-                   onChange={(e) => setTaskValue(category, e.target.value)}
+                   onChange={(e) => setTextInput(e.target.value)}
                    className={cn('h-12 px-4 border-border text-foreground placeholder:text-sm placeholder:text-card-foreground/50',
                        classNameValue)}
                    placeholder={placeholder}/>

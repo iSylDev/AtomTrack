@@ -19,9 +19,11 @@ function CreateTaskComponent() {
     const nameError = taskStore(state => state.errors.nameError);
 
     function handleCreateTask() {
+        // console.log('Validating')
         // Validate the user input
         const validatedData = validateCreateTaskInput();
 
+            console.log(validatedData);
         // Create the task in db if there are no errors
         if (validatedData) {
             createTask(validatedData);

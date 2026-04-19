@@ -48,7 +48,7 @@ function CustomCategory() {
                                         <Input className={'hidden'} disabled value={selectedIcon}/>
                                     </div>
                                 </PopoverTrigger>
-                                <PopoverContent>
+                                <PopoverContent className={'mx-7'}>
                                     <CustomIcon/>
                                 </PopoverContent>
                             </Popover>
@@ -68,7 +68,7 @@ function CustomCategory() {
                                     </div>
                                 </PopoverTrigger>
 
-                                <PopoverContent>
+                                <PopoverContent className={'mx-7'}>
                                     <ColorPicker/>
                                 </PopoverContent>
                             </Popover>
