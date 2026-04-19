@@ -1,26 +1,25 @@
-import AuthGate from "@/components/auth/components/AuthGate";
 import MobileHeader from "@/components/shared/MobileHeader";
-import { AppSidebar } from "@/components/sidebar/AppSidebar";
-import { ThemeSync } from "@/components/theme/ThemeSync";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import {AppSidebar} from "@/components/sidebar/AppSidebar";
+import {ThemeSync} from "@/components/theme/ThemeSync";
+import {SidebarProvider} from "@/components/ui/sidebar";
+import React from "react";
 
 export default function DashboardLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                            children,
+                                        }: Readonly<{
+    children: React.ReactNode;
 }>) {
 
-  return (
-    // <AuthGate>
-      <SidebarProvider>
-        <AppSidebar />
-        <div className="flex-1 relative px-2">
-          <MobileHeader />
-          <ThemeSync />
-          {children}
-        </div>
-      </SidebarProvider>
-    // </AuthGate>
-
-  )
+    return (
+        <SidebarProvider>
+            <AppSidebar/>
+            <div className="w-full min-h-screen px-2 flex flex-col">
+                <MobileHeader/>
+                <ThemeSync/>
+                <div className={'mt-15 pb-30 flex-between'}>
+                    {children}
+                </div>
+            </div>
+        </SidebarProvider>
+    )
 }

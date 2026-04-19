@@ -5,7 +5,7 @@ import {Label} from "../ui/label";
 import {Pencil} from "lucide-react";
 import Image from "next/image";
 import {ChangeEvent} from "react";
-import {useUser} from "@/hooks/useUser";
+import {useUser} from "@/hooks/settings/useUser";
 import useSettingsSaver from "@/hooks/settings/useSettingsSaver";
 import {useQueryClient} from "@tanstack/react-query";
 import {UserType} from "@/types/user";

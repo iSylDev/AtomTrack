@@ -3,11 +3,11 @@
 import { Palette, Sun, Moon } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { Card, CardContent } from "../ui/card";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/shared/use-mobile";
 import { cn } from "@/lib/utils";
 import { useThemeSwitch } from "../theme/useThemeSwtich";
-import { useUser } from "@/hooks/useUser";
-import { useHasMounted } from "@/hooks/useHasMounted";
+import { useUser } from "@/hooks/settings/useUser";
+import { useHasMounted } from "@/hooks/shared/useHasMounted";
 
 
 export default function Appearance() {

@@ -19,7 +19,7 @@ export async function verifyOtpAction({
 
     if (verificationError) throw verificationError;
 
-    return { success: true, message: "Email verified sucessfully" };
+    return { success: true, message: "Email verified successfully" };
   } catch (err: any) {
     return { success: false, message: err.message };
   }

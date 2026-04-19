@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { useUser } from "@/hooks/useUser"
+import { useUser } from "@/hooks/settings/useUser"
 
 
 export default function UserAvatar({ className, size }: { className?: string, size?: 'sm' | 'lg' }) {

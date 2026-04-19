@@ -5,9 +5,9 @@ import {Bell} from "lucide-react";
 import {Field, FieldLabel, FieldGroup} from "../ui/field";
 import {Switch} from "../ui/switch";
 import {Separator} from "../ui/separator";
-import {useIsMobile} from "@/hooks/use-mobile";
-import {useHasMounted} from "@/hooks/useHasMounted";
-import {useUser} from "@/hooks/useUser";
+import {useIsMobile} from "@/hooks/shared/use-mobile";
+import {useHasMounted} from "@/hooks/shared/useHasMounted";
+import {useUser} from "@/hooks/settings/useUser";
 import useSettingsSaver from "@/hooks/settings/useSettingsSaver";
 import {UserType} from "@/types/user";
 

@@ -3,6 +3,6 @@ import {LucideIcon} from 'lucide-react'
 export type NavLinkProp = {
     title: string;
     to: string;
-    icon: LucideIcon;
+    icon: string;
     subLinks?: { title: string; to: string }[];
 };
