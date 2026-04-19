@@ -20,18 +20,18 @@ export async function createUser() {
   }
 
   // Check if profile exists
-  const { data: exisitingProfile } = await supabase
+  const { data: existingProfile } = await supabase
     .from("users")
     .select("user_id")
     .eq("user_id", user.id)
     .maybeSingle();
 
     // return here if profile already exists
-  if (exisitingProfile) {
+  if (existingProfile) {
     return { success: true, message: "Profile already exists" };
   }
 
-  //  Inset the profile if its a new user
+  //  Inset the profile if it's a new user
   const { error: insertError } = await supabase.from("users").insert({
     user_id: user.id,
     email: user.email,

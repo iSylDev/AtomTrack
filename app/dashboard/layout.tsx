@@ -16,7 +16,7 @@ export default function DashboardLayout({
             <div className="w-full min-h-screen px-2 flex flex-col">
                 <MobileHeader/>
                 <ThemeSync/>
-                <div className={'mt-15 pb-30 flex-between'}>
+                <div>
                     {children}
                 </div>
             </div>

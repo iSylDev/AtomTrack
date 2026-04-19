@@ -1,11 +1,13 @@
-
+import WeeklyReportComponent from "@/components/reports/weekly/shared/WeeklyReportComponent";
+import Header from "@/components/reports/weekly/shared/Header";
 
 
 
 export default function WeeklyReportsPage() {
   return (
     <div>
-      <h3>WeeklyReportsPage</h3>
+        <Header />
+      <WeeklyReportComponent />
     </div>
   )
 }

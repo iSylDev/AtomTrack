@@ -11,7 +11,7 @@ const useUser = () => {
   const { data, isLoading, error, refetch,  } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      // Get the currently logged in user
+      // Get the currently logged-in user
       const {
         data: { user: authUser },
         error: authError,

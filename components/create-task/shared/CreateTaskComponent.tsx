@@ -23,7 +23,7 @@ function CreateTaskComponent() {
         // Validate the user input
         const validatedData = validateCreateTaskInput();
 
-            console.log(validatedData);
+        console.log(validatedData);
         // Create the task in db if there are no errors
         if (validatedData) {
             createTask(validatedData);
@@ -31,50 +31,53 @@ function CreateTaskComponent() {
     }
 
     return (
-        <Card className="w-full rounded-3xl max-w-150 lg:px-2 lg:py-5 ">
-            <CardHeader>
-                <CreateTaskHeader/>
-            </CardHeader>
+        <div className={'mt-5 md:mt-10 lg:mt-12 pb-30 flex-between'}>
+            <Card className="w-full rounded-3xl max-w-150 lg:px-2 lg:py-5 ">
+                <CardHeader>
+                    <CreateTaskHeader/>
+                </CardHeader>
 
-            <CardContent>
-                <div className={'col gap-7 '}>
-                    <div className={'mt-5'}>
-                        <TextInputComp
-                            category={'name'}
-                            label={'Task name'}
-                            placeholder={'e.g Morning Workout'}
-                            error={nameError}
-                        />
+                <CardContent>
+                    <div className={'col gap-7 '}>
+                        <div className={'mt-5'}>
+                            <TextInputComp
+                                category={'name'}
+                                label={'Task name'}
+                                placeholder={'e.g Morning Workout'}
+                                error={nameError}
+                            />
+                        </div>
+
+                        <div>
+                            <h3 className={'uppercase mb-2 text-xs font-semibold'}>Set Task Priority</h3>
+                            <PrioritySelector/>
+                        </div>
+                        <div>
+                            <h3 className={'uppercase mb-2 text-xs font-semibold'}>Category</h3>
+                            <CategorySelector/>
+                        </div>
+
+                        <>
+                            <CustomCategory/>
+                        </>
+
+                        <div>
+                            <h3 className={'uppercase mb-2 text-xs font-semibold'}>Recurrence</h3>
+                            <RecurrenceComponent/>
+                        </div>
+
+                        <Button
+                            disabled={isPending}
+                            onClick={handleCreateTask}
+                            size={'lg'}>
+                            {isPending ? <Loader2 className={'animate-spin'}/> : <p>Save Task</p>}
+                        </Button>
+
                     </div>
+                </CardContent>
+            </Card>
+        </div>
 
-                    <div>
-                        <h3 className={'uppercase mb-2 text-xs font-semibold'}>Set Task Priority</h3>
-                        <PrioritySelector/>
-                    </div>
-                    <div>
-                        <h3 className={'uppercase mb-2 text-xs font-semibold'}>Category</h3>
-                        <CategorySelector/>
-                    </div>
-
-                    <>
-                        <CustomCategory/>
-                    </>
-
-                    <div>
-                        <h3 className={'uppercase mb-2 text-xs font-semibold'}>Recurrence</h3>
-                        <RecurrenceComponent/>
-                    </div>
-
-                    <Button
-                        disabled={isPending}
-                        onClick={handleCreateTask}
-                        size={'lg'}>
-                        {isPending ? <Loader2 className={'animate-spin'}/> : <p>Save Task</p>}
-                    </Button>
-
-                </div>
-            </CardContent>
-        </Card>
     );
 }
 
