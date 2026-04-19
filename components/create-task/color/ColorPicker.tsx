@@ -4,20 +4,26 @@ import {Field, FieldLabel} from "@/components/ui/field";
 import {cn} from "@/lib/utils";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import taskStore from "@/store/taskStore";
+import {useIsMobile} from "@/hooks/shared/use-mobile";
 
 const ColorPicker = () => {
-    const temp_category_color = taskStore(state => state.temp_category_color)
+    const isMobile = useIsMobile();
+
+    const targetKey = isMobile ? 'temp_category_color' : 'category_color'
+
+    const temp_category_color = taskStore(state => state.temp_category_color);
+
     const setTaskValue = taskStore(state => state.setTaskValue)
-    // const store = taskStore(state => state)
-    // console.log(store)
+    const store = taskStore(state => state)
+    console.log(store)
 
     return (
         <>
             <div className={''}>
                 <RadioGroup
                     value={temp_category_color}
-                    onValueChange={(color) => setTaskValue('temp_category_color', color)}
-                    className="flex flex-wrap gap-3 justify-center">
+                    onValueChange={(color) => setTaskValue(targetKey, color)}
+                    className="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] justify-center">
                     {
                         categoryColor.map((c) => {
                                 const isSelected = temp_category_color === c.color;
@@ -36,7 +42,7 @@ const ColorPicker = () => {
                                             <div
                                                 style={{backgroundColor: c.color}}
                                                 key={c.color}
-                                                className={'h-12 w-12 rounded-xl shrink-0'}
+                                                className={'h-12 w-12 rounded-xl shrink-0 lg:h-10 lg:w-10'}
                                             >
                                             </div>
                                         </FieldLabel>

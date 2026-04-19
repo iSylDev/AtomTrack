@@ -54,9 +54,16 @@ const RecurrenceTab = () => {
                 <TabsTrigger value="weekly">Weekly</TabsTrigger>
                 <TabsTrigger value="specific-days">Specific Days</TabsTrigger>
             </TabsList>
-            <TabsContent value={'daily'}><p className={'text-center mt-1'}>This task will be completed everyday</p>
+
+            {/*Tab contents*/}
+            <TabsContent value={'daily'}>
+                <p className={'text-center mt-1'}>This task will be completed everyday</p>
             </TabsContent>
-            <TabsContent value={'weekly'}> <RecurrenceRadioGroup/></TabsContent>
+
+            <TabsContent value={'weekly'}>
+                <RecurrenceRadioGroup/>
+            </TabsContent>
+
             <TabsContent value={'specific-days'}>
                 <RecurrenceToggleGroup/>
             </TabsContent>
